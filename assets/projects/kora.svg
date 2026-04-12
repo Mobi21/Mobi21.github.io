@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="presentation" aria-hidden="true">
+  <defs>
+    <linearGradient id="koraBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#koraBg)" />
+  <circle cx="160" cy="80" r="160" fill="rgba(14,165,233,0.15)" />
+  <circle cx="640" cy="380" r="180" fill="rgba(99,102,241,0.12)" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="#f1f5f9">Kora</text>
+  <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="18" fill="#a5b4fc">Local-first agent runtime</text>
+</svg>

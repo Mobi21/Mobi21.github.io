@@ -620,3 +620,104 @@ main {
   color: var(--text-secondary);
   border: 1px solid rgba(148, 163, 184, 0.15);
 }
+
+/* ============================================================
+   Projects
+   ============================================================ */
+.projects__featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.project-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  transition: border-color var(--transition-med), transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.project-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.8);
+}
+
+.project-card__image {
+  display: block;
+  overflow: hidden;
+  border-right: 1px solid rgba(148, 163, 184, 0.10);
+}
+
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.project-card:hover .project-card__image img {
+  transform: scale(1.03);
+}
+
+.project-card__body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.project-card__name {
+  font-size: var(--fs-32);
+  line-height: var(--lh-32);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.project-card__role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-12);
+  line-height: var(--lh-12);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.project-card__desc {
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  color: var(--text-secondary);
+}
+
+.project-card__link {
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  font-weight: 600;
+  color: var(--accent-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.project-card__link:hover {
+  gap: 10px;
+  color: #38bdf8;
+}
