@@ -1008,3 +1008,133 @@ main {
   line-height: var(--lh-14);
   color: var(--text-secondary);
 }
+
+/* ============================================================
+   Responsive: Tablet (768px - 1023px)
+   ============================================================ */
+@media (max-width: 1023px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__avatar-wrap {
+    width: 240px;
+    height: 240px;
+    order: -1;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__stats {
+    position: static;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card__image {
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+    aspect-ratio: 16 / 9;
+  }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-group--wide {
+    grid-column: span 1;
+  }
+
+  .contact__links {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Responsive: Mobile (< 768px)
+   ============================================================ */
+@media (max-width: 767px) {
+  :root {
+    --gutter: 20px;
+  }
+
+  /* Hide desktop nav; show hamburger */
+  .site-nav {
+    display: none;
+  }
+
+  .site-header__menu-toggle {
+    display: inline-flex;
+  }
+
+  /* Shrink hero typography */
+  .hero__name {
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .hero__tagline {
+    font-size: var(--fs-18);
+    line-height: var(--lh-18);
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* Section titles shrink */
+  .section-title {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .contact__headline {
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  /* Experience card headers stack */
+  .exp-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exp-card,
+  .project-card__body,
+  .edu-card,
+  .skill-group,
+  .about__stats {
+    padding: 24px;
+  }
+
+  /* Education card header stacks */
+  .edu-card__header {
+    flex-direction: column;
+  }
+
+  .edu-card__meta {
+    text-align: left;
+  }
+}
