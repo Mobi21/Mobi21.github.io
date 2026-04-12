@@ -795,3 +795,34 @@ main {
 .compact-row__link:hover {
   gap: 10px;
 }
+
+/* ============================================================
+   Skills
+   ============================================================ */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.skill-group {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.skill-group--wide {
+  grid-column: span 2;
+}
+
+.skill-group__title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
