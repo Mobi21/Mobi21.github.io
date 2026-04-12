@@ -58,4 +58,97 @@
 
     sections.forEach((section) => observer.observe(section));
   }
+
+  // ========================================================
+  // 3. Mobile drawer with focus trap
+  // ========================================================
+  const toggleBtn = document.getElementById('menu-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  let lastFocusedElement = null;
+
+  function getFocusableElements(container) {
+    return Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    );
+  }
+
+  function openDrawer() {
+    lastFocusedElement = document.activeElement;
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('has-drawer-open');
+
+    // Focus the first focusable element inside the drawer
+    const focusables = getFocusableElements(drawer);
+    if (focusables.length) {
+      focusables[0].focus();
+    }
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('has-drawer-open');
+
+    // Return focus to the hamburger button
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    } else {
+      toggleBtn.focus();
+    }
+  }
+
+  function toggleDrawer() {
+    if (drawer.classList.contains('is-open')) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  }
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener('click', toggleDrawer);
+
+    // Close on link click
+    drawer.querySelectorAll('.mobile-drawer__link').forEach((link) => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Close on backdrop click
+    drawer.querySelectorAll('[data-drawer-dismiss]').forEach((el) => {
+      el.addEventListener('click', closeDrawer);
+    });
+
+    // Escape key closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeDrawer();
+      }
+    });
+
+    // Focus trap: Tab/Shift+Tab cycle within the drawer while open
+    drawer.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !drawer.classList.contains('is-open')) return;
+      const focusables = getFocusableElements(drawer);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
 })();
