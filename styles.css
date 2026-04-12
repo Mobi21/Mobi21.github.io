@@ -150,3 +150,99 @@ ul, ol {
   letter-spacing: 2px;
   margin-bottom: 12px;
 }
+
+/* ============================================================
+   Site Header / Nav
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background var(--transition-med), backdrop-filter var(--transition-med), border-color var(--transition-med);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom-color: rgba(148, 163, 184, 0.12);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.site-header__brand {
+  font-size: var(--fs-18);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.site-nav__list {
+  display: flex;
+  gap: 32px;
+}
+
+.site-nav__link {
+  font-size: var(--fs-14);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 6px 2px;
+}
+
+.site-nav__link:hover {
+  color: var(--text-primary);
+}
+
+.site-nav__link.is-active {
+  color: var(--text-primary);
+}
+
+.site-nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent-secondary);
+  border-radius: 2px;
+}
+
+.site-header__menu-toggle {
+  display: none; /* hidden on desktop; shown on mobile in Task 14 */
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform var(--transition-med);
+}
+
+.hamburger::before { transform: translateY(-7px); }
+.hamburger::after  { transform: translateY(5px); }
+
+/* Push main content below fixed header */
+main {
+  padding-top: 72px;
+}

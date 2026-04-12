@@ -22,10 +22,39 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Page content will be added in subsequent tasks -->
-  <main>
-    <h1>Mobolaji Ogunbiyi</h1>
-    <p>Site under construction. Check back soon.</p>
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+      <a href="#top" class="site-header__brand">Mobolaji</a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="site-nav__list">
+          <li><a href="#about" class="site-nav__link">About</a></li>
+          <li><a href="#experience" class="site-nav__link">Experience</a></li>
+          <li><a href="#projects" class="site-nav__link">Projects</a></li>
+          <li><a href="#skills" class="site-nav__link">Skills</a></li>
+          <li><a href="#education" class="site-nav__link">Education</a></li>
+          <li><a href="#contact" class="site-nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <button
+        class="site-header__menu-toggle"
+        id="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        aria-label="Toggle menu"
+        type="button"
+      >
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section" id="placeholder">
+      <div class="container">
+        <h1>Mobolaji Ogunbiyi</h1>
+        <p>Site under construction. Check back soon.</p>
+      </div>
+    </section>
   </main>
 
   <script src="script.js" defer></script>
