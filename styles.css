@@ -1,0 +1,152 @@
+/* ============================================================
+   Design Tokens
+   ============================================================ */
+:root {
+  /* Backgrounds */
+  --bg-primary: #0f172a;       /* deep slate, main background */
+  --bg-secondary: #1e293b;     /* cards, elevated sections */
+  --bg-elevated: #334155;      /* hover states, borders */
+
+  /* Text */
+  --text-primary: #f1f5f9;     /* headings, main text */
+  --text-secondary: #94a3b8;   /* subtitles, descriptions */
+  --text-muted: #64748b;       /* labels, metadata — only ≥14px */
+
+  /* Accents */
+  --accent-primary: #6366f1;   /* indigo — primary actions */
+  --accent-secondary: #0ea5e9; /* sky — links, highlights */
+  --accent-success: #22c55e;   /* green — backend/Python pills */
+
+  /* Glows (for backgrounds) */
+  --glow-indigo: rgba(99, 102, 241, 0.15);
+  --glow-sky: rgba(14, 165, 233, 0.10);
+
+  /* Layout */
+  --max-width: 1100px;
+  --section-padding-y: 96px;
+  --section-padding-y-mobile: 48px;
+  --gutter: 24px;
+
+  /* Type scale (size / line-height) */
+  --fs-12: 12px;   --lh-12: 1.5;
+  --fs-14: 14px;   --lh-14: 1.5;
+  --fs-16: 16px;   --lh-16: 1.6;
+  --fs-18: 18px;   --lh-18: 1.6;
+  --fs-24: 24px;   --lh-24: 1.35;
+  --fs-32: 32px;   --lh-32: 1.25;
+  --fs-48: 48px;   --lh-48: 1.15;
+  --fs-64: 64px;   --lh-64: 1.05;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-med: 300ms ease;
+}
+
+/* ============================================================
+   Reset / Normalize
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Visible focus indicators (not just color — outlined) */
+:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Utility
+   ============================================================ */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-padding-y);
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: var(--section-padding-y-mobile);
+  }
+}
+
+.section-title {
+  font-size: var(--fs-48);
+  line-height: var(--lh-48);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
