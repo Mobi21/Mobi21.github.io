@@ -900,3 +900,111 @@ main {
   margin-bottom: 12px;
   font-weight: 500;
 }
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__glow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: var(--glow-indigo);
+  filter: blur(140px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.contact__headline {
+  font-size: var(--fs-64);
+  line-height: var(--lh-64);
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contact__sub {
+  font-size: var(--fs-18);
+  line-height: var(--lh-18);
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+
+.contact__links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 24px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.contact-link:hover {
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+}
+
+.contact-link__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-link__value {
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.10);
+  padding-block: 32px;
+}
+
+.site-footer__inner {
+  text-align: center;
+}
+
+.site-footer p {
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--text-secondary);
+}
