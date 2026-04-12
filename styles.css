@@ -826,3 +826,77 @@ main {
   margin-bottom: 18px;
   font-weight: 500;
 }
+
+/* ============================================================
+   Education
+   ============================================================ */
+.edu-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+}
+
+.edu-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+}
+
+.edu-card__school {
+  font-size: var(--fs-24);
+  line-height: var(--lh-24);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.edu-card__degree {
+  font-size: var(--fs-16);
+  line-height: var(--lh-16);
+  color: var(--accent-secondary);
+}
+
+.edu-card__meta {
+  text-align: right;
+}
+
+.edu-card__dates {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.edu-card__gpa {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-18);
+  line-height: var(--lh-18);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.edu-card__section {
+  margin-bottom: 24px;
+}
+
+.edu-card__section:last-child {
+  margin-bottom: 0;
+}
+
+.edu-card__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
