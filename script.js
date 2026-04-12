@@ -151,4 +151,35 @@
       }
     });
   }
+
+  // ========================================================
+  // 4. Scroll reveal (Intersection Observer, single-fire)
+  // ========================================================
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const revealTargets = document.querySelectorAll(
+      '.about, .experience, .projects, .skills, .education, .contact'
+    );
+
+    // Add reveal class to each target
+    revealTargets.forEach((el) => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target); // single-fire
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -80px 0px',
+      }
+    );
+
+    revealTargets.forEach((el) => revealObserver.observe(el));
+  }
 })();
