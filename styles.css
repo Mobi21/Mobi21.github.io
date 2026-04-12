@@ -721,3 +721,77 @@ main {
   gap: 10px;
   color: #38bdf8;
 }
+
+/* ============================================================
+   Compact project rows
+   ============================================================ */
+.projects__subtitle {
+  font-size: var(--fs-18);
+  line-height: var(--lh-18);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.projects__compact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.compact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.compact-row:hover {
+  border-color: rgba(14, 165, 233, 0.35);
+  background: #243147;
+}
+
+.compact-row__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.compact-row__name {
+  font-size: var(--fs-18);
+  line-height: var(--lh-18);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.compact-row__desc {
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  color: var(--text-secondary);
+}
+
+.compact-row__desc strong {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+.compact-row__link {
+  font-size: var(--fs-14);
+  line-height: var(--lh-14);
+  font-weight: 600;
+  color: var(--accent-secondary);
+  white-space: nowrap;
+  display: inline-flex;
+  gap: 6px;
+  transition: gap var(--transition-fast);
+}
+
+.compact-row__link:hover {
+  gap: 10px;
+}
