@@ -10,7 +10,7 @@ web
 
 ## Users
 
-The primary audience is software-engineering and AI-engineering recruiters and hiring managers evaluating Mobolaji Ogunbiyi for new-graduate roles. They often arrive from a resume, LinkedIn profile, GitHub profile, or application and need to understand his direction, credibility, and strongest work quickly. Engineers and potential collaborators are a secondary audience who may inspect the projects in greater depth.
+The primary audience is software-engineering and applied-AI recruiters and hiring managers evaluating Mobolaji Ogunbiyi for new-graduate roles. They often arrive from a resume, LinkedIn profile, GitHub profile, or application and need to understand his direction, credibility, and strongest work quickly. Engineers and potential collaborators are a secondary audience who may inspect the projects in greater depth.
 
 ## Product Purpose
 
@@ -18,15 +18,22 @@ This portfolio turns a one-page resume into visible proof of engineering ability
 
 ## Positioning
 
-Mobolaji is a full-stack and applied-AI engineer who turns ambitious ideas into complete, tested systems that people can actually use.
+Mobolaji Ogunbiyi is a software engineer and founder of Kora Studio. He builds complete full-stack products and applied-AI systems, owns the engineering from interface through persistence and evaluation, and ships work for real users and businesses.
 
 ## Conversion & proof
 
-- Primary CTA: explore the selected systems and their concrete outcomes.
+- Primary CTA: explore deep, truthful case studies for Kora, KS App, and WorldBuilder.
 - Secondary CTA: download the current resume or contact Mobolaji.
-- The line a visitor remembers after ten seconds: he builds complete software and AI systems, not isolated demos.
+- The line a visitor remembers after ten seconds: he is a software engineer and founder who builds full-stack products and applied-AI systems.
 - Belief ladder: understand the role and graduation target; see the three strongest systems; verify scope, decisions, and measured outcomes; recognize commercial and collaborative experience; open the resume, GitHub, or contact link.
-- Proof on hand: the current application resume; Kora, KS App, WorldBuilder, and Kora Studio repositories; eight shipped client systems and approximately $7.4K profit; Kora's 185-scenario evaluation and 99.2% ranking-quality result; WorldBuilder's 511-test offline baseline; the DAMS Lab F1 improvement from 0.42 to 0.71 on 500 gold-labeled examples; M&T Bank's greater-than-80% top-1 result; and JuneBrain's ophthalmic computer-vision work.
+- Proof on hand: the canonical application resume; private Kora, KS App, and WorldBuilder repositories inspected locally; live Kora Studio client work; eight shipped client systems and approximately $7.4K profit; Kora's 185-scenario evaluation and 99.2% ranking-quality result; KS App's three-company, 15-checkpoint month-long synthetic benchmark; WorldBuilder's 511-test offline mechanics baseline and implemented evaluator/repair path; the DAMS Lab F1 improvement from 0.42 to 0.71 on 500 gold-labeled examples; M&T Bank's greater-than-80% top-1 result; and JuneBrain's ophthalmic computer-vision work.
+
+## Public identity and routing
+
+- `mobolaji.builtbykora.com` is the personal recruiter front door and canonical portfolio domain.
+- `builtbykora.com` is the separate Kora Studio business and client-work site.
+- GitHub is supporting public-code proof only. Private product repositories are labeled plainly and never routed to a generic profile as if public source were available.
+- Stable case-study routes are `/projects/kora/`, `/projects/ks-app/`, `/projects/worldbuilder/`, and `/commercial-work/`.
 
 ## Brand Personality
 

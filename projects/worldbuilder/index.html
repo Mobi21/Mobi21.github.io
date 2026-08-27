@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="WorldBuilder case study by Mobolaji Ogunbiyi: durable AI world generation with checkpoints, evaluation, bounded repair, and replayable provenance.">
+  <meta name="theme-color" content="#090b10">
+  <meta property="og:title" content="WorldBuilder — Mobolaji Ogunbiyi">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/projects/worldbuilder/">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/projects/worldbuilder/">
+  <title>WorldBuilder — Mobolaji Ogunbiyi</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header><div class="shell header-inner"><a class="wordmark" href="/">Mobolaji Ogunbiyi</a><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button><nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav><a href="/#work">Work</a><a href="/commercial-work/">Commercial</a><a href="/#experience">Experience</a><a href="/#contact">Contact</a></nav></div></header>
+  <main id="main" class="shell">
+    <section class="case-hero" aria-labelledby="case-title">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Portfolio</a><span>/</span><span>Projects</span><span>/</span><span aria-current="page">WorldBuilder</span></nav>
+      <h1 id="case-title">WorldBuilder</h1>
+      <p class="case-deck">A durable AI generation system that transforms creative direction into a governed world model, connected lore, narrative structure, a readable edition, and a versioned software package.</p>
+      <p class="case-owner">Designed and built by Mobolaji Ogunbiyi · January 2026—Present</p>
+      <div class="case-status"><span><b>Status:</b> complete offline mechanics path; live creative qualification not yet claimed</span><span><b>Role:</b> architecture, workflow, domain model, evaluation and verification</span></div>
+      <div class="case-actions"><a class="action action--primary" href="#demo">Demo</a><a class="action" href="#case-study">Case Study</a><a class="action" href="#evidence">Evidence</a><span class="action private-repo">Private repository</span></div>
+    </section>
+
+    <section class="case-section" id="demo" aria-labelledby="demo-title">
+      <header><h2 id="demo-title">Trace explorer</h2><p>This fixture-driven replay shows the implemented mechanics boundary: generation, persisted checkpoints, linked branching, independent evaluation, bounded repair, and re-evaluation. It does not present synthetic content as live creative-quality proof.</p></header>
+      <div class="demo" data-demo>
+        <div class="demo-header"><strong>The Ash Meridian / generation run 047</strong><span>Offline fixture · sanitized · read only</span></div>
+        <div class="demo-stage" aria-live="polite">
+          <article class="demo-step is-active" data-demo-step="generate"><h3>1. Generate governed products</h3><p>Creative direction enters a finite compiled program. Model proposals are treated as untrusted input until validated and admitted by the owned domain boundary.</p><pre class="demo-code">direction: fractured archipelago after a vanished sun&#10;products: lore corpus, narrative web, world edition, package manifest&#10;proposal_authority: none</pre></article>
+          <article class="demo-step" data-demo-step="checkpoint"><h3>2. Persist checkpoints and provenance</h3><p>Workflow state stores references to immutable artifacts, preserving identity, dependencies, provider evidence, costs, and the exact point from which work can continue.</p><pre class="demo-code">checkpoint: world_foundation&#10;artifact_refs: 14&#10;provenance: sealed&#10;controls: pause | resume | cancel | replay</pre></article>
+          <article class="demo-step" data-demo-step="branch"><h3>3. Create a linked fork</h3><p>A proposed change starts from an exact checkpoint and creates a non-destructive linked branch. The original world remains inspectable.</p><pre class="demo-code">source_checkpoint: world_foundation:v3&#10;change: make the eastern islands politically independent&#10;target_run: ash-meridian-fork-02&#10;original_mutated: false</pre></article>
+          <article class="demo-step" data-demo-step="evaluate"><h3>4. Evaluate independently</h3><p>The evaluator judges admitted state and generated products across eighteen non-waivable dimensions and emits cited findings instead of a vague quality score.</p><pre class="demo-code">verdict: blocked&#10;dimension: causal_coherence&#10;finding: trade route depends on a removed treaty&#10;evidence_refs: lore:71, narrative:18</pre></article>
+          <article class="demo-step" data-demo-step="repair"><h3>5. Repair once, then re-evaluate</h3><p>The workflow creates a finite repair contract for the cited weakness, revises only affected descendants, recompiles the product, and runs the independent evaluator again.</p><pre class="demo-code">repair_scope: trade_route + affected narrative edge&#10;repair_turns: 1&#10;reevaluation: certified&#10;delivery: revised edition + inspection refs</pre></article>
+        </div>
+        <div class="demo-controls" role="group" aria-label="Trace events"><button class="demo-control" type="button" data-demo-target="generate" aria-pressed="true">Generate</button><button class="demo-control" type="button" data-demo-target="checkpoint" aria-pressed="false">Checkpoint</button><button class="demo-control" type="button" data-demo-target="branch" aria-pressed="false">Branch</button><button class="demo-control" type="button" data-demo-target="evaluate" aria-pressed="false">Evaluate</button><button class="demo-control" type="button" data-demo-target="repair" aria-pressed="false">Repair</button></div>
+        <details class="demo-fallback"><summary>Read the complete trace</summary><ol><li>Compile a finite generation program and admit only validated proposals.</li><li>Persist checkpoint references, provenance, and controls.</li><li>Create a non-destructive fork from an exact checkpoint.</li><li>Evaluate admitted state and actual products across eighteen dimensions.</li><li>Execute one cited repair and re-evaluate before delivery.</li></ol></details>
+      </div>
+    </section>
+
+    <section class="case-section" id="evidence" aria-labelledby="evidence-title"><header><h2 id="evidence-title">Contextualized evidence</h2><p>The repository proves a complete zero-live mechanics path. It does not yet prove live creative quality, benchmark acceptance, production operations, or a desktop release.</p></header><dl class="proof-points"><div><dt>Offline baseline</dt><dd>511 / 511 tests passing</dd></div><div><dt>Independent rubric</dt><dd>18 dimensions</dd></div><div><dt>Durable controls</dt><dd>Pause · replay · linked forks</dd></div></dl><p class="proof-context">Evidence covers deterministic contracts, persistence, retained transport, workflow execution, evaluator verdicts, bounded repair, delivery, controls, and inspection at the documented revision.</p></section>
+
+    <section class="case-section" id="case-study" aria-labelledby="study-title"><header><h2 id="study-title">What I engineered</h2></header><div class="case-columns"><div><h3>Durable generation</h3><p>A finite workflow separates direction, foundation, growth, program execution, integration, product authorship, evaluation, repair, and delivery.</p></div><div><h3>Trusted world state</h3><p>Model proposals cannot assign canonical identity or mutate trusted state. Authority validates, records provenance, and admits revisions.</p></div><div><h3>Independent quality control</h3><p>An eighteen-dimension evaluator produces evidence-backed findings and bounded repair requests that re-enter the durable workflow.</p></div></div></section>
+
+    <section class="case-section" aria-labelledby="architecture-title"><header><h2 id="architecture-title">Architecture</h2><p>Durable execution coordinates model work, but trusted admission and independent evaluation remain separate owners.</p></header><div class="architecture" role="img" aria-label="Durable workflow coordinates bounded generation, trusted Authority admits canonical state, and independent evaluation routes bounded repair"><div class="architecture-node"><strong>Durable workflow</strong><span>finite program · checkpoints · controls · provider evidence</span></div><div class="architecture-arrow" aria-hidden="true">→</div><div class="architecture-node"><strong>Authority + products</strong><span>validated proposals · provenance · lore · narrative · edition</span></div><div class="architecture-arrow" aria-hidden="true">→</div><div class="architecture-node"><strong>Evaluation + repair</strong><span>18 dimensions · cited findings · bounded revision · re-evaluation</span></div></div></section>
+
+    <section class="case-section" aria-labelledby="decisions-title"><header><h2 id="decisions-title">Engineering decisions and tradeoffs</h2></header><div class="case-columns"><div><h3>Models propose; code governs</h3><p>Creative decisions remain model-driven, while identity, feasibility, budgets, validation, and proof are deterministic. This reduces hidden mutation at the cost of more explicit contracts.</p></div><div><h3>References, not giant workflow payloads</h3><p>Large immutable bodies use content-addressed storage and workflow state retains references. That improves recovery and provenance, but demands disciplined artifact ownership.</p></div><div><h3>Repair is finite</h3><p>Evaluator findings can trigger bounded cited repair, never an open-ended self-improvement loop. This limits runaway cost and preserves causal history.</p></div></div></section>
+
+    <section class="case-section" aria-labelledby="status-title"><header><h2 id="status-title">Current status</h2></header><p>WorldBuilder has a complete offline mechanics path for generation control, trusted admission, product compilation, independent evaluation, bounded repair, delivery, and inspection. Live creative quality, the complete benchmark, production operations, and a desktop release remain unclaimed.</p></section>
+  </main>
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="/">Return to portfolio ↑</a></footer>
+</body>
+</html>

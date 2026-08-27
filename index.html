@@ -3,195 +3,199 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Mobolaji Ogunbiyi is a software engineer building complete AI systems, full-stack products, and evaluation infrastructure.">
+  <meta name="description" content="Mobolaji Ogunbiyi is a software engineer and founder of Kora Studio building full-stack products and applied AI systems.">
   <meta name="author" content="Mobolaji Ogunbiyi">
   <meta name="theme-color" content="#090b10">
   <meta property="og:title" content="Mobolaji Ogunbiyi — Software Engineer">
-  <meta property="og:description" content="Selected work across applied AI, full-stack engineering, evaluation systems, and research.">
+  <meta property="og:description" content="Full-stack software engineering, applied AI systems, commercial work, and research.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mobi21.github.io/">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/">
   <title>Mobolaji Ogunbiyi — Software Engineer</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" data-header>
     <div class="shell header-inner">
-      <a class="wordmark" href="#top" aria-label="Mobolaji Ogunbiyi, home">
-        <span>Mobolaji Ogunbiyi</span>
-        <span class="availability"><span aria-hidden="true"></span>Open to 2027 roles</span>
-      </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span>Menu</span></button>
+      <a class="wordmark" href="/" aria-label="Mobolaji Ogunbiyi, home">Mobolaji Ogunbiyi</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
       <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
         <a href="#work">Work</a>
+        <a href="/commercial-work/">Commercial</a>
         <a href="#experience">Experience</a>
-        <a href="assets/resume.pdf" target="_blank">Resume <span aria-hidden="true">↗</span></a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="intro shell" id="top" aria-labelledby="intro-title">
-      <div class="intro-mark" aria-hidden="true"><span></span><span></span><span></span></div>
-      <p class="eyebrow">Software engineering · Applied AI</p>
-      <h1 id="intro-title">I build complete AI systems—not just demos.</h1>
-      <p class="intro-copy">I’m Mobolaji, a Computer Science and Psychology student at UMBC. I design the product, backend, agent runtime, and evaluation loop needed to make ambitious software reliable.</p>
-      <div class="intro-meta" aria-label="Candidate details">
-        <span>Frederick, Maryland</span>
-        <span>B.S. Computer Science + B.A. Psychology</span>
-        <span>Graduating May 2027</span>
+    <section class="hero shell" aria-labelledby="hero-title">
+      <p class="role-line">Software engineer and founder of Kora Studio</p>
+      <h1 id="hero-title">Mobolaji Ogunbiyi</h1>
+      <p class="hero-lede">I build full-stack products and applied AI systems, from multi-tenant business software to durable agent workflows.</p>
+      <p class="hero-context">Computer Science and Psychology at the University of Maryland. Graduating May 2027 and open to software engineering and applied AI roles.</p>
+      <div class="action-row" aria-label="Primary links">
+        <a class="action action--primary" href="/assets/resume.pdf" target="_blank">Resume <span aria-hidden="true">↗</span></a>
+        <a class="action" href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="action" href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="action" href="mailto:bjfifi1@gmail.com">Contact <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="intro-actions">
-        <a class="text-link text-link--primary" href="#work">See selected work <span aria-hidden="true">↓</span></a>
-        <a class="text-link" href="mailto:bjfifi1@gmail.com">bjfifi1@gmail.com <span aria-hidden="true">↗</span></a>
-      </div>
+      <dl class="quick-facts">
+        <div><dt>Based in</dt><dd>Frederick, Maryland</dd></div>
+        <div><dt>Focus</dt><dd>Full-stack engineering + applied AI</dd></div>
+        <div><dt>Availability</dt><dd>New-grad roles beginning after May 2027</dd></div>
+      </dl>
     </section>
 
-    <section class="work shell section" id="work" aria-labelledby="work-title">
-      <div class="section-heading">
-        <p class="eyebrow">Selected work</p>
-        <h2 id="work-title">Systems with proof.</h2>
-      </div>
-      <nav class="project-index" aria-label="Selected projects">
-        <a href="#kora"><span>01</span>Kora</a>
-        <a href="#ks-app"><span>02</span>KS App</a>
-        <a href="#worldbuilder"><span>03</span>WorldBuilder</a>
-      </nav>
+    <section class="section shell" id="work" aria-labelledby="work-title">
+      <header class="section-intro">
+        <h2 id="work-title">Selected product work</h2>
+        <p>Three systems I designed and built. Each case study separates implemented behavior, test evidence, and current limitations.</p>
+      </header>
 
-      <article class="project project--feature" id="kora" data-reveal>
-        <header class="project-header">
-          <div><p class="project-number">01 / Applied AI system</p><h3>Kora</h3></div>
-          <p class="project-summary">A local-first assistant that can plan, use tools, retain context, and evaluate its own behavior across real workflows.</p>
-        </header>
-        <figure class="product-frame">
-          <div class="frame-bar" aria-hidden="true"><span></span><span></span><span></span><p>Kora / conversation workspace</p></div>
-          <img src="assets/projects/kora-conversation-workspace.png" alt="Kora conversation workspace showing the assistant, activity timeline, and integrated work panel" width="1600" height="1000" loading="eager">
-        </figure>
-        <dl class="proof-strip" aria-label="Kora evaluation results">
-          <div><dt>Evaluation suite</dt><dd>185 scenarios</dd></div>
-          <div><dt>Retrieval ranking</dt><dd>99.2%</dd></div>
-          <div><dt>Safety and data failures</dt><dd>0</dd></div>
-        </dl>
-        <div class="project-details">
-          <div><p class="detail-label">Problem</p><p>Long-running assistants lose context, choose the wrong tools, and become difficult to trust once a task crosses apps or sessions.</p></div>
-          <div><p class="detail-label">Engineering</p><p>I extended the Pi agent runtime into a full desktop system with durable memory, browser and app connectors, explicit task state, and evaluation-driven development.</p></div>
-          <div><p class="detail-label">Proof</p><p>A 185-scenario benchmark tests retrieval quality, safety, and multi-step behavior. The current suite reaches 99.2% ranking quality with no safety or data-integrity failures.</p></div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
-          <span>Python · TypeScript · React · Tauri · SQLite</span>
-        </div>
-      </article>
-
-      <article class="project" id="ks-app" data-reveal>
-        <header class="project-header">
-          <div><p class="project-number">02 / Full-stack operations</p><h3>KS App</h3></div>
-          <p class="project-summary">A business operations desktop app that turns scattered company work into one connected, agent-assisted workspace.</p>
-        </header>
-        <div class="system-map" role="img" aria-label="KS App architecture connecting business workspaces, a local agent runtime, browser and native connectors, and persistent company data">
-          <div class="system-node system-node--primary"><span>KS App</span><small>Desktop workspace</small></div>
-          <div class="system-rail" aria-hidden="true"><i></i><i></i><i></i></div>
-          <div class="system-stack">
-            <div class="system-node"><span>Company workspaces</span><small>Campaigns · content · operations</small></div>
-            <div class="system-node"><span>Kora runtime</span><small>Planning · tools · review</small></div>
-            <div class="system-node"><span>Connected state</span><small>Browser · native apps · persistence</small></div>
+      <div class="work-list">
+        <article class="work-entry">
+          <a class="work-visual product-shot" href="/projects/kora/" aria-label="Open the Kora case study">
+            <img src="/assets/projects/kora-conversation-workspace.webp" alt="Kora desktop conversation workspace" width="1600" height="1000">
+          </a>
+          <div class="work-copy">
+            <p class="work-type">Personal AI agent · Windows</p>
+            <h3><a href="/projects/kora/">Kora</a></h3>
+            <p>A local-first assistant that turns requests into multi-step work across knowledge, schedules, documents, and browser or desktop applications.</p>
+            <p class="ownership">Designed and built by Mobolaji Ogunbiyi.</p>
+            <div class="proof-line"><span>185 search scenarios</span><span>99.2% ranking quality</span><span>0 safety or data-integrity failures</span></div>
+            <a class="inline-link" href="/projects/kora/">Explore the case study <span aria-hidden="true">→</span></a>
           </div>
-        </div>
-        <dl class="proof-strip" aria-label="KS App validation">
-          <div><dt>Simulation scope</dt><dd>3 companies</dd></div>
-          <div><dt>Validation</dt><dd>15 checkpoints</dd></div>
-          <div><dt>Time horizon</dt><dd>1 month</dd></div>
-        </dl>
-        <div class="project-details">
-          <div><p class="detail-label">Problem</p><p>Running client work across browsers, files, communication tools, and separate AI chats creates fragmented context and repeated coordination.</p></div>
-          <div><p class="detail-label">Engineering</p><p>I built a full-stack desktop workflow around company workspaces, durable business state, native connectors, and an agent that can complete operational work—not merely discuss it.</p></div>
-          <div><p class="detail-label">Proof</p><p>A month-long synthetic business simulation exercised three companies and fifteen operational checkpoints, with repeatable fixtures for regression testing.</p></div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
-          <span>TypeScript · React · Python · Postgres · Desktop automation</span>
-        </div>
-      </article>
+        </article>
 
-      <article class="project" id="worldbuilder" data-reveal>
-        <header class="project-header">
-          <div><p class="project-number">03 / Agent evaluation</p><h3>WorldBuilder</h3></div>
-          <p class="project-summary">An offline evaluation environment for long-horizon agents, designed to expose failure modes before expensive live runs.</p>
-        </header>
-        <div class="trace-view" aria-label="WorldBuilder evaluation trace">
-          <div class="trace-head"><span>offline evaluation / run 047</span><span class="trace-status">511 tests passing</span></div>
-          <ol>
-            <li><span>01</span><strong>Initialize world</strong><small>fixture loaded</small></li>
-            <li><span>02</span><strong>Execute agent actions</strong><small>state checkpointed</small></li>
-            <li><span>03</span><strong>Fork and replay</strong><small>branch compared</small></li>
-            <li><span>04</span><strong>Score behavior</strong><small>18 dimensions</small></li>
-          </ol>
-        </div>
-        <dl class="proof-strip" aria-label="WorldBuilder baseline results">
-          <div><dt>Offline tests</dt><dd>511 passing</dd></div>
-          <div><dt>Evaluator</dt><dd>18 dimensions</dd></div>
-          <div><dt>Runtime control</dt><dd>Pause · replay · fork</dd></div>
-        </dl>
-        <div class="project-details">
-          <div><p class="detail-label">Problem</p><p>Long-horizon agent behavior is costly to test live and difficult to reproduce after the environment changes.</p></div>
-          <div><p class="detail-label">Engineering</p><p>I designed an offline mechanics baseline with deterministic fixtures, checkpointing, pause and resume, cancellation, linked forks, and replayable traces.</p></div>
-          <div><p class="detail-label">Status</p><p>The offline baseline passes 511 tests. An eighteen-dimension evaluator is the next layer for comparing agent decisions and system behavior.</p></div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
-          <span>Python · Simulation · Evaluation · Test infrastructure</span>
-        </div>
-      </article>
-    </section>
+        <article class="work-entry work-entry--reverse">
+          <a class="work-visual workspace-preview" href="/projects/ks-app/" aria-label="Open the KS App case study">
+            <div class="preview-top"><span>Northstar Wellness</span><span>Synthetic demo</span></div>
+            <div class="preview-body">
+              <nav aria-hidden="true"><b>Overview</b><span>CRM</span><span>Projects</span><span>Finance</span><span>Campaigns</span></nav>
+              <div><p>Operations overview</p><strong>12 active clients</strong><strong>7 projects on track</strong><strong>3 actions prepared</strong><small>Tenant-aware records and assistant actions share one workspace.</small></div>
+            </div>
+          </a>
+          <div class="work-copy">
+            <p class="work-type">Multi-tenant business operations</p>
+            <h3><a href="/projects/ks-app/">KS App</a></h3>
+            <p>A full-stack platform for CRM, projects, finance, communications, campaigns, knowledge, reporting, automation, and client operations. An AI business operator works inside the same tenant boundary.</p>
+            <p class="ownership">Designed and built by Mobolaji Ogunbiyi.</p>
+            <div class="proof-line"><span>3 synthetic companies</span><span>15 operational checkpoints</span><span>Month-long simulation</span></div>
+            <a class="inline-link" href="/projects/ks-app/">Explore the case study <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
 
-    <section class="studio shell section" id="studio" aria-labelledby="studio-title" data-reveal>
-      <div class="section-heading"><p class="eyebrow">Commercial work</p><h2 id="studio-title">Kora Studio</h2></div>
-      <div class="studio-layout">
-        <p class="studio-lead">I started a software studio to learn the complete loop: finding a real problem, shipping the system, and owning the result.</p>
-        <div class="studio-proof">
-          <div><strong>8</strong><span>client websites and operational systems shipped</span></div>
-          <div><strong>~$7.4K</strong><span>profit generated since May 2026</span></div>
-        </div>
-      </div>
-      <a class="text-link text-link--primary" href="https://builtbykora.com" target="_blank" rel="noopener noreferrer">Visit Kora Studio <span aria-hidden="true">↗</span></a>
-    </section>
-
-    <section class="experience shell section" id="experience" aria-labelledby="experience-title">
-      <div class="section-heading"><p class="eyebrow">Experience + research</p><h2 id="experience-title">Work that sharpened the systems.</h2></div>
-      <div class="experience-list">
-        <article data-reveal><div class="experience-meta"><span>2025</span><span>M&amp;T Bank</span></div><div><h3>Technology Intern</h3><p>Co-built a Flask and React record-mapping tool and an NLP pipeline that mapped document descriptions to retention codes with over 80% top-1 accuracy.</p></div></article>
-        <article data-reveal><div class="experience-meta"><span>2025</span><span>JuneBrain</span></div><div><h3>Software Engineering Intern</h3><p>Built an OpenCV pupil-localization and gaze-quality pipeline for ophthalmic imaging, working under mentorship across multi-camera inputs and model evaluation.</p></div></article>
-        <article data-reveal><div class="experience-meta"><span>2024—Now</span><span>UMBC DAMS Lab</span></div><div><h3>Undergraduate Researcher</h3><p>Helped build a privacy-policy analysis pipeline whose prompt-optimization loop improved classification F1 from 0.42 to 0.71 across 500 gold-labeled examples.</p></div></article>
+        <article class="work-entry">
+          <a class="work-visual trace-preview" href="/projects/worldbuilder/" aria-label="Open the WorldBuilder case study">
+            <div class="preview-top"><span>The Ash Meridian / run 047</span><span>Offline fixture</span></div>
+            <ol>
+              <li><span>Generate</span><b>World products compiled</b></li>
+              <li><span>Checkpoint</span><b>State and provenance sealed</b></li>
+              <li><span>Evaluate</span><b>18 dimensions inspected</b></li>
+              <li><span>Repair</span><b>Bounded revision re-evaluated</b></li>
+            </ol>
+          </a>
+          <div class="work-copy">
+            <p class="work-type">Durable AI generation system</p>
+            <h3><a href="/projects/worldbuilder/">WorldBuilder</a></h3>
+            <p>A governed workflow that transforms creative direction into connected lore, narrative structure, a readable edition, and a versioned software package.</p>
+            <p class="ownership">Designed and built by Mobolaji Ogunbiyi.</p>
+            <div class="proof-line"><span>511 passing offline tests</span><span>18-dimension evaluator</span><span>Bounded repair path</span></div>
+            <a class="inline-link" href="/projects/worldbuilder/">Explore the case study <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="profile shell section" id="profile" aria-labelledby="profile-title" data-reveal>
-      <div class="section-heading"><p class="eyebrow">Foundation</p><h2 id="profile-title">Engineering, behavior, and evidence.</h2></div>
-      <div class="profile-grid">
-        <div><p class="detail-label">Education</p><h3>University of Maryland, Baltimore County</h3><p>B.S. Computer Science + B.A. Psychology · GPA 3.63 · Expected May 2027</p><p>Meyerhoff Scholar · President’s List · Dean’s List</p></div>
-        <div><p class="detail-label">Core toolkit</p><p>Python, TypeScript, JavaScript, React, FastAPI, Flask, SQL, Postgres, SQLite, OpenCV, TensorFlow, Tauri, Playwright, Pytest, Git, Docker, Google Cloud.</p></div>
+    <section class="section shell" id="commercial" aria-labelledby="commercial-title">
+      <header class="section-intro split-intro">
+        <div>
+          <h2 id="commercial-title">Commercial work</h2>
+          <p>Selected client systems shipped through Kora Studio across consulting, healthcare, food service, and wellness.</p>
+        </div>
+        <a class="inline-link" href="https://builtbykora.com/services/what-we-build" target="_blank" rel="noopener noreferrer">Full Kora Studio gallery <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <div class="commercial-grid">
+        <a class="commercial-item commercial-item--wide" href="https://abohconsulting.com" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/commercial/aboh-consulting.webp" alt="Aboh Consulting website homepage" width="1200" height="1200">
+          <span><b>Aboh Consulting</b><small>Consulting and Salesforce implementation</small></span>
+        </a>
+        <a class="commercial-item" href="https://www.mydivinecareservices.com/" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/commercial/divine-care.webp" alt="Divine Care Services website homepage" width="1200" height="1200">
+          <span><b>Divine Care Services</b><small>Primary-care website and booking path</small></span>
+        </a>
+        <a class="commercial-item" href="https://zubesgrub.com/" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/commercial/zubes-grub.webp" alt="Zube's Grub website homepage" width="1200" height="675">
+          <span><b>Zube’s Grub</b><small>Restaurant brand and ordering experience</small></span>
+        </a>
+      </div>
+      <p class="commercial-note">I led the engineering and delivery of these client systems. Kora Studio remains the separate business site for services, process, and the complete work gallery.</p>
+      <a class="inline-link" href="/commercial-work/">See my role and more commercial work <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="section shell" id="experience" aria-labelledby="experience-title">
+      <header class="section-intro">
+        <h2 id="experience-title">Experience and research</h2>
+      </header>
+      <div class="timeline">
+        <article>
+          <div class="timeline-meta"><time>May 2026–Present</time><span>Kora Studio</span></div>
+          <div><h3>Founder and Software Engineer</h3><p>Founded and led a software studio, shipping eight client websites and operational systems while generating approximately $7.4K in profit. Built full-stack applications with authentication, admin dashboards, CRM, content, booking, ordering, payments, integrations, testing, and support.</p></div>
+        </article>
+        <article>
+          <div class="timeline-meta"><time>Jun–Aug 2025</time><span>M&amp;T Bank</span></div>
+          <div><h3>Technology Intern</h3><p>Collaborated with a project partner on a Flask and React NLP application that replaced manual retention-code mapping and achieved over 80% top-1 accuracy on labeled records.</p></div>
+        </article>
+        <article>
+          <div class="timeline-meta"><time>Jan–May 2025</time><span>JUNEBRAIN Inc.</span></div>
+          <div><h3>Software Engineering Intern</h3><p>Built a real-time Python and OpenCV pipeline for pupil localization, 2D gaze estimation, and frame-quality checks on an ophthalmic prototype.</p></div>
+        </article>
+        <article>
+          <div class="timeline-meta"><time>Oct 2024–Present</time><span>University of Maryland DAMS Lab</span></div>
+          <div><h3>Undergraduate Researcher</h3><p>Built reproducible privacy-policy analysis workflows and an agentic prompt-optimization loop that improved classification F1 from 0.42 to 0.71 across 500 gold-labeled examples.</p></div>
+        </article>
       </div>
     </section>
 
-    <section class="contact shell section" id="contact" aria-labelledby="contact-title">
-      <div class="contact-rule" aria-hidden="true"><span></span></div>
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact-title">Let’s build something that has to work.</h2>
-      <p>I’m looking for 2027 new-grad software engineering and applied AI roles.</p>
-      <div class="contact-links">
-        <a href="mailto:bjfifi1@gmail.com">Email <span>bjfifi1@gmail.com ↗</span></a>
-        <a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/" target="_blank" rel="noopener noreferrer">LinkedIn <span>Profile ↗</span></a>
-        <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub <span>Mobi21 ↗</span></a>
-        <a href="assets/resume.pdf" target="_blank">Resume <span>Open PDF ↗</span></a>
+    <section class="section shell" id="education" aria-labelledby="education-title">
+      <header class="section-intro"><h2 id="education-title">Education and capabilities</h2></header>
+      <div class="foundation-grid">
+        <div>
+          <h3>University of Maryland</h3>
+          <p>B.S. Computer Science and B.A. Psychology · GPA 3.63/4.00 · Expected May 2027</p>
+          <p>Meyerhoff Scholar · President’s List · Dean’s List</p>
+        </div>
+        <div>
+          <h3>Engineering range</h3>
+          <p>TypeScript, Python, JavaScript, SQL, React, Next.js, Node.js, Flask, Tauri, REST APIs, OAuth, webhooks, PostgreSQL, SQLite, Supabase, D1, Playwright, Vitest, machine learning, RAG, NLP, computer vision, and agent systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact shell" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Let’s talk.</h2>
+      <p>I’m looking for new-grad software engineering and applied AI roles beginning after May 2027.</p>
+      <div class="contact-list">
+        <a href="mailto:bjfifi1@gmail.com"><span>Email</span><b>bjfifi1@gmail.com ↗</b></a>
+        <a href="/assets/resume.pdf" target="_blank"><span>Resume</span><b>Open current PDF ↗</b></a>
+        <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer"><span>GitHub</span><b>Mobi21 ↗</b></a>
+        <a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><b>Mobolaji Ogunbiyi ↗</b></a>
       </div>
     </section>
   </main>
-  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+
+  <footer class="site-footer shell">
+    <p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p>
+    <p>Personal portfolio · Kora Studio is the separate business site</p>
+    <a href="#main">Back to top ↑</a>
+  </footer>
 </body>
 </html>

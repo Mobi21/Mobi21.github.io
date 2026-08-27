@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Kora case study by Mobolaji Ogunbiyi: a local-first personal AI agent with durable state, tools, retrieval, and evaluation.">
+  <meta name="theme-color" content="#090b10">
+  <meta property="og:title" content="Kora — Mobolaji Ogunbiyi">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/projects/kora/">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/projects/kora/">
+  <title>Kora — Mobolaji Ogunbiyi</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header><div class="shell header-inner"><a class="wordmark" href="/">Mobolaji Ogunbiyi</a><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button><nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav><a href="/#work">Work</a><a href="/commercial-work/">Commercial</a><a href="/#experience">Experience</a><a href="/#contact">Contact</a></nav></div></header>
+  <main id="main" class="shell">
+    <section class="case-hero" aria-labelledby="case-title">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Portfolio</a><span>/</span><span>Projects</span><span>/</span><span aria-current="page">Kora</span></nav>
+      <h1 id="case-title">Kora</h1>
+      <p class="case-deck">A local-first Windows assistant that turns natural-language requests into multi-step actions across personal knowledge, schedules, projects, documents, and browser or desktop applications.</p>
+      <p class="case-owner">Designed and built by Mobolaji Ogunbiyi · December 2025—Present</p>
+      <div class="case-status"><span><b>Status:</b> active private development</span><span><b>Role:</b> product, architecture, full-stack implementation, evaluation</span></div>
+      <div class="case-actions"><a class="action action--primary" href="#demo">Demo</a><a class="action" href="#case-study">Case Study</a><a class="action" href="#evidence">Evidence</a><span class="action private-repo">Private repository</span></div>
+    </section>
+    <figure class="product-frame case-product-frame"><div class="preview-top"><span>Kora / conversation workspace</span><span>Product UI</span></div><img src="/assets/projects/kora-conversation-workspace.webp" alt="Kora desktop conversation workspace with a conversation, activity timeline, and working panel" width="1600" height="1000"></figure>
+    <section class="case-section" id="demo" aria-labelledby="demo-title">
+      <header><h2 id="demo-title">Guided workflow replay</h2><p>A sanitized fixture demonstrates the implemented control flow without connecting to private accounts or a live model. Use the controls to inspect each step; the complete reading path remains below without JavaScript.</p></header>
+      <div class="demo" data-demo>
+        <div class="demo-header"><strong>Request: “Prepare my interview brief and put the final document in my applications folder.”</strong><span>Fixture replay · no private data · read only</span></div>
+        <div class="demo-stage" aria-live="polite">
+          <article class="demo-step is-active" data-demo-step="plan"><h3>1. Plan the work</h3><p>Kora resolves the requested outcome into a bounded sequence: identify the application, retrieve candidate evidence, research the company, assemble the brief, and save the artifact.</p><pre class="demo-code">goal: interview_brief&#10;steps: resolve → retrieve → research → compose → save&#10;write_scope: applications/interview-brief.md</pre></article>
+          <article class="demo-step" data-demo-step="retrieve"><h3>2. Retrieve grounded context</h3><p>The runtime searches durable local sources and returns supporting spans rather than relying on conversation memory alone.</p><pre class="demo-code">sources: master resume, application record, project evidence&#10;result: 7 cited spans selected</pre></article>
+          <article class="demo-step" data-demo-step="act"><h3>3. Use connected tools</h3><p>The agent reads the relevant browser page, records the company context, and prepares a document through typed tools. Effects remain explicit and attached to the active run.</p><pre class="demo-code">browser.read_page → engineering principles&#10;document.compose → structured interview brief&#10;filesystem.write → applications/acme/interview-brief.md</pre></article>
+          <article class="demo-step" data-demo-step="result"><h3>4. Return the artifact and evidence</h3><p>The final response reports what changed, where the artifact lives, and which sources support it. The session retains enough state to continue after compaction or restart without replaying effects.</p><pre class="demo-code">completed: true&#10;artifact: applications/acme/interview-brief.md&#10;citations: 7&#10;next: review system-design talking points</pre></article>
+        </div>
+        <div class="demo-controls" role="group" aria-label="Workflow steps"><button class="demo-control" type="button" data-demo-target="plan" aria-pressed="true">Plan</button><button class="demo-control" type="button" data-demo-target="retrieve" aria-pressed="false">Retrieve</button><button class="demo-control" type="button" data-demo-target="act" aria-pressed="false">Act</button><button class="demo-control" type="button" data-demo-target="result" aria-pressed="false">Result</button></div>
+        <details class="demo-fallback"><summary>Read the complete workflow</summary><ol><li>Plan the bounded workflow and write scope.</li><li>Retrieve cited spans from durable local sources.</li><li>Use typed browser, document, and filesystem tools.</li><li>Return the saved artifact, citations, and next action.</li></ol></details>
+      </div>
+    </section>
+    <section class="case-section" id="evidence" aria-labelledby="evidence-title"><header><h2 id="evidence-title">Contextualized evidence</h2><p>These results describe the current automated retrieval evaluation—not universal model accuracy or production reliability.</p></header><dl class="proof-points"><div><dt>Evaluation corpus</dt><dd>185 search scenarios</dd></div><div><dt>Ranking result</dt><dd>99.2% quality</dd></div><div><dt>Safety and integrity</dt><dd>0 failures</dd></div></dl><p class="proof-context">The suite uses synthetic personal histories. Every correct result appeared within the top five. Separate live tool-selection and operational qualification remain different evidence boundaries.</p></section>
+    <section class="case-section" id="case-study" aria-labelledby="study-title"><header><h2 id="study-title">What I engineered</h2></header><div class="case-columns"><div><h3>Product system</h3><p>One authenticated runtime shared by a Tauri desktop app, CLI, and Chrome extension so the assistant can keep context across surfaces.</p></div><div><h3>Agent runtime</h3><p>Kora-native orchestration, typed tools and skills, context retrieval, durable SQLite state, and resumable sessions around the Pi runtime.</p></div><div><h3>Evaluation loop</h3><p>Synthetic histories, repeatable queries, ranking checks, safety assertions, and data-integrity assertions used to guide implementation.</p></div></div></section>
+    <section class="case-section" aria-labelledby="architecture-title"><header><h2 id="architecture-title">Architecture</h2><p>Product surfaces share one runtime and durable state instead of duplicating agent behavior in each interface.</p></header><div class="architecture" role="img" aria-label="Desktop app, CLI, and Chrome extension connect to the Kora runtime, which connects to durable SQLite state and typed tools"><div class="architecture-node"><strong>Product surfaces</strong><span>Tauri desktop · CLI · Chrome extension</span></div><div class="architecture-arrow" aria-hidden="true">→</div><div class="architecture-node"><strong>Kora runtime</strong><span>Pi harness · orchestration · retrieval · session control</span></div><div class="architecture-arrow" aria-hidden="true">→</div><div class="architecture-node"><strong>Owned state + tools</strong><span>SQLite · files · browser · desktop · connected services</span></div></div></section>
+    <section class="case-section" aria-labelledby="decisions-title"><header><h2 id="decisions-title">Engineering decisions and tradeoffs</h2></header><div class="case-columns"><div><h3>Local-first by default</h3><p>Personal context and durable state stay on the user’s machine. That improves control and inspectability, but makes packaging and cross-device synchronization harder.</p></div><div><h3>One runtime, multiple interfaces</h3><p>Sharing a runtime avoids behavioral drift. It also requires strict surface contracts so desktop, browser, and CLI clients do not leak internal fields.</p></div><div><h3>Evaluation before claims</h3><p>Retrieval is measured with repeatable fixtures. A strong offline result does not substitute for connected, long-running, or production evidence.</p></div></div></section>
+    <section class="case-section" aria-labelledby="status-title"><header><h2 id="status-title">Current status</h2></header><p>Kora is an active private project with a working local runtime, desktop and browser surfaces, durable sessions, typed tools, retrieval, and automated evaluations. It is not presented here as a public hosted service or open-source repository.</p></section>
+  </main>
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="/">Return to portfolio ↑</a></footer>
+</body>
+</html>

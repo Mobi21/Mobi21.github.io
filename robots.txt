@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mobolaji.builtbykora.com/sitemap.xml
