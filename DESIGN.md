@@ -25,7 +25,9 @@ The site is a centered, dark, recruiter-first personal portfolio: direct, proof-
 
 - Maximum content width: 72rem.
 - Spacing follows a 4px-derived token scale from 4px through fluid 96px/144px section spacing.
-- Homepage work is presented as three full-width artifact-and-copy records rather than equal cards or numbered scaffolding.
+- The homepage is the short recruiter scan: decisive hero, three featured projects, compact studio proof, two writing links, and a direct closing contact path.
+- Projects, Work & Writing, and About are real destinations rather than homepage anchors. Project evidence remains on dedicated case-study routes.
+- Homepage work uses one artifact-led lead project and two concise supporting records rather than a repetitive equal-card grid.
 - Major evidence gets a bordered frame; other grouping uses whitespace and hairlines.
 - Z-index tiers are intentionally small: sticky header `20`, skip link `100`.
 

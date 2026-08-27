@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Mobolaji Ogunbiyi's practical workflow for using AI agents while retaining engineering judgment, review, and testing.">
+  <meta name="theme-color" content="#090b10">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/building-with-ai/">
+  <title>How I Build With AI — Mobolaji Ogunbiyi</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
+        <a href="/">Home</a><a href="/projects/">Projects</a><a href="/work-writing/" aria-current="page">Work &amp; Writing</a><a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="shell article-page">
+    <article>
+      <header class="article-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/work-writing/">Work &amp; Writing</a><span>/</span><span aria-current="page">How I build with AI</span></nav>
+        <p class="piece-type">Engineering Workflow</p>
+        <h1>How I build with AI without outsourcing engineering judgment</h1>
+        <p class="article-deck">I use agents to increase the amount of grounded implementation and verification I can do—not to avoid understanding the system or deciding what “correct” means.</p>
+        <p class="article-meta">Mobolaji Ogunbiyi · Working method</p>
+      </header>
+
+      <div class="article-body">
+        <section>
+          <h2>Start with an outcome and an owned boundary</h2>
+          <p>Before an agent touches code, I define the user-visible outcome, the source of truth, the part of the system it may change, and the checks that would make the result believable. A useful task is not “improve the backend.” It is closer to “persist tenant-scoped campaign drafts through the existing service boundary and prove one tenant cannot read another’s records.”</p>
+          <p>This work remains mine. The agent can inspect and implement inside the boundary, but it should not invent the product decision or silently broaden the scope.</p>
+        </section>
+
+        <section>
+          <h2>Give the agent the repository, not a story about it</h2>
+          <p>I point the agent at the real code, relevant documentation, current tests, and the exact files that establish the contract. When a decision depends on behavior, I prefer having it trace the implementation over pasting a long prompt that may already be wrong.</p>
+          <p>Good context is selective. The goal is enough evidence to act correctly, not every file in the repository. For large work, I split tasks by independent ownership boundaries so parallel work does not become parallel conflict.</p>
+        </section>
+
+        <section>
+          <h2>Review the system change, not just the generated diff</h2>
+          <p>I inspect whether the implementation used the right boundary, preserved existing behavior, and made the system easier or harder to reason about. A clean diff can still be wrong if it duplicates authority, adds a second persistence path, hides a failure, or “solves” a local symptom with a global abstraction.</p>
+          <p>I also check the claims around the work. If an evaluation uses synthetic fixtures, I say so. If a workflow proves mechanics but not live quality, I keep those evidence boundaries separate.</p>
+        </section>
+
+        <section>
+          <h2>Test outcomes at the level where they matter</h2>
+          <p>Unit tests are useful for contracts; they are not the complete proof of a product. I combine them with integration checks, persisted-state inspection, browser verification, fixture-driven workflows, and evaluation datasets depending on the system.</p>
+          <p>That approach appears across my projects: Kora has repeatable retrieval scenarios and integrity checks, KS App exercises a month of synthetic multi-company operations, and WorldBuilder verifies durable workflow, evaluation, and bounded repair mechanics offline.</p>
+        </section>
+
+        <section>
+          <h2>Where agents help most</h2>
+          <ul>
+            <li>Tracing an unfamiliar code path and assembling the relevant evidence.</li>
+            <li>Implementing a clear vertical slice inside an established boundary.</li>
+            <li>Generating test fixtures and checking many consistent cases.</li>
+            <li>Finding mismatches across code, documentation, UI, and stored state.</li>
+            <li>Running focused review passes for accessibility, failures, and edge cases.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>What I keep accountable to myself</h2>
+          <ul>
+            <li>The product goal and the tradeoff worth making.</li>
+            <li>The authority boundary: which component is allowed to decide or mutate state.</li>
+            <li>Whether evidence supports the claim being made.</li>
+            <li>Whether the result is understandable and useful to the person it serves.</li>
+            <li>The final review when failure could affect users, data, security, or trust.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>The failure mode I watch for</h2>
+          <p>The most expensive agent mistake is often not broken syntax. It is plausible work aimed at the wrong abstraction. The code runs, but a new layer duplicates something the repository already owned, a filter silently excludes valid data, or a generated metric loses its evidence boundary.</p>
+          <p>My response is to reduce the scope, return to the source of truth, state the contract plainly, and verify one complete path before increasing parallelism. Speed comes from clear ownership and fast feedback—not from creating more work at once.</p>
+        </section>
+      </div>
+
+      <footer class="article-end">
+        <a class="action action--primary" href="/projects/">See the systems <span aria-hidden="true">→</span></a>
+        <a class="action" href="/work-writing/">Back to Work &amp; Writing</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+</body>
+</html>

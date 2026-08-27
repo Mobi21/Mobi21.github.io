@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="How Mobolaji Ogunbiyi designed Kora around one local runtime shared by a desktop app, Chrome extension, and CLI.">
+  <meta name="theme-color" content="#090b10">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/kora-runtime/">
+  <title>One Runtime, Three Surfaces — Mobolaji Ogunbiyi</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
+        <a href="/">Home</a><a href="/projects/">Projects</a><a href="/work-writing/" aria-current="page">Work &amp; Writing</a><a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="shell article-page">
+    <article>
+      <header class="article-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/work-writing/">Work &amp; Writing</a><span>/</span><span aria-current="page">Kora runtime</span></nav>
+        <p class="piece-type">System Design</p>
+        <h1>One runtime, three surfaces</h1>
+        <p class="article-deck">The desktop app, Chrome extension, and CLI all need the same memory, tools, and sessions. I designed Kora around one local runtime so those interfaces do not become three different assistants.</p>
+        <p class="article-meta">Mobolaji Ogunbiyi · Kora architecture</p>
+      </header>
+
+      <figure class="article-figure">
+        <img src="/assets/projects/kora-conversation-workspace.webp" alt="Kora desktop conversation workspace showing a multi-step task" width="1600" height="1000">
+        <figcaption>The desktop workspace is one client of the same local runtime used by Kora’s other surfaces.</figcaption>
+      </figure>
+
+      <div class="article-body">
+        <section>
+          <h2>The problem was consistency, not another chat box</h2>
+          <p>Kora can be used from a Tauri desktop application, a command-line interface, and a Chrome extension. Each surface has a different interaction model, but the underlying work—retrieving context, selecting tools, updating state, and resuming a session—must stay consistent.</p>
+          <p>Putting a separate agent loop inside every interface would have made each surface easy to start and difficult to trust. Tool behavior, prompts, memory rules, and session state would drift as soon as one client changed faster than the others.</p>
+        </section>
+
+        <section>
+          <h2>The boundary I chose</h2>
+          <div class="architecture article-architecture" role="img" aria-label="Desktop, browser extension, and CLI connect to one Kora runtime, which owns sessions, retrieval, tools, and local state">
+            <div class="architecture-node"><strong>Product surfaces</strong><span>Desktop · Chrome extension · CLI</span></div>
+            <div class="architecture-arrow" aria-hidden="true">→</div>
+            <div class="architecture-node"><strong>Kora runtime</strong><span>Sessions · orchestration · retrieval · typed tools</span></div>
+            <div class="architecture-arrow" aria-hidden="true">→</div>
+            <div class="architecture-node"><strong>Owned local state</strong><span>SQLite · files · browser and desktop actions</span></div>
+          </div>
+          <p>The interfaces request work and render events. The runtime owns the behavior that must remain coherent: session control, tool and skill execution, context retrieval, and durable state. That also keeps private context on the user’s machine by default.</p>
+        </section>
+
+        <section>
+          <h2>What the design improves</h2>
+          <ul>
+            <li><strong>Continuity:</strong> a session can be resumed without teaching each interface its own memory model.</li>
+            <li><strong>Inspectability:</strong> one owner records tool activity, retrieved context, and durable state.</li>
+            <li><strong>Consistency:</strong> tools and skills behave the same way regardless of where a request begins.</li>
+            <li><strong>Evaluation:</strong> retrieval and safety behavior can be tested below the interface layer with repeatable fixtures.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>What the design makes harder</h2>
+          <p>A shared runtime creates a real contract between clients and the system underneath them. Events need stable shapes. The browser extension cannot depend on desktop-only internals. Packaging, local process management, recovery, and version compatibility become product problems rather than details hidden inside one application.</p>
+          <p>Local-first storage also improves user control while making cross-device synchronization more difficult. I chose that tradeoff deliberately: Kora’s default responsibility is to the user’s machine and context, not to a hosted account.</p>
+        </section>
+
+        <section>
+          <h2>How I check the boundary</h2>
+          <p>Kora’s current retrieval evaluation uses 185 synthetic search scenarios. The measured result is 99.2% ranking quality, with every correct result appearing in the top five and no safety or data-integrity failures in that suite. That evidence supports the retrieval boundary; it does not claim universal model accuracy or complete production reliability.</p>
+        </section>
+      </div>
+
+      <footer class="article-end">
+        <a class="action action--primary" href="/projects/kora/">Explore the Kora case study <span aria-hidden="true">→</span></a>
+        <a class="action" href="/work-writing/">Back to Work &amp; Writing</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+</body>
+</html>

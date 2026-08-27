@@ -35,6 +35,14 @@ Mobolaji Ogunbiyi is a software engineer and founder of Kora Studio. He builds c
 - GitHub is supporting public-code proof only. Private product repositories are labeled plainly and never routed to a generic profile as if public source were available.
 - Stable case-study routes are `/projects/kora/`, `/projects/ks-app/`, `/projects/worldbuilder/`, and `/commercial-work/`.
 
+## Information architecture
+
+- `/` is the fast recruiter view: concise positioning, three featured projects, a small Kora Studio highlight, two featured pieces, resume, GitHub, LinkedIn, and contact.
+- `/projects/` is the major technical-project index. Kora, KS App, and WorldBuilder keep their own flexible evidence-rich case studies.
+- `/work-writing/` is the flexible index for client case studies, system design, technical writing, and engineering workflow pieces.
+- `/about/` is a short personal and professional introduction covering the Computer Science and Psychology background, current interests, target work, and contact paths.
+- The global navigation is always Home, Projects, Work & Writing, and About. It does not mirror résumé sections.
+
 ## Brand Personality
 
 Precise, ambitious, and human. The voice should be confident without pretending to be senior, technically specific without drowning recruiters in jargon, and expressive without becoming a design experiment that hides the work.
