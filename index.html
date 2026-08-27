@@ -1,481 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mobolaji Ogunbiyi — CS + Psychology @ UMBC · Software Engineer building AI-native tools and local-first agents." />
-  <meta name="author" content="Mobolaji Ogunbiyi" />
-  <meta property="og:title" content="Mobolaji Ogunbiyi — Software Engineer" />
-  <meta property="og:description" content="CS + Psychology @ UMBC · Building AI-native tools and local-first agents." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mobi21.github.io" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Mobolaji Ogunbiyi is a software engineer building complete AI systems, full-stack products, and evaluation infrastructure.">
+  <meta name="author" content="Mobolaji Ogunbiyi">
+  <meta name="theme-color" content="#090b10">
+  <meta property="og:title" content="Mobolaji Ogunbiyi — Software Engineer">
+  <meta property="og:description" content="Selected work across applied AI, full-stack engineering, evaluation systems, and research.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mobi21.github.io/">
   <title>Mobolaji Ogunbiyi — Software Engineer</title>
-
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-
-  <!-- Google Fonts: Inter + JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="site-header" id="site-header">
-    <div class="container site-header__inner">
-      <a href="#top" class="site-header__brand">Mobolaji</a>
-      <nav class="site-nav" aria-label="Primary">
-        <ul class="site-nav__list">
-          <li><a href="#about" class="site-nav__link">About</a></li>
-          <li><a href="#experience" class="site-nav__link">Experience</a></li>
-          <li><a href="#projects" class="site-nav__link">Projects</a></li>
-          <li><a href="#skills" class="site-nav__link">Skills</a></li>
-          <li><a href="#education" class="site-nav__link">Education</a></li>
-          <li><a href="#contact" class="site-nav__link">Contact</a></li>
-        </ul>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="wordmark" href="#top" aria-label="Mobolaji Ogunbiyi, home">
+        <span>Mobolaji Ogunbiyi</span>
+        <span class="availability"><span aria-hidden="true"></span>Open to 2027 roles</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span>Menu</span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="assets/resume.pdf" target="_blank">Resume <span aria-hidden="true">↗</span></a>
+        <a href="#contact">Contact</a>
       </nav>
-      <button
-        class="site-header__menu-toggle"
-        id="menu-toggle"
-        aria-expanded="false"
-        aria-controls="mobile-drawer"
-        aria-label="Toggle menu"
-        type="button"
-      >
-        <span class="hamburger"></span>
-      </button>
     </div>
   </header>
 
-  <div
-    class="mobile-drawer"
-    id="mobile-drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Navigation menu"
-    aria-hidden="true"
-  >
-    <div class="mobile-drawer__backdrop" data-drawer-dismiss></div>
-    <nav class="mobile-drawer__panel" aria-label="Mobile navigation">
-      <ul class="mobile-drawer__list">
-        <li><a href="#about" class="mobile-drawer__link">About</a></li>
-        <li><a href="#experience" class="mobile-drawer__link">Experience</a></li>
-        <li><a href="#projects" class="mobile-drawer__link">Projects</a></li>
-        <li><a href="#skills" class="mobile-drawer__link">Skills</a></li>
-        <li><a href="#education" class="mobile-drawer__link">Education</a></li>
-        <li><a href="#contact" class="mobile-drawer__link">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <main>
-    <section class="hero" id="top">
-      <div class="hero__glow hero__glow--indigo" aria-hidden="true"></div>
-      <div class="hero__glow hero__glow--sky" aria-hidden="true"></div>
-
-      <div class="container hero__inner">
-        <div class="hero__content">
-          <p class="hero__eyebrow">CS + Psychology @ UMBC</p>
-          <h1 class="hero__name">Mobolaji Ogunbiyi</h1>
-          <p class="hero__tagline">
-            Software engineer building AI-native tools and local-first
-            (runs on your machine, no cloud required) autonomous agents.
-          </p>
-          <p class="hero__pitch">
-            Meyerhoff Scholar focused on the intersection of software engineering and human
-            behavior — shipping systems that are technically rigorous and thoughtful about
-            the people using them.
-          </p>
-          <div class="hero__actions">
-            <a href="#projects" class="btn btn--primary">View Projects</a>
-            <a href="assets/resume.pdf" class="btn btn--secondary" download>Download Resume</a>
-          </div>
-        </div>
-
-        <div class="hero__avatar-wrap">
-          <div class="hero__avatar-ring" aria-hidden="true"></div>
-          <img src="assets/profile.svg" alt="" role="presentation" class="hero__avatar" />
-        </div>
+  <main id="main">
+    <section class="intro shell" id="top" aria-labelledby="intro-title">
+      <div class="intro-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="eyebrow">Software engineering · Applied AI</p>
+      <h1 id="intro-title">I build complete AI systems—not just demos.</h1>
+      <p class="intro-copy">I’m Mobolaji, a Computer Science and Psychology student at UMBC. I design the product, backend, agent runtime, and evaluation loop needed to make ambitious software reliable.</p>
+      <div class="intro-meta" aria-label="Candidate details">
+        <span>Frederick, Maryland</span>
+        <span>B.S. Computer Science + B.A. Psychology</span>
+        <span>Graduating May 2027</span>
+      </div>
+      <div class="intro-actions">
+        <a class="text-link text-link--primary" href="#work">See selected work <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="mailto:bjfifi1@gmail.com">bjfifi1@gmail.com <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
-    <section class="section about" id="about">
-      <div class="container about__inner">
-        <div class="about__content">
-          <p class="section-label">About</p>
-          <h2 class="section-title">About Me</h2>
-          <p class="about__paragraph">
-            I'm a Computer Science and Psychology dual-major at UMBC, where I'm a Meyerhoff
-            Scholar. I'm drawn to the intersection of software engineering and human
-            behavior — building systems that are technically rigorous and thoughtful about
-            the people using them.
-          </p>
-          <p class="about__paragraph">
-            Lately I've been focused on local-first AI agents, developer tooling, and the
-            evaluation layer around LLMs. My recent work at M&amp;T Bank, JuneBrain, and in
-            UMBC research has ranged from NLP pipelines to computer vision to web-scraping
-            and policy analysis.
-          </p>
-          <p class="about__paragraph">
-            Outside of building things, I tutor Python and C++ through UMBC NSBE and
-            co-led a winning hackathon team at TechBuffalo PowerUpTech 2025.
-          </p>
-        </div>
+    <section class="work shell section" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <p class="eyebrow">Selected work</p>
+        <h2 id="work-title">Systems with proof.</h2>
+      </div>
+      <nav class="project-index" aria-label="Selected projects">
+        <a href="#kora"><span>01</span>Kora</a>
+        <a href="#ks-app"><span>02</span>KS App</a>
+        <a href="#worldbuilder"><span>03</span>WorldBuilder</a>
+      </nav>
 
-        <aside class="about__stats">
-          <div class="stat">
-            <span class="stat__label">Expected Grad</span>
-            <span class="stat__value">May 2027</span>
+      <article class="project project--feature" id="kora" data-reveal>
+        <header class="project-header">
+          <div><p class="project-number">01 / Applied AI system</p><h3>Kora</h3></div>
+          <p class="project-summary">A local-first assistant that can plan, use tools, retain context, and evaluate its own behavior across real workflows.</p>
+        </header>
+        <figure class="product-frame">
+          <div class="frame-bar" aria-hidden="true"><span></span><span></span><span></span><p>Kora / conversation workspace</p></div>
+          <img src="assets/projects/kora-conversation-workspace.png" alt="Kora conversation workspace showing the assistant, activity timeline, and integrated work panel" width="1600" height="1000" loading="eager">
+        </figure>
+        <dl class="proof-strip" aria-label="Kora evaluation results">
+          <div><dt>Evaluation suite</dt><dd>185 scenarios</dd></div>
+          <div><dt>Retrieval ranking</dt><dd>99.2%</dd></div>
+          <div><dt>Safety and data failures</dt><dd>0</dd></div>
+        </dl>
+        <div class="project-details">
+          <div><p class="detail-label">Problem</p><p>Long-running assistants lose context, choose the wrong tools, and become difficult to trust once a task crosses apps or sessions.</p></div>
+          <div><p class="detail-label">Engineering</p><p>I extended the Pi agent runtime into a full desktop system with durable memory, browser and app connectors, explicit task state, and evaluation-driven development.</p></div>
+          <div><p class="detail-label">Proof</p><p>A 185-scenario benchmark tests retrieval quality, safety, and multi-step behavior. The current suite reaches 99.2% ranking quality with no safety or data-integrity failures.</p></div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+          <span>Python · TypeScript · React · Tauri · SQLite</span>
+        </div>
+      </article>
+
+      <article class="project" id="ks-app" data-reveal>
+        <header class="project-header">
+          <div><p class="project-number">02 / Full-stack operations</p><h3>KS App</h3></div>
+          <p class="project-summary">A business operations desktop app that turns scattered company work into one connected, agent-assisted workspace.</p>
+        </header>
+        <div class="system-map" role="img" aria-label="KS App architecture connecting business workspaces, a local agent runtime, browser and native connectors, and persistent company data">
+          <div class="system-node system-node--primary"><span>KS App</span><small>Desktop workspace</small></div>
+          <div class="system-rail" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="system-stack">
+            <div class="system-node"><span>Company workspaces</span><small>Campaigns · content · operations</small></div>
+            <div class="system-node"><span>Kora runtime</span><small>Planning · tools · review</small></div>
+            <div class="system-node"><span>Connected state</span><small>Browser · native apps · persistence</small></div>
           </div>
-          <div class="stat">
-            <span class="stat__label">GPA</span>
-            <span class="stat__value">3.59 / 4.00</span>
-          </div>
-          <div class="stat">
-            <span class="stat__label">Location</span>
-            <span class="stat__value">Baltimore, MD</span>
-          </div>
-          <div class="stat">
-            <span class="stat__label">Focus Areas</span>
-            <span class="stat__value stat__value--small">
-              AI Agents · Developer Tools · Applied NLP · Human-in-the-Loop Systems
-            </span>
-          </div>
-        </aside>
+        </div>
+        <dl class="proof-strip" aria-label="KS App validation">
+          <div><dt>Simulation scope</dt><dd>3 companies</dd></div>
+          <div><dt>Validation</dt><dd>15 checkpoints</dd></div>
+          <div><dt>Time horizon</dt><dd>1 month</dd></div>
+        </dl>
+        <div class="project-details">
+          <div><p class="detail-label">Problem</p><p>Running client work across browsers, files, communication tools, and separate AI chats creates fragmented context and repeated coordination.</p></div>
+          <div><p class="detail-label">Engineering</p><p>I built a full-stack desktop workflow around company workspaces, durable business state, native connectors, and an agent that can complete operational work—not merely discuss it.</p></div>
+          <div><p class="detail-label">Proof</p><p>A month-long synthetic business simulation exercised three companies and fifteen operational checkpoints, with repeatable fixtures for regression testing.</p></div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+          <span>TypeScript · React · Python · Postgres · Desktop automation</span>
+        </div>
+      </article>
+
+      <article class="project" id="worldbuilder" data-reveal>
+        <header class="project-header">
+          <div><p class="project-number">03 / Agent evaluation</p><h3>WorldBuilder</h3></div>
+          <p class="project-summary">An offline evaluation environment for long-horizon agents, designed to expose failure modes before expensive live runs.</p>
+        </header>
+        <div class="trace-view" aria-label="WorldBuilder evaluation trace">
+          <div class="trace-head"><span>offline evaluation / run 047</span><span class="trace-status">511 tests passing</span></div>
+          <ol>
+            <li><span>01</span><strong>Initialize world</strong><small>fixture loaded</small></li>
+            <li><span>02</span><strong>Execute agent actions</strong><small>state checkpointed</small></li>
+            <li><span>03</span><strong>Fork and replay</strong><small>branch compared</small></li>
+            <li><span>04</span><strong>Score behavior</strong><small>18 dimensions</small></li>
+          </ol>
+        </div>
+        <dl class="proof-strip" aria-label="WorldBuilder baseline results">
+          <div><dt>Offline tests</dt><dd>511 passing</dd></div>
+          <div><dt>Evaluator</dt><dd>18 dimensions</dd></div>
+          <div><dt>Runtime control</dt><dd>Pause · replay · fork</dd></div>
+        </dl>
+        <div class="project-details">
+          <div><p class="detail-label">Problem</p><p>Long-horizon agent behavior is costly to test live and difficult to reproduce after the environment changes.</p></div>
+          <div><p class="detail-label">Engineering</p><p>I designed an offline mechanics baseline with deterministic fixtures, checkpointing, pause and resume, cancellation, linked forks, and replayable traces.</p></div>
+          <div><p class="detail-label">Status</p><p>The offline baseline passes 511 tests. An eighteen-dimension evaluator is the next layer for comparing agent decisions and system behavior.</p></div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+          <span>Python · Simulation · Evaluation · Test infrastructure</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="studio shell section" id="studio" aria-labelledby="studio-title" data-reveal>
+      <div class="section-heading"><p class="eyebrow">Commercial work</p><h2 id="studio-title">Kora Studio</h2></div>
+      <div class="studio-layout">
+        <p class="studio-lead">I started a software studio to learn the complete loop: finding a real problem, shipping the system, and owning the result.</p>
+        <div class="studio-proof">
+          <div><strong>8</strong><span>client websites and operational systems shipped</span></div>
+          <div><strong>~$7.4K</strong><span>profit generated since May 2026</span></div>
+        </div>
+      </div>
+      <a class="text-link text-link--primary" href="https://builtbykora.com" target="_blank" rel="noopener noreferrer">Visit Kora Studio <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="experience shell section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading"><p class="eyebrow">Experience + research</p><h2 id="experience-title">Work that sharpened the systems.</h2></div>
+      <div class="experience-list">
+        <article data-reveal><div class="experience-meta"><span>2025</span><span>M&amp;T Bank</span></div><div><h3>Technology Intern</h3><p>Co-built a Flask and React record-mapping tool and an NLP pipeline that mapped document descriptions to retention codes with over 80% top-1 accuracy.</p></div></article>
+        <article data-reveal><div class="experience-meta"><span>2025</span><span>JuneBrain</span></div><div><h3>Software Engineering Intern</h3><p>Built an OpenCV pupil-localization and gaze-quality pipeline for ophthalmic imaging, working under mentorship across multi-camera inputs and model evaluation.</p></div></article>
+        <article data-reveal><div class="experience-meta"><span>2024—Now</span><span>UMBC DAMS Lab</span></div><div><h3>Undergraduate Researcher</h3><p>Helped build a privacy-policy analysis pipeline whose prompt-optimization loop improved classification F1 from 0.42 to 0.71 across 500 gold-labeled examples.</p></div></article>
       </div>
     </section>
 
-    <section class="section experience" id="experience">
-      <div class="container">
-        <p class="section-label">Experience</p>
-        <h2 class="section-title">Work &amp; Research</h2>
-
-        <div class="experience__list">
-
-          <article class="exp-card">
-            <header class="exp-card__header">
-              <div>
-                <h3 class="exp-card__role">Technology Intern</h3>
-                <p class="exp-card__company">M&amp;T Bank</p>
-              </div>
-              <p class="exp-card__dates">Jun 2025 – Aug 2025</p>
-            </header>
-            <ul class="exp-card__bullets">
-              <li>Built an internal record-mapping tool (Flask REST API + React/Vite frontend) to reduce manual retention-code lookup work for the DDRR team.</li>
-              <li>Developed an NLP pipeline mapping document descriptions to retention codes with <strong>80%+ top-1 accuracy</strong>, comparing TF-IDF and ConceptNet Numberbatch approaches with cosine-similarity evaluation.</li>
-              <li>Drove early adoption by demoing the tool to stakeholders across the organization and helping position it for internal onboarding.</li>
-            </ul>
-            <ul class="pill-list">
-              <li class="pill pill--success">Python</li>
-              <li class="pill pill--primary">Flask</li>
-              <li class="pill pill--secondary">React</li>
-              <li class="pill pill--secondary">Vite</li>
-              <li class="pill pill--primary">NLP</li>
-              <li class="pill pill--primary">TF-IDF</li>
-            </ul>
-          </article>
-
-          <article class="exp-card">
-            <header class="exp-card__header">
-              <div>
-                <h3 class="exp-card__role">Software Engineering Intern</h3>
-                <p class="exp-card__company">JuneBrain Inc.</p>
-              </div>
-              <p class="exp-card__dates">Jan 2025 – May 2025</p>
-            </header>
-            <ul class="exp-card__bullets">
-              <li>Built a Python/OpenCV pupil-localization pipeline for JuneBrain's Neuro-i OCT device to detect gaze misalignment and flag low-fidelity frames in real time.</li>
-              <li>Implemented ellipse-geometry and thresholding logic for 2D gaze estimation across multi-camera input streams.</li>
-              <li>Evaluated and adapted ML-based gaze models (GazeML, NVIDIA TAO GazeNet) for eye-only inference and TensorFlow 2 compatibility.</li>
-            </ul>
-            <ul class="pill-list">
-              <li class="pill pill--success">Python</li>
-              <li class="pill pill--primary">OpenCV</li>
-              <li class="pill pill--primary">TensorFlow</li>
-              <li class="pill pill--primary">Computer Vision</li>
-            </ul>
-          </article>
-
-          <article class="exp-card">
-            <header class="exp-card__header">
-              <div>
-                <h3 class="exp-card__role">Undergraduate Researcher</h3>
-                <p class="exp-card__company">University of Maryland, Baltimore County</p>
-              </div>
-              <p class="exp-card__dates">Oct 2024 – Present</p>
-            </header>
-            <ul class="exp-card__bullets">
-              <li>Maintain Python web-scraping pipelines collecting smart-IoT-device metadata and privacy policies, plus comparison tooling to detect newly added or updated policies across runs.</li>
-              <li>Automate privacy-policy extraction and analysis with LLM- and NLP-based workflows, contributing experimental results and writing support for an ongoing research paper.</li>
-              <li>Build reproducible analysis scripts for validation, readability scoring, and large-scale policy comparison across repeated data-collection sessions.</li>
-            </ul>
-            <ul class="pill-list">
-              <li class="pill pill--success">Python</li>
-              <li class="pill pill--secondary">LLMs</li>
-              <li class="pill pill--primary">NLP</li>
-              <li class="pill pill--primary">Web Scraping</li>
-              <li class="pill pill--primary">Data Analysis</li>
-            </ul>
-          </article>
-
-        </div>
+    <section class="profile shell section" id="profile" aria-labelledby="profile-title" data-reveal>
+      <div class="section-heading"><p class="eyebrow">Foundation</p><h2 id="profile-title">Engineering, behavior, and evidence.</h2></div>
+      <div class="profile-grid">
+        <div><p class="detail-label">Education</p><h3>University of Maryland, Baltimore County</h3><p>B.S. Computer Science + B.A. Psychology · GPA 3.63 · Expected May 2027</p><p>Meyerhoff Scholar · President’s List · Dean’s List</p></div>
+        <div><p class="detail-label">Core toolkit</p><p>Python, TypeScript, JavaScript, React, FastAPI, Flask, SQL, Postgres, SQLite, OpenCV, TensorFlow, Tauri, Playwright, Pytest, Git, Docker, Google Cloud.</p></div>
       </div>
     </section>
 
-    <section class="section projects" id="projects">
-      <div class="container">
-        <p class="section-label">Projects</p>
-        <h2 class="section-title">What I've Built</h2>
-
-        <div class="projects__featured">
-
-          <article class="project-card">
-            <a href="https://github.com/Mobi21/molabel" target="_blank" rel="noopener" class="project-card__image" aria-hidden="true" tabindex="-1">
-              <img src="assets/projects/molabel.svg" alt="" role="presentation" />
-            </a>
-            <div class="project-card__body">
-              <div class="project-card__heading">
-                <h3 class="project-card__name">MoLabel</h3>
-                <span class="project-card__role">Founder</span>
-              </div>
-              <p class="project-card__desc">
-                Local-first AI data operations workbench for agent-assisted labeling, review,
-                and dataset release workflows. Python/FastAPI backend, React frontend, Tauri desktop shell.
-              </p>
-              <ul class="pill-list">
-                <li class="pill pill--success">Python</li>
-                <li class="pill pill--primary">FastAPI</li>
-                <li class="pill pill--secondary">React</li>
-                <li class="pill pill--secondary">Tauri</li>
-                <li class="pill pill--primary">SQLite</li>
-              </ul>
-              <a href="https://github.com/Mobi21/molabel" target="_blank" rel="noopener" class="project-card__link">
-                View on GitHub <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <a href="https://github.com/Mobi21/kora" target="_blank" rel="noopener" class="project-card__image" aria-hidden="true" tabindex="-1">
-              <img src="assets/projects/kora.svg" alt="" role="presentation" />
-            </a>
-            <div class="project-card__body">
-              <div class="project-card__heading">
-                <h3 class="project-card__name">Kora</h3>
-              </div>
-              <p class="project-card__desc">
-                ADHD-aware local-first (runs on your machine, no cloud) AI runtime with a
-                LangGraph supervisor coordinating planner, executor, and reviewer agents.
-                Time-bounded micro-steps, context compaction, hybrid memory with filesystem
-                + SQLite + sqlite-vec.
-              </p>
-              <ul class="pill-list">
-                <li class="pill pill--success">Python</li>
-                <li class="pill pill--primary">FastAPI</li>
-                <li class="pill pill--secondary">LangGraph</li>
-                <li class="pill pill--secondary">WebSockets</li>
-                <li class="pill pill--primary">SQLite</li>
-                <li class="pill pill--primary">sqlite-vec</li>
-              </ul>
-              <a href="https://github.com/Mobi21/kora" target="_blank" rel="noopener" class="project-card__link">
-                View on GitHub <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-
-        </div>
-
-        <h3 class="projects__subtitle">Other Work</h3>
-        <ul class="projects__compact">
-          <li class="compact-row">
-            <div class="compact-row__main">
-              <h4 class="compact-row__name">Seneca Signal</h4>
-              <p class="compact-row__desc">
-                Community information platform combining a website, admin dashboard, and SMS
-                distribution workflow. <strong>1st Place — TechBuffalo PowerUpTech 2025.</strong>
-              </p>
-            </div>
-            <a href="https://github.com/Mobi21" target="_blank" rel="noopener" class="compact-row__link">
-              View <span aria-hidden="true">→</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section skills" id="skills">
-      <div class="container">
-        <p class="section-label">Skills</p>
-        <h2 class="section-title">Tech Stack</h2>
-
-        <div class="skills__grid">
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">Languages</h3>
-            <ul class="pill-list">
-              <li class="pill pill--success">Python</li>
-              <li class="pill pill--success">C++</li>
-              <li class="pill pill--success">JavaScript</li>
-              <li class="pill pill--success">Swift</li>
-              <li class="pill pill--success">SQL</li>
-            </ul>
-          </div>
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">Backend / Frameworks</h3>
-            <ul class="pill-list">
-              <li class="pill pill--primary">FastAPI</li>
-              <li class="pill pill--primary">Flask</li>
-              <li class="pill pill--primary">Django</li>
-            </ul>
-          </div>
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">Frontend</h3>
-            <ul class="pill-list">
-              <li class="pill pill--secondary">React</li>
-              <li class="pill pill--secondary">Vite</li>
-              <li class="pill pill--secondary">HTML / CSS</li>
-            </ul>
-          </div>
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">AI / ML Libraries</h3>
-            <ul class="pill-list">
-              <li class="pill pill--primary">TensorFlow</li>
-              <li class="pill pill--primary">scikit-learn</li>
-              <li class="pill pill--primary">NumPy</li>
-              <li class="pill pill--primary">Pandas</li>
-              <li class="pill pill--primary">OpenCV</li>
-            </ul>
-          </div>
-
-          <div class="skill-group skill-group--wide">
-            <h3 class="skill-group__title">AI / Agents</h3>
-            <ul class="pill-list">
-              <li class="pill pill--secondary">LangGraph</li>
-              <li class="pill pill--secondary">Prompt Engineering</li>
-              <li class="pill pill--secondary">Agent Orchestration</li>
-              <li class="pill pill--secondary">Tool-Calling Agents</li>
-              <li class="pill pill--secondary">Long-Horizon Task Execution</li>
-              <li class="pill pill--secondary">Memory Systems</li>
-              <li class="pill pill--secondary">Vector Search</li>
-              <li class="pill pill--secondary">LLM Evaluation</li>
-              <li class="pill pill--secondary">NLP</li>
-            </ul>
-          </div>
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">Data / Search</h3>
-            <ul class="pill-list">
-              <li class="pill pill--primary">SQLite</li>
-              <li class="pill pill--primary">FTS5</li>
-              <li class="pill pill--primary">sqlite-vec</li>
-              <li class="pill pill--primary">pgvector</li>
-              <li class="pill pill--primary">Firestore</li>
-              <li class="pill pill--primary">AlloyDB</li>
-            </ul>
-          </div>
-
-          <div class="skill-group">
-            <h3 class="skill-group__title">Tools</h3>
-            <ul class="pill-list">
-              <li class="pill pill--neutral">Git</li>
-              <li class="pill pill--neutral">Postman</li>
-              <li class="pill pill--neutral">Jupyter</li>
-              <li class="pill pill--neutral">Xcode</li>
-              <li class="pill pill--neutral">Google Cloud</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section education" id="education">
-      <div class="container">
-        <p class="section-label">Education</p>
-        <h2 class="section-title">Where I'm Studying</h2>
-
-        <article class="edu-card">
-          <div class="edu-card__header">
-            <div>
-              <h3 class="edu-card__school">University of Maryland, Baltimore County</h3>
-              <p class="edu-card__degree">
-                B.S. Computer Science &nbsp;·&nbsp; B.A. Psychology
-              </p>
-            </div>
-            <div class="edu-card__meta">
-              <p class="edu-card__dates">Expected May 2027</p>
-              <p class="edu-card__gpa">GPA 3.59 / 4.00</p>
-            </div>
-          </div>
-
-          <div class="edu-card__section">
-            <h4 class="edu-card__label">Honors</h4>
-            <ul class="pill-list">
-              <li class="pill pill--success">Meyerhoff Scholar</li>
-              <li class="pill pill--primary">President's List</li>
-              <li class="pill pill--primary">Semester Academic Honors</li>
-            </ul>
-          </div>
-
-          <div class="edu-card__section">
-            <h4 class="edu-card__label">Selected Coursework</h4>
-            <ul class="pill-list">
-              <li class="pill pill--neutral">Data Structures</li>
-              <li class="pill pill--neutral">Operating Systems</li>
-              <li class="pill pill--neutral">Computer Architecture</li>
-              <li class="pill pill--neutral">Linear Algebra</li>
-              <li class="pill pill--neutral">Statistics</li>
-              <li class="pill pill--neutral">Discrete Structures</li>
-              <li class="pill pill--neutral">Programming Languages</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="contact__glow" aria-hidden="true"></div>
-      <div class="container contact__inner">
-        <p class="section-label">Contact</p>
-        <h2 class="contact__headline">Let's build something.</h2>
-        <p class="contact__sub">
-          Open to software engineering internships, research collaborations, and any excuse
-          to talk about AI agents, developer tools, or how to make LLM systems actually
-          trustworthy.
-        </p>
-
-        <div class="contact__links">
-          <a href="mailto:m387@umbc.edu" class="contact-link">
-            <span class="contact-link__label">Email</span>
-            <span class="contact-link__value">m387@umbc.edu</span>
-          </a>
-          <a href="https://github.com/Mobi21" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-link__label">GitHub</span>
-            <span class="contact-link__value">github.com/Mobi21</span>
-          </a>
-          <a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-link__label">LinkedIn</span>
-            <span class="contact-link__value">/in/mobolaji-ogunbiyi</span>
-          </a>
-          <a href="assets/resume.pdf" class="contact-link" download>
-            <span class="contact-link__label">Resume</span>
-            <span class="contact-link__value">Download PDF</span>
-          </a>
-        </div>
+    <section class="contact shell section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-rule" aria-hidden="true"><span></span></div>
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title">Let’s build something that has to work.</h2>
+      <p>I’m looking for 2027 new-grad software engineering and applied AI roles.</p>
+      <div class="contact-links">
+        <a href="mailto:bjfifi1@gmail.com">Email <span>bjfifi1@gmail.com ↗</span></a>
+        <a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/" target="_blank" rel="noopener noreferrer">LinkedIn <span>Profile ↗</span></a>
+        <a href="https://github.com/Mobi21" target="_blank" rel="noopener noreferrer">GitHub <span>Mobi21 ↗</span></a>
+        <a href="assets/resume.pdf" target="_blank">Resume <span>Open PDF ↗</span></a>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <p>&copy; 2026 Mobolaji Ogunbiyi. Built with vanilla HTML, CSS, and JavaScript.</p>
-    </div>
-  </footer>
-
-  <script src="script.js" defer></script>
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
 </body>
 </html>

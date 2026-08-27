@@ -1,20 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6366f1" />
-      <stop offset="100%" stop-color="#0ea5e9" />
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="url(#faviconGradient)" />
-  <text
-    x="50%"
-    y="56%"
-    dominant-baseline="middle"
-    text-anchor="middle"
-    font-family="Inter, sans-serif"
-    font-size="34"
-    font-weight="800"
-    fill="#f1f5f9"
-    letter-spacing="-1"
-  >M</text>
+  <rect width="64" height="64" rx="12" fill="#090b10"/>
+  <path d="M15 44V20h7l10 14 10-14h7v24h-7V31L32 44 22 31v13Z" fill="#f4f7fb"/>
+  <circle cx="52" cy="12" r="4" fill="#4c7dff"/>
 </svg>
