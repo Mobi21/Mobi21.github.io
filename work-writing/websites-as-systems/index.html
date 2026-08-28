@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="How Mobolaji Ogunbiyi designs websites as complete business systems: from customer action and ownership boundaries through operations, recovery, testing, and deployment.">
+  <meta name="theme-color" content="#f4f6f2">
+  <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/websites-as-systems/">
+  <title>How I Build Websites as Complete Systems — Mobolaji Ogunbiyi</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=399ff7a">
+  <link rel="stylesheet" href="/work-writing/websites-as-systems/article.css?v=1">
+  <script src="/script.js" defer></script>
+</head>
+<body class="systems-writing">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
+        <a href="/">Home</a>
+        <a href="/projects/">Projects</a>
+        <a href="/work-writing/" aria-current="page">Work &amp; Writing</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="systems-hero shell">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a><span>/</span><a href="/work-writing/">Work &amp; Writing</a><span>/</span><span aria-current="page">Websites as systems</span>
+        </nav>
+        <div class="systems-hero-grid">
+          <div>
+            <p class="piece-type">System Design</p>
+            <h1>How I build websites as complete systems</h1>
+          </div>
+          <div class="systems-hero-copy">
+            <p class="systems-deck">I start with the customer’s action and the business’s next action—not a page list or a preferred stack. The architecture should carry that workflow reliably, without owning more than it needs to.</p>
+            <p class="systems-byline">By Mobolaji Ogunbiyi · A synthesis of five implemented website systems</p>
+          </div>
+        </div>
+        <div class="systems-thesis" role="note" aria-label="Central idea">
+          <p>A “website” can be a document, a protected intake boundary, a booking operation, or a commerce system. Systems thinking means telling those apart early.</p>
+        </div>
+      </header>
+
+      <div class="systems-layout shell">
+        <aside class="article-nav" aria-label="Article sections">
+          <p>In this article</p>
+          <nav>
+            <a href="#workflow">Trace the work</a>
+            <a href="#experience">Shape the interface</a>
+            <a href="#ownership">Assign ownership</a>
+            <a href="#architecture">Choose the architecture</a>
+            <a href="#implementation">Build the boundary</a>
+            <a href="#operations">Design operations</a>
+            <a href="#safety">Protect trust</a>
+            <a href="#recovery">Plan recovery</a>
+            <a href="#verification">Verify and release</a>
+            <a href="#principles">Working principles</a>
+          </nav>
+        </aside>
+
+        <div class="systems-prose">
+          <section class="article-opening" aria-labelledby="opening-title">
+            <h2 id="opening-title">The word “website” hides the engineering problem</h2>
+            <p>A public interface is only the visible edge of a business workflow. A visitor clicks <em>Send</em>, <em>Book</em>, or <em>Order</em>; after that, the system still has to validate intent, place the resulting work somewhere authoritative, notify the right person, expose a useful operational state, and recover if one of those steps fails.</p>
+            <p>I learned to treat those downstream responsibilities as part of the website decision. That does not mean giving every client a database, admin dashboard, or custom backend. Kora Studio’s own inquiry flow intentionally sends one validated owner notification and stores nothing. Zube’s Grub needs a very different boundary because payments, kitchen work, fulfillment, and provider reconciliation continue long after checkout.</p>
+            <p>This article explains the method that recurs across the systems I have built. It is not a fixed process or a universal stack. Each example is here because its checked-in implementation makes a different tradeoff visible.</p>
+          </section>
+
+          <section id="workflow" aria-labelledby="workflow-title">
+            <div class="section-heading">
+              <p class="section-index">The first question</p>
+              <h2 id="workflow-title">Trace the work in both directions</h2>
+            </div>
+            <p>I begin with a concrete customer action and follow it until the business can respond. Then I trace backward: what must be true before the interface is allowed to offer that action?</p>
+
+            <figure class="systems-diagram" aria-labelledby="flow-caption">
+              <div class="diagram-canvas">
+                <svg viewBox="0 0 980 310" role="img" aria-labelledby="flow-title flow-desc">
+                  <title id="flow-title">Customer action to business outcome</title>
+                  <desc id="flow-desc">A customer need moves through the public interface, validation, an authoritative system, an owner workflow, a customer confirmation, and a recovery path.</desc>
+                  <defs>
+                    <marker id="arrow-flow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="arrow-fill"/></marker>
+                  </defs>
+                  <path class="svg-path" marker-end="url(#arrow-flow)" d="M140 108H185"/>
+                  <path class="svg-path" marker-end="url(#arrow-flow)" d="M310 108H355"/>
+                  <path class="svg-path" marker-end="url(#arrow-flow)" d="M480 108H525"/>
+                  <path class="svg-path" marker-end="url(#arrow-flow)" d="M650 108H695"/>
+                  <path class="svg-path" marker-end="url(#arrow-flow)" d="M820 108H865"/>
+                  <path class="svg-path svg-path--return" marker-end="url(#arrow-flow)" d="M918 152V228H555V158"/>
+                  <g class="svg-node"><rect x="15" y="62" width="125" height="92" rx="4"/><text x="77" y="97">Customer</text><text class="svg-small" x="77" y="121">intent</text></g>
+                  <g class="svg-node"><rect x="185" y="62" width="125" height="92" rx="4"/><text x="247" y="97">Public</text><text class="svg-small" x="247" y="121">interface</text></g>
+                  <g class="svg-node"><rect x="355" y="62" width="125" height="92" rx="4"/><text x="417" y="97">Validation</text><text class="svg-small" x="417" y="121">boundary</text></g>
+                  <g class="svg-node svg-node--accent"><rect x="525" y="62" width="125" height="92" rx="4"/><text x="587" y="97">Authority</text><text class="svg-small" x="587" y="121">accepts work</text></g>
+                  <g class="svg-node"><rect x="695" y="62" width="125" height="92" rx="4"/><text x="757" y="97">Owner</text><text class="svg-small" x="757" y="121">acts</text></g>
+                  <g class="svg-node"><rect x="865" y="62" width="100" height="92" rx="4"/><text x="915" y="97">Customer</text><text class="svg-small" x="915" y="121">knows</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="430" y="228" width="250" height="58" rx="4"/><text x="555" y="263">Recovery closes the loop</text></g>
+                </svg>
+              </div>
+              <figcaption id="flow-caption">The interface is one link in a customer-to-operator chain. A complete design includes the return path when the chain breaks.</figcaption>
+              <details class="diagram-transcript" open>
+                <summary>Text equivalent</summary>
+                <ol>
+                  <li>A customer arrives with an intent: ask, book, or buy.</li>
+                  <li>The public interface collects only what the workflow needs.</li>
+                  <li>The server validates the request and enforces the trust boundary.</li>
+                  <li>One authoritative system accepts the work.</li>
+                  <li>The owner receives a state they can act on.</li>
+                  <li>The customer receives an honest confirmation; recovery reconnects any failed step to the authority.</li>
+                </ol>
+              </details>
+            </figure>
+
+            <div class="decision-note">
+              <strong>What I write down first</strong>
+              <p>The user action, the owner’s next action, the facts each side needs, the system allowed to accept the work, and the evidence required before the customer sees “success.”</p>
+            </div>
+            <p>For an inquiry, this might end with one email accepted by Resend. For a booking, “success” may require a held slot but not yet an owner-approved appointment. For an order, it may require server-calculated totals and a captured payment before staff can begin fulfillment. The words on the button are simple; their contracts are not interchangeable.</p>
+          </section>
+
+          <section id="experience" aria-labelledby="experience-title">
+            <div class="section-heading">
+              <p class="section-index">The visible system</p>
+              <h2 id="experience-title">Shape information and interaction around decisions</h2>
+            </div>
+            <p>Information architecture answers what a person needs to understand before acting. Interaction design answers what the system must reveal while that action is underway: prerequisites, price, availability, privacy boundaries, progress, errors, and a recovery path.</p>
+            <p>I map the happy path and the hesitant path. A customer who already knows what they want should move quickly. Someone who is unsure should be able to compare options without opening a second site or calling for basic information. That is why a useful architecture includes content ownership and state design, not only routes.</p>
+
+            <div class="comparison-table" role="region" aria-label="Examples of interface decisions" tabindex="0">
+              <table>
+                <thead><tr><th>System</th><th>Customer decision</th><th>Interface responsibility</th><th>Deliberate limit</th></tr></thead>
+                <tbody>
+                  <tr><td>Kora Studio</td><td>Is this studio relevant to my problem?</td><td>Explain the work, collect a focused inquiry, preserve a non-JavaScript submit path.</td><td>No CRM or scheduling system on the public site.</td></tr>
+                  <tr><td>Divine Care</td><td>Which non-emergency contact path fits?</td><td>Route people by inquiry type and make the no-PHI boundary visible before submission.</td><td>No clinical intake, diagnosis, DOB, medication, or insurance-member data.</td></tr>
+                  <tr><td>Elevate</td><td>Which consultation time can I request?</td><td>Show current availability, collect non-clinical logistics, hold a slot, and explain owner confirmation.</td><td>Payment does not silently become a confirmed appointment.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Responsive behavior, keyboard access, readable focus, reduced motion, and honest loading states belong here too. They are not a final accessibility pass. They decide whether the workflow can be completed at all.</p>
+          </section>
+
+          <section id="ownership" aria-labelledby="ownership-title">
+            <div class="section-heading">
+              <p class="section-index">The central design decision</p>
+              <h2 id="ownership-title">Give each important fact one owner</h2>
+            </div>
+            <p>Most expensive system mistakes begin when two parts of the product believe they own the same fact. The browser should not decide a commercial price. A database projection should not overrule a payment provider. A webhook should not be treated as a once-only message. An admin panel should not expose controls the underlying authority cannot honor.</p>
+
+            <figure class="systems-diagram" aria-labelledby="ownership-caption">
+              <div class="diagram-canvas">
+                <svg viewBox="0 0 980 450" role="img" aria-labelledby="ownership-svg-title ownership-svg-desc">
+                  <title id="ownership-svg-title">Ownership model for a website system</title>
+                  <desc id="ownership-svg-desc">The browser owns temporary intent, the application owns workflow policy, providers own specialized truth, the operational store owns durable projections, and the owner interface exposes permitted actions.</desc>
+                  <defs><marker id="arrow-own" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="arrow-fill"/></marker></defs>
+                  <path class="svg-path" marker-end="url(#arrow-own)" d="M210 110H315"/>
+                  <path class="svg-path" marker-end="url(#arrow-own)" d="M440 110H545"/>
+                  <path class="svg-path" marker-end="url(#arrow-own)" d="M670 110H775"/>
+                  <path class="svg-path" marker-end="url(#arrow-own)" d="M607 158V235"/>
+                  <path class="svg-path" marker-end="url(#arrow-own)" d="M545 301H440"/>
+                  <g class="svg-node"><rect x="40" y="56" width="170" height="104" rx="4"/><text x="125" y="91">Browser</text><text class="svg-small" x="125" y="118">temporary intent</text><text class="svg-small" x="125" y="139">presentation state</text></g>
+                  <g class="svg-node svg-node--accent"><rect x="315" y="56" width="125" height="104" rx="4"/><text x="377" y="91">Server</text><text class="svg-small" x="377" y="118">validation</text><text class="svg-small" x="377" y="139">workflow policy</text></g>
+                  <g class="svg-node"><rect x="545" y="56" width="125" height="104" rx="4"/><text x="607" y="91">Provider</text><text class="svg-small" x="607" y="118">specialized</text><text class="svg-small" x="607" y="139">truth</text></g>
+                  <g class="svg-node"><rect x="775" y="56" width="165" height="104" rx="4"/><text x="857" y="91">Outside world</text><text class="svg-small" x="857" y="118">money, delivery,</text><text class="svg-small" x="857" y="139">email or calendar</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="545" y="235" width="125" height="130" rx="4"/><text x="607" y="273">Operational</text><text x="607" y="294">store</text><text class="svg-small" x="607" y="325">durable workflow</text><text class="svg-small" x="607" y="346">and projections</text></g>
+                  <g class="svg-node"><rect x="275" y="245" width="165" height="110" rx="4"/><text x="357" y="281">Owner interface</text><text class="svg-small" x="357" y="310">permitted actions</text><text class="svg-small" x="357" y="331">and exceptions</text></g>
+                  <text class="svg-label" x="490" y="417">The exact owners change. The rule does not: authority must be explicit.</text>
+                </svg>
+              </div>
+              <figcaption id="ownership-caption">Ownership is a contract, not a technology choice. Some systems legitimately omit the provider or operational store entirely.</figcaption>
+              <details class="diagram-transcript" open>
+                <summary>Text equivalent</summary>
+                <ul>
+                  <li><strong>Browser:</strong> temporary input and presentation state; never privileged commercial or operational authority.</li>
+                  <li><strong>Server:</strong> validation, authorization, and workflow policy.</li>
+                  <li><strong>Specialized provider:</strong> payment, order, email, calendar, or CRM truth when that service is present.</li>
+                  <li><strong>Operational store:</strong> durable workflow state and provider projections needed by the business.</li>
+                  <li><strong>Owner interface:</strong> only the actions the authority model permits.</li>
+                </ul>
+              </details>
+            </figure>
+
+            <p>Zube’s Grub makes this distinction especially concrete: Square owns payments, orders, and the operational catalog; Supabase holds application workflow and projections; the browser carries cart intent; staff controls move through protected server boundaries. By contrast, Kora Studio intentionally has no lead database. Its successful terminal state is an accepted owner email notification, so adding persistence would create a second responsibility without improving the workflow.</p>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <div class="section-heading">
+              <p class="section-index">Scope control</p>
+              <h2 id="architecture-title">Choose the smallest architecture that completes the workflow</h2>
+            </div>
+            <p>“Smallest” does not mean the fewest files. It means no subsystem exists without a responsibility, and no required responsibility is left to a manual accident. I escalate architecture only when the business workflow introduces a new kind of state, authority, or recovery obligation.</p>
+
+            <figure class="systems-diagram" aria-labelledby="decision-caption">
+              <div class="diagram-canvas">
+                <svg viewBox="0 0 980 570" role="img" aria-labelledby="decision-svg-title decision-svg-desc">
+                  <title id="decision-svg-title">Architecture decision framework</title>
+                  <desc id="decision-svg-desc">A sequence of questions determines whether a site needs static delivery, server notification, persistence, authentication and operations, specialized providers, or reconciliation.</desc>
+                  <defs><marker id="arrow-decision" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="arrow-fill"/></marker></defs>
+                  <path class="svg-path" marker-end="url(#arrow-decision)" d="M490 83V126"/>
+                  <path class="svg-path" marker-end="url(#arrow-decision)" d="M490 203V246"/>
+                  <path class="svg-path" marker-end="url(#arrow-decision)" d="M490 323V366"/>
+                  <path class="svg-path" marker-end="url(#arrow-decision)" d="M490 443V486"/>
+                  <path class="svg-path svg-path--branch" marker-end="url(#arrow-decision)" d="M340 164H180V225"/>
+                  <path class="svg-path svg-path--branch" marker-end="url(#arrow-decision)" d="M640 284H800V345"/>
+                  <path class="svg-path svg-path--branch" marker-end="url(#arrow-decision)" d="M340 404H180V465"/>
+                  <text class="svg-branch-label" x="226" y="153">No</text><text class="svg-branch-label" x="715" y="273">No</text><text class="svg-branch-label" x="226" y="393">No</text>
+                  <g class="svg-node svg-node--accent"><rect x="340" y="25" width="300" height="58" rx="4"/><text x="490" y="60">What must happen after the click?</text></g>
+                  <g class="svg-node"><rect x="340" y="126" width="300" height="77" rx="4"/><text x="490" y="158">Must the server perform work?</text><text class="svg-small" x="490" y="181">validation, notification, transformation</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="45" y="225" width="270" height="76" rx="4"/><text x="180" y="257">Static delivery</text><text class="svg-small" x="180" y="280">content, links, external handoff</text></g>
+                  <g class="svg-node"><rect x="340" y="246" width="300" height="77" rx="4"/><text x="490" y="278">Must state survive the request?</text><text class="svg-small" x="490" y="301">lead, booking, order, content</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="665" y="345" width="270" height="76" rx="4"/><text x="800" y="377">Server notification</text><text class="svg-small" x="800" y="400">validate, send, fail honestly</text></g>
+                  <g class="svg-node"><rect x="340" y="366" width="300" height="77" rx="4"/><text x="490" y="398">Does an owner operate the state?</text><text class="svg-small" x="490" y="421">review, schedule, fulfill, publish</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="45" y="465" width="270" height="76" rx="4"/><text x="180" y="497">Persistent workflow</text><text class="svg-small" x="180" y="520">storage without custom operations UI</text></g>
+                  <g class="svg-node svg-node--accent"><rect x="340" y="486" width="300" height="58" rx="4"/><text x="490" y="521">Protected operational system</text></g>
+                  <text class="svg-label" x="490" y="564">Providers add another question: can events be late, duplicated, or disagree?</text>
+                </svg>
+              </div>
+              <figcaption id="decision-caption">Architecture grows when the workflow acquires durable state, operational ownership, external authority, or recovery obligations.</figcaption>
+              <details class="diagram-transcript" open>
+                <summary>Text equivalent</summary>
+                <ol>
+                  <li>If the click needs no server work, use static delivery or an external handoff.</li>
+                  <li>If the server only validates and notifies, build a narrow server boundary and fail visibly when delivery fails.</li>
+                  <li>If state must survive the request, add a durable store with a clear schema and retention boundary.</li>
+                  <li>If an owner must operate that state, add authenticated tools for the actual decisions they make.</li>
+                  <li>If a provider owns money, orders, calendar, or CRM state, define synchronization and recovery before treating the integration as complete.</li>
+                </ol>
+              </details>
+            </figure>
+
+            <h3>Five systems, five justified shapes</h3>
+            <figure class="systems-diagram spectrum" aria-labelledby="spectrum-caption">
+              <div class="diagram-canvas">
+                <svg viewBox="0 0 980 450" role="img" aria-labelledby="spectrum-svg-title spectrum-svg-desc">
+                  <title id="spectrum-svg-title">Architecture spectrum across five client systems</title>
+                  <desc id="spectrum-svg-desc">Kora Studio uses a narrow server notification boundary. Divine Care adds privacy-directed routing. Elevate adds persistent booking and owner operations. Zube's Grub adds commerce, kitchen operations, and reconciliation. Aboh's implemented architecture adds native booking and CRM workflow alignment.</desc>
+                  <path class="spectrum-line" d="M75 285H905"/>
+                  <g class="spectrum-stop" transform="translate(90 0)"><circle cx="0" cy="285" r="9"/><text x="0" y="235">Kora Studio</text><text class="svg-small" x="0" y="315">validated inquiry</text><text class="svg-small" x="0" y="336">one notification</text></g>
+                  <g class="spectrum-stop" transform="translate(285 0)"><circle cx="0" cy="285" r="9"/><text x="0" y="205">Divine Care</text><text class="svg-small" x="0" y="315">inquiry routing</text><text class="svg-small" x="0" y="336">zero-PHI boundary</text></g>
+                  <g class="spectrum-stop" transform="translate(480 0)"><circle cx="0" cy="285" r="9"/><text x="0" y="175">Elevate</text><text class="svg-small" x="0" y="315">persistent leads</text><text class="svg-small" x="0" y="336">booking + owner approval</text></g>
+                  <g class="spectrum-stop" transform="translate(675 0)"><circle cx="0" cy="285" r="9"/><text x="0" y="145">Zube’s Grub</text><text class="svg-small" x="0" y="315">commerce + kitchen</text><text class="svg-small" x="0" y="336">provider reconciliation</text></g>
+                  <g class="spectrum-stop" transform="translate(870 0)"><circle cx="0" cy="285" r="9"/><text x="0" y="115">Aboh</text><text class="svg-small" x="0" y="315">native booking</text><text class="svg-small" x="0" y="336">CRM workflow alignment</text></g>
+                  <text class="spectrum-axis" x="75" y="405">Narrow request boundary</text><text class="spectrum-axis spectrum-axis--end" x="905" y="405">Multi-system operations</text>
+                </svg>
+              </div>
+              <figcaption id="spectrum-caption">This is a responsibility spectrum, not a maturity ranking. Kora Studio is deliberately smaller because its public workflow ends earlier. Aboh’s position describes the implemented repository architecture, not a claim about client adoption or business outcomes.</figcaption>
+              <details class="diagram-transcript" open>
+                <summary>Text equivalent</summary>
+                <ol>
+                  <li><strong>Kora Studio:</strong> schema validation, honeypot, rate limit, one server-side email notification, and no lead persistence.</li>
+                  <li><strong>Divine Care:</strong> multiple inquiry types, allow-listed fields, explicit consent, and rejection of clinical-data keys before email delivery.</li>
+                  <li><strong>Elevate:</strong> non-clinical lead persistence, live availability, held slots, payment state, protected owner confirmation, and customer notification.</li>
+                  <li><strong>Zube’s Grub:</strong> storefront, protected staff application, Square-owned commerce, operational projections, webhooks, queues, and reconciliation.</li>
+                  <li><strong>Aboh:</strong> a native booking model plus queued workflow items and provider-alignment records for Salesforce and calendar handoffs.</li>
+                </ol>
+              </details>
+            </figure>
+          </section>
+
+          <section id="implementation" aria-labelledby="implementation-title">
+            <div class="section-heading">
+              <p class="section-index">The implementation seam</p>
+              <h2 id="implementation-title">Build the public interface against a narrow server contract</h2>
+            </div>
+            <p>The browser is untrusted and disposable. It can help someone assemble intent, but the server must reload or validate every fact that affects money, permission, availability, privacy, or durable state. I keep that boundary legible: a route or server action accepts a bounded input, enforces the contract, calls one domain operation, and returns a user-safe result.</p>
+
+            <pre class="contract-code" aria-label="Simplified server boundary example"><code>request
+  → normalize and allow-list fields
+  → reject unsafe or incomplete input
+  → enforce authorization and abuse limits
+  → ask the authoritative service to perform the work
+  → persist only the workflow state the business owns
+  → return an honest success, conflict, or recovery path</code></pre>
+
+            <p>The shape is visible in real differences. Kora Studio uses a Server Action so the contact form can still submit when JavaScript fails; the server validates, rate-limits, sends one notification, and reports failure rather than claiming the message arrived. Divine Care’s Cloudflare function removes forbidden clinical keys and accepts only allow-listed scheduling and administrative fields. Elevate reloads availability before reserving a slot and removes an orphan lead if the hold loses a race.</p>
+            <p>Integrations live behind the same boundary. Secrets never enter browser bundles. Money stays in integer cents. External identifiers are treated as references, not proof that an operation succeeded. User-facing success waits for the level of evidence promised by the interface.</p>
+          </section>
+
+          <section id="operations" aria-labelledby="operations-title">
+            <div class="section-heading">
+              <p class="section-index">The business-facing product</p>
+              <h2 id="operations-title">Build operational tooling only around real decisions</h2>
+            </div>
+            <p>An admin interface is justified when someone repeatedly needs to review state, resolve exceptions, or change information without a code deployment. It is not justified because “professional websites have dashboards.”</p>
+            <div class="operation-list">
+              <article><h3>Content</h3><p>Give owners control when information changes frequently and publishing state matters. Elevate separates draft and published blog content and exposes selected site settings without making every sentence database-driven.</p></article>
+              <article><h3>Scheduling</h3><p>Expose availability, holds, payment state, and confirmation as distinct states. The owner should see what action remains instead of inferring it from email.</p></article>
+              <article><h3>Fulfillment</h3><p>Use a workflow vocabulary that matches the work. Zube’s Grub translates paid orders into kitchen states while withholding unconfirmed provider intent from public tracking.</p></article>
+              <article><h3>Exceptions</h3><p>Surface the cases automation cannot safely close: a failed notification, a provider mismatch, an expired hold, or a record awaiting owner approval.</p></article>
+            </div>
+            <div class="decision-note">
+              <strong>The test for an admin control</strong>
+              <p>Which real decision does this control let the owner make, what authority accepts that decision, and what evidence proves the change took effect?</p>
+            </div>
+          </section>
+
+          <section id="safety" aria-labelledby="safety-title">
+            <div class="section-heading">
+              <p class="section-index">Trust boundaries</p>
+              <h2 id="safety-title">Privacy and security change the product surface</h2>
+            </div>
+            <p>Security is not only middleware around an already-decided form. It changes what the form is allowed to ask, where records may live, who can act on them, and what the system says when a dependency is unavailable.</p>
+            <p>Divine Care is the clearest example. The public site is intentionally zero-PHI. Its endpoint strips forbidden keys including diagnosis, medications, DOB, insurance identifiers, and clinical messages; it does not simply add a warning and hope people comply. The interface routes users toward scheduling and administrative callbacks while preserving phone and office contact paths for anything outside that boundary.</p>
+            <p>Other recurring controls include server-derived staff authorization, authenticated owner routes, row-level database rules, request size limits, origin checks, honeypots, rate limits, and provider signature verification. I choose controls in proportion to the data and action—not from a generic “security checklist”—but privileged state always stays behind the server.</p>
+          </section>
+
+          <section id="recovery" aria-labelledby="recovery-title">
+            <div class="section-heading">
+              <p class="section-index">The non-happy path</p>
+              <h2 id="recovery-title">Design recovery as part of the workflow</h2>
+            </div>
+            <p>Distributed work is not finished when an API returns 200 once. Providers retry webhooks, networks time out after accepting work, two people claim the same slot, credentials expire, and an email can fail after the underlying state changed. The system needs enough durable identity to determine what happened without repeating a side effect.</p>
+            <p>My recovery design depends on the consequence:</p>
+            <ul class="technical-list">
+              <li><strong>Human inquiry:</strong> fail visibly and provide a direct alternative contact path.</li>
+              <li><strong>Competing booking:</strong> return a conflict, remove orphan state, and ask the customer to choose again.</li>
+              <li><strong>Payment or order:</strong> use idempotency, monotonic provider projections, signed webhooks, retryable claims, and reconciliation.</li>
+              <li><strong>Owner confirmation:</strong> make the transition explicit and make follow-up delivery retryable without repeating the decision.</li>
+            </ul>
+            <p>This is why Zube’s Grub’s architecture contains durable webhook claims and reconciliation while Kora Studio’s contact form does not. The cost of ambiguity and the amount of state to repair are fundamentally different.</p>
+          </section>
+
+          <section id="verification" aria-labelledby="verification-title">
+            <div class="section-heading">
+              <p class="section-index">Release confidence</p>
+              <h2 id="verification-title">Verify the story from interface to owner outcome</h2>
+            </div>
+            <p>I treat build success as one signal, not the release gate. Verification follows the responsibilities introduced by the architecture: schema and unit tests for domain contracts, integration tests for persistence and providers, browser checks for complete user paths, and deployment checks for routing, headers, configuration, and recovery.</p>
+
+            <figure class="systems-diagram" aria-labelledby="verification-caption">
+              <div class="diagram-canvas">
+                <svg viewBox="0 0 980 370" role="img" aria-labelledby="verify-svg-title verify-svg-desc">
+                  <title id="verify-svg-title">Verification and deployment loop</title>
+                  <desc id="verify-svg-desc">Implementation is checked through contracts, integrations, browser workflows, a candidate deployment, live behavior and rollback readiness, with failures returning to the smallest relevant layer.</desc>
+                  <defs><marker id="arrow-verify" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="arrow-fill"/></marker></defs>
+                  <path class="svg-path" marker-end="url(#arrow-verify)" d="M175 105H225"/><path class="svg-path" marker-end="url(#arrow-verify)" d="M375 105H425"/><path class="svg-path" marker-end="url(#arrow-verify)" d="M575 105H625"/><path class="svg-path" marker-end="url(#arrow-verify)" d="M775 105H825"/>
+                  <path class="svg-path svg-path--return" marker-end="url(#arrow-verify)" d="M900 153V276H100V153"/>
+                  <g class="svg-node"><rect x="25" y="58" width="150" height="94" rx="4"/><text x="100" y="94">Contracts</text><text class="svg-small" x="100" y="120">unit + schema</text></g>
+                  <g class="svg-node"><rect x="225" y="58" width="150" height="94" rx="4"/><text x="300" y="94">Integration</text><text class="svg-small" x="300" y="120">state + providers</text></g>
+                  <g class="svg-node"><rect x="425" y="58" width="150" height="94" rx="4"/><text x="500" y="94">Browser</text><text class="svg-small" x="500" y="120">complete workflow</text></g>
+                  <g class="svg-node svg-node--accent"><rect x="625" y="58" width="150" height="94" rx="4"/><text x="700" y="94">Candidate</text><text class="svg-small" x="700" y="120">production config</text></g>
+                  <g class="svg-node"><rect x="825" y="58" width="150" height="94" rx="4"/><text x="900" y="94">Live proof</text><text class="svg-small" x="900" y="120">or rollback</text></g>
+                  <g class="svg-node svg-node--quiet"><rect x="325" y="245" width="330" height="64" rx="4"/><text x="490" y="283">Failure returns to the smallest relevant layer</text></g>
+                </svg>
+              </div>
+              <figcaption id="verification-caption">The release loop follows the same system boundary as the implementation. A browser test cannot replace provider verification; a provider test cannot prove the customer can complete the flow.</figcaption>
+              <details class="diagram-transcript" open>
+                <summary>Text equivalent</summary>
+                <ol>
+                  <li>Verify domain contracts and schemas locally.</li>
+                  <li>Verify persistence and third-party adapters at their real boundaries.</li>
+                  <li>Complete the workflow in a browser, including error and reduced-motion states.</li>
+                  <li>Build the production-shaped artifact with the intended environment contract.</li>
+                  <li>Verify live routes, headers, delivery, and recovery; keep the previous healthy deployment available for rollback.</li>
+                </ol>
+              </details>
+            </figure>
+
+            <p>Handoff completes the operational story. The owner needs to know what they can change, what failure looks like, where work appears, and which external accounts the system depends on. Documentation should describe the current system rather than preserve every abandoned plan.</p>
+          </section>
+
+          <section id="principles" aria-labelledby="principles-title">
+            <div class="section-heading">
+              <p class="section-index">What I carry forward</p>
+              <h2 id="principles-title">Five working principles</h2>
+            </div>
+            <ol class="principle-list">
+              <li><div><strong>Trace the customer action into the business.</strong><p>The page is not complete until the resulting work reaches a state someone can act on.</p></div></li>
+              <li><div><strong>Name the owner of every important fact.</strong><p>Browser intent, application policy, provider truth, and operator state must not compete silently.</p></div></li>
+              <li><div><strong>Add architecture only when responsibility requires it.</strong><p>A database, dashboard, queue, or custom integration has to close a real workflow gap.</p></div></li>
+              <li><div><strong>Make failure states honest and recoverable.</strong><p>Success copy should reflect accepted work, not optimistic intent.</p></div></li>
+              <li><div><strong>Verify the same path the customer and owner use.</strong><p>Tests, deployment checks, and operational handoff should prove the system as a connected whole.</p></div></li>
+            </ol>
+            <div class="closing-statement">
+              <p>A good website is not the architecture with the most parts. It is the smallest complete system that lets a customer act, lets a business respond, and makes both sides’ state trustworthy.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="article-end systems-end shell">
+        <a class="action action--primary" href="/work-writing/">More Work &amp; Writing <span aria-hidden="true">→</span></a>
+        <a class="action" href="mailto:bjfifi1@gmail.com">Discuss the work</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+</body>
+</html>

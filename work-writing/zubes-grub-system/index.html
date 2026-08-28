@@ -1,0 +1,1931 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="A technical system-design deep dive into Zube's Grub: storefront, checkout, Square payments, kitchen operations, provider synchronization, and failure recovery."
+    />
+    <meta name="theme-color" content="#f4f6f2" />
+    <link
+      rel="canonical"
+      href="https://mobolaji.builtbykora.com/work-writing/zubes-grub-system/"
+    />
+    <title>Designing Zube's Grub — Mobolaji Ogunbiyi</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css?v=399ff7a" />
+    <link
+      rel="stylesheet"
+      href="/work-writing/zubes-grub-system/article.css?v=1"
+    />
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
+        <button
+          class="menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          data-menu-button
+        >
+          Menu
+        </button>
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
+          <a href="/">Home</a><a href="/projects/">Projects</a
+          ><a href="/work-writing/" aria-current="page">Work &amp; Writing</a
+          ><a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <article class="zg-article">
+        <header class="zg-hero shell">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a><span>/</span
+            ><a href="/work-writing/">Work &amp; Writing</a><span>/</span
+            ><span aria-current="page">Zube's Grub system</span>
+          </nav>
+          <div class="zg-hero-grid">
+            <div>
+              <p class="piece-type">System design</p>
+              <h1>Designing Zube's Grub</h1>
+            </div>
+            <div class="zg-hero-summary">
+              <p class="zg-deck">
+                How one system coordinates a public storefront, authoritative
+                commerce, kitchen operations, customer tracking, and recovery
+                when providers disagree.
+              </p>
+              <dl class="zg-hero-meta">
+                <div>
+                  <dt>Author</dt>
+                  <dd>Mobolaji Ogunbiyi</dd>
+                </div>
+                <div>
+                  <dt>System</dt>
+                  <dd>Commerce + operations</dd>
+                </div>
+                <div>
+                  <dt>Primary authority</dt>
+                  <dd>Square</dd>
+                </div>
+                <div>
+                  <dt>Runtime</dt>
+                  <dd>Cloudflare Worker</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </header>
+
+        <section
+          class="zg-system-overview"
+          aria-labelledby="system-overview-title"
+        >
+          <div class="shell">
+            <div class="zg-overview-heading">
+              <div>
+                <h2 id="system-overview-title">The complete system</h2>
+                <p>
+                  The public website is only one interface. The product also has
+                  a protected staff application, provider-backed checkout,
+                  operational projections, email delivery, and maintenance
+                  workers.
+                </p>
+              </div>
+              <p class="zg-diagram-hint">
+                Select a node to jump to its explanation.
+              </p>
+            </div>
+
+            <figure
+              class="zg-diagram zg-diagram--architecture"
+              aria-labelledby="architecture-caption"
+            >
+              <svg
+                viewBox="0 0 1180 610"
+                role="img"
+                aria-labelledby="architecture-title architecture-desc"
+              >
+                <title id="architecture-title">
+                  Zube's Grub complete system architecture
+                </title>
+                <desc id="architecture-desc">
+                  Customers use the React storefront through a Cloudflare
+                  Worker. The Worker serves static assets and routes API, staff,
+                  authentication, scheduled, and queue work to a Next.js
+                  application. The application works with Square, Supabase, and
+                  Resend. Staff use the protected application, while marketplace
+                  orders enter through Square.
+                </desc>
+                <defs>
+                  <marker
+                    id="zg-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                  </marker>
+                </defs>
+
+                <g class="zg-lane">
+                  <rect x="20" y="20" width="1140" height="118" rx="10"></rect>
+                  <text x="42" y="49" class="zg-lane-label">Interfaces</text>
+                </g>
+                <g class="zg-lane">
+                  <rect x="20" y="158" width="1140" height="170" rx="10"></rect>
+                  <text x="42" y="187" class="zg-lane-label">
+                    Application boundary
+                  </text>
+                </g>
+                <g class="zg-lane">
+                  <rect x="20" y="348" width="1140" height="242" rx="10"></rect>
+                  <text x="42" y="377" class="zg-lane-label">
+                    Authoritative services + durable state
+                  </text>
+                </g>
+
+                <path class="zg-edge" d="M202 89 H286"></path>
+                <path class="zg-edge" d="M894 89 H814"></path>
+                <path class="zg-edge" d="M420 113 V202"></path>
+                <path class="zg-edge" d="M620 113 V202"></path>
+                <path class="zg-edge" d="M745 274 V414 H890"></path>
+                <path class="zg-edge" d="M535 274 V414 H590"></path>
+                <path class="zg-edge" d="M535 274 V515 H590"></path>
+                <path class="zg-edge zg-edge--dashed" d="M990 113 V414"></path>
+                <path
+                  class="zg-edge zg-edge--dashed"
+                  d="M334 274 V515 H350"
+                ></path>
+
+                <a href="#storefront" class="zg-node-link">
+                  <g class="zg-node zg-node--interface">
+                    <rect x="62" y="55" width="140" height="68" rx="8"></rect>
+                    <text x="132" y="83" text-anchor="middle">Customer</text>
+                    <text
+                      x="132"
+                      y="104"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      browser
+                    </text>
+                  </g>
+                </a>
+                <a href="#architecture" class="zg-node-link">
+                  <g class="zg-node zg-node--primary">
+                    <rect x="286" y="44" width="268" height="79" rx="8"></rect>
+                    <text x="420" y="76" text-anchor="middle">
+                      React storefront
+                    </text>
+                    <text
+                      x="420"
+                      y="100"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      public UI · cart · Square tokenization
+                    </text>
+                  </g>
+                </a>
+                <a href="#operations" class="zg-node-link">
+                  <g class="zg-node zg-node--interface">
+                    <rect x="594" y="44" width="220" height="79" rx="8"></rect>
+                    <text x="704" y="76" text-anchor="middle">
+                      Staff application
+                    </text>
+                    <text
+                      x="704"
+                      y="100"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      orders · menu · schedule
+                    </text>
+                  </g>
+                </a>
+                <a href="#ownership" class="zg-node-link">
+                  <g class="zg-node zg-node--interface">
+                    <rect x="894" y="44" width="224" height="79" rx="8"></rect>
+                    <text x="1006" y="76" text-anchor="middle">
+                      Marketplaces
+                    </text>
+                    <text
+                      x="1006"
+                      y="100"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      DoorDash · Grubhub
+                    </text>
+                  </g>
+                </a>
+
+                <a href="#architecture" class="zg-node-link">
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="255" y="202" width="205" height="72" rx="8"></rect>
+                    <text x="357" y="232" text-anchor="middle">
+                      Cloudflare Worker
+                    </text>
+                    <text
+                      x="357"
+                      y="254"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      routing · assets · edge policy
+                    </text>
+                  </g>
+                </a>
+                <a href="#checkout" class="zg-node-link">
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="485" y="202" width="260" height="72" rx="8"></rect>
+                    <text x="615" y="232" text-anchor="middle">
+                      Next.js application
+                    </text>
+                    <text
+                      x="615"
+                      y="254"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      API · auth · domain services
+                    </text>
+                  </g>
+                </a>
+                <a href="#failure-recovery" class="zg-node-link">
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="770" y="202" width="285" height="72" rx="8"></rect>
+                    <text x="912" y="232" text-anchor="middle">
+                      Scheduled + queue workers
+                    </text>
+                    <text
+                      x="912"
+                      y="254"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      reconcile · retry · analytics · hours
+                    </text>
+                  </g>
+                </a>
+
+                <a href="#ownership" class="zg-node-link">
+                  <g class="zg-node zg-node--authority">
+                    <rect x="90" y="414" width="260" height="115" rx="8"></rect>
+                    <text x="220" y="446" text-anchor="middle">Square</text>
+                    <text
+                      x="220"
+                      y="470"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      catalog · orders · payments
+                    </text>
+                    <text
+                      x="220"
+                      y="493"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      refunds · fulfillment
+                    </text>
+                  </g>
+                </a>
+                <a href="#data-model" class="zg-node-link">
+                  <g class="zg-node zg-node--state">
+                    <rect
+                      x="590"
+                      y="399"
+                      width="270"
+                      height="115"
+                      rx="8"
+                    ></rect>
+                    <text x="725" y="431" text-anchor="middle">Supabase</text>
+                    <text
+                      x="725"
+                      y="455"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      auth · projections · schedules
+                    </text>
+                    <text
+                      x="725"
+                      y="478"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      events · notifications · content
+                    </text>
+                  </g>
+                </a>
+                <a href="#notifications" class="zg-node-link">
+                  <g class="zg-node zg-node--state">
+                    <rect
+                      x="890"
+                      y="399"
+                      width="205"
+                      height="115"
+                      rx="8"
+                    ></rect>
+                    <text x="992" y="443" text-anchor="middle">Resend</text>
+                    <text
+                      x="992"
+                      y="467"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      transactional email
+                    </text>
+                    <text
+                      x="992"
+                      y="490"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      delivery preference
+                    </text>
+                  </g>
+                </a>
+                <g class="zg-note-node">
+                  <rect x="90" y="550" width="1005" height="24" rx="4"></rect>
+                  <text x="592" y="567" text-anchor="middle">
+                    The browser never receives service-role credentials and
+                    never decides price, availability, payment, or fulfillment
+                    truth.
+                  </text>
+                </g>
+              </svg>
+
+              <div
+                class="zg-diagram-linear"
+                aria-label="Text version of the complete architecture"
+              >
+                <ol>
+                  <li>
+                    <strong>Customer browser</strong
+                    ><span
+                      >renders the React storefront and sends cart intent.</span
+                    >
+                  </li>
+                  <li>
+                    <strong>Cloudflare Worker</strong
+                    ><span
+                      >serves assets, applies edge policy, and routes backend
+                      work.</span
+                    >
+                  </li>
+                  <li>
+                    <strong>Next.js application</strong
+                    ><span
+                      >validates requests and owns API, authentication, and
+                      domain logic.</span
+                    >
+                  </li>
+                  <li>
+                    <strong>Square + Supabase + Resend</strong
+                    ><span
+                      >hold commercial truth, durable application state, and
+                      email delivery.</span
+                    >
+                  </li>
+                  <li>
+                    <strong>Staff application + workers</strong
+                    ><span
+                      >operate orders and repair delayed or failed provider
+                      synchronization.</span
+                    >
+                  </li>
+                </ol>
+              </div>
+              <figcaption id="architecture-caption">
+                One Cloudflare Worker deployment combines a static public
+                storefront with protected application routes and maintenance
+                work. The implementation sources remain separated even though
+                the runtime is unified.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <div class="shell zg-reading-layout">
+          <aside class="zg-toc" aria-label="Article contents">
+            <p>In this article</p>
+            <ol>
+              <li><a href="#requirements">Requirements</a></li>
+              <li><a href="#architecture">Runtime architecture</a></li>
+              <li><a href="#ownership">Sources of truth</a></li>
+              <li><a href="#checkout">Ordering and payment</a></li>
+              <li><a href="#operations">Kitchen operations</a></li>
+              <li><a href="#failure-recovery">Failure and recovery</a></li>
+              <li><a href="#data-model">Data model</a></li>
+              <li><a href="#security">Trust boundaries</a></li>
+              <li><a href="#testing">Testing and deployment</a></li>
+              <li><a href="#tradeoffs">Decisions and tradeoffs</a></li>
+            </ol>
+          </aside>
+
+          <div class="zg-prose">
+            <section class="zg-opening" aria-labelledby="opening-title">
+              <h2 id="opening-title">
+                The website is the public face of an operating system
+              </h2>
+              <p class="zg-lead">
+                A customer experiences Zube's Grub as a menu and an order form.
+                The business experiences the same action as a catalog lookup, an
+                availability decision, a payment, a kitchen task, a fulfillment
+                transition, a notification, and a record that must remain
+                correct when any one provider is late.
+              </p>
+              <p>
+                That makes the hard problem coordination. The implementation
+                cannot allow the browser, the local database, and Square to each
+                tell a different story about an item's price or an order's
+                state. It also cannot turn every temporary provider outage into
+                a duplicate charge or a customer-visible promise that the
+                kitchen has not actually confirmed.
+              </p>
+              <aside class="zg-callout zg-callout--scope">
+                <h3>Scope of this article</h3>
+                <p>
+                  This describes the current repository architecture and its
+                  implemented safeguards. It does not claim a specific
+                  transaction volume, conversion result, or uninterrupted
+                  production history.
+                </p>
+              </aside>
+            </section>
+
+            <section id="requirements" aria-labelledby="requirements-title">
+              <h2 id="requirements-title">Start with operating constraints</h2>
+              <p>
+                The useful requirements are not a list of pages. They are the
+                conditions that determine whether an order can be accepted and
+                completed safely.
+              </p>
+              <dl class="zg-requirements">
+                <div>
+                  <dt>Changing service</dt>
+                  <dd>
+                    Pickup availability depends on configured days, windows,
+                    lead time, and location rather than a permanent storefront
+                    schedule.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Configurable food</dt>
+                  <dd>
+                    Variations and modifier groups need minimums, maximums,
+                    price deltas, and sold-out behavior that match the
+                    operational catalog.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Two ordering channels</dt>
+                  <dd>
+                    The website owns direct pickup. DoorDash and Grubhub own
+                    their delivery transactions and send resulting orders
+                    through their Square integrations.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Kitchen progression</dt>
+                  <dd>
+                    Paid orders need a controlled path from received to
+                    preparing, ready, and completed, with cancellation and
+                    refund represented separately.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Provider latency</dt>
+                  <dd>
+                    Webhooks can repeat, arrive late, or be missed. A process
+                    can fail after a provider accepts a request but before the
+                    application stores the response.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Different audiences</dt>
+                  <dd>
+                    Customers need a small, confirmed view. Staff need pending
+                    side effects, failed synchronization, and repair controls.
+                  </dd>
+                </div>
+              </dl>
+              <p>
+                This framing immediately eliminates a tempting but fragile
+                design: a browser-only cart that trusts static prices and writes
+                a final order directly to a database. The server must
+                re-establish every commercial fact before creating provider
+                state.
+              </p>
+            </section>
+
+            <section
+              id="architecture"
+              aria-labelledby="architecture-section-title"
+            >
+              <h2 id="architecture-section-title">
+                One deployment, deliberately separated sources
+              </h2>
+              <p>
+                The repository has two UI source areas. <code>web/</code> is the
+                public Vite/React storefront. The Next.js application contains
+                API routes, authentication, domain services, and the protected
+                staff interface. A Cloudflare Worker assembles both into one
+                deployment without pretending they are one codebase.
+              </p>
+              <div
+                class="zg-code-map"
+                role="group"
+                aria-label="Runtime routing map"
+              >
+                <div><code>/</code><span>React storefront assets</span></div>
+                <div>
+                  <code>/api/*</code><span>Next.js route handlers</span>
+                </div>
+                <div>
+                  <code>/admin*</code><span>Protected staff application</span>
+                </div>
+                <div>
+                  <code>/auth/*</code><span>Authentication callbacks</span>
+                </div>
+                <div>
+                  <code>scheduled / queue</code
+                  ><span>Reconciliation and retry work</span>
+                </div>
+              </div>
+              <p>
+                This boundary keeps public presentation independent from the
+                staff application's release structure while still giving the
+                customer one origin. The Worker can apply same-origin mutation
+                checks, request-size ceilings, durable rate limits, security
+                headers, and explicit asset caching before a request reaches
+                application code.
+              </p>
+              <aside class="zg-callout">
+                <h3>Decision: a unified edge, not a unified source tree</h3>
+                <p>
+                  The business gets one domain and one deployable runtime.
+                  Engineers retain a clear rule: customer-facing work lives in
+                  the storefront; privileged work lives behind typed server
+                  boundaries.
+                </p>
+              </aside>
+            </section>
+
+            <section id="storefront" aria-labelledby="storefront-title">
+              <h2 id="storefront-title">
+                The storefront owns intent, not truth
+              </h2>
+              <p>
+                The browser helps a customer compose an order. It can display a
+                cached menu projection, collect a pickup choice, hold a cart,
+                and ask Square's browser SDK to tokenize a payment method. None
+                of those actions authorize a final price or payment.
+              </p>
+              <p>
+                When the customer submits, the API reloads the referenced
+                catalog rows from the server-side menu projection. It rejects
+                missing or sold-out items, verifies the selected variation and
+                every modifier, enforces selection limits, checks the configured
+                ordering window, applies pickup lead time, reserves an eligible
+                promotion, and calculates tax and totals in integer cents.
+              </p>
+              <p>
+                The cart is therefore a proposal. The server is the verifier.
+                Square is the commercial authority.
+              </p>
+            </section>
+
+            <section id="ownership" aria-labelledby="ownership-title">
+              <h2 id="ownership-title">Give every important fact one owner</h2>
+              <p>
+                Many commerce bugs are ownership bugs: two systems both believe
+                they are allowed to decide the same fact. Zube's Grub instead
+                distinguishes provider truth, application projection, and
+                temporary intent.
+              </p>
+
+              <figure
+                class="zg-diagram zg-diagram--authority"
+                aria-labelledby="authority-caption"
+              >
+                <svg
+                  viewBox="0 0 900 470"
+                  role="img"
+                  aria-labelledby="authority-title authority-desc"
+                >
+                  <title id="authority-title">
+                    Source-of-truth ownership map
+                  </title>
+                  <desc id="authority-desc">
+                    Square owns catalog, orders, payments, refunds, and
+                    fulfillment. Supabase owns identity, schedules, application
+                    projections, workflow events, content, and retry state.
+                    Resend owns email transport and recipient preferences. The
+                    browser owns only temporary cart and form intent.
+                  </desc>
+                  <defs>
+                    <marker
+                      id="zg-arrow-2"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                    </marker>
+                  </defs>
+                  <circle
+                    class="zg-authority-ring"
+                    cx="450"
+                    cy="235"
+                    r="105"
+                  ></circle>
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="350" y="190" width="200" height="90" rx="8"></rect>
+                    <text x="450" y="225" text-anchor="middle">
+                      Server boundary
+                    </text>
+                    <text
+                      x="450"
+                      y="250"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      validates · coordinates
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M350 220 H275"></path>
+                  <path class="zg-edge" d="M550 220 H625"></path>
+                  <path class="zg-edge" d="M412 190 L345 112"></path>
+                  <path class="zg-edge" d="M488 280 L550 360"></path>
+                  <g class="zg-node zg-node--authority">
+                    <rect x="35" y="160" width="240" height="120" rx="8"></rect>
+                    <text x="155" y="194" text-anchor="middle">Square</text>
+                    <text
+                      x="155"
+                      y="220"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      catalog · money · orders
+                    </text>
+                    <text
+                      x="155"
+                      y="244"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      refunds · fulfillment
+                    </text>
+                  </g>
+                  <g class="zg-node zg-node--state">
+                    <rect
+                      x="625"
+                      y="160"
+                      width="240"
+                      height="120"
+                      rx="8"
+                    ></rect>
+                    <text x="745" y="194" text-anchor="middle">Supabase</text>
+                    <text
+                      x="745"
+                      y="220"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      auth · projections · schedule
+                    </text>
+                    <text
+                      x="745"
+                      y="244"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      events · retry state · content
+                    </text>
+                  </g>
+                  <g class="zg-node zg-node--interface">
+                    <rect x="230" y="38" width="230" height="76" rx="8"></rect>
+                    <text x="345" y="69" text-anchor="middle">Browser</text>
+                    <text
+                      x="345"
+                      y="93"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      cart + form intent only
+                    </text>
+                  </g>
+                  <g class="zg-node zg-node--state">
+                    <rect x="440" y="360" width="220" height="76" rx="8"></rect>
+                    <text x="550" y="391" text-anchor="middle">Resend</text>
+                    <text
+                      x="550"
+                      y="415"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      email transport + preferences
+                    </text>
+                  </g>
+                </svg>
+                <div
+                  class="zg-diagram-linear"
+                  aria-label="Text version of the source-of-truth map"
+                >
+                  <dl>
+                    <div>
+                      <dt>Square</dt>
+                      <dd>
+                        Operational catalog, orders, payments, refunds, and
+                        fulfillment.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Supabase</dt>
+                      <dd>
+                        Authentication, schedules, application projections,
+                        events, content, and retry state.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Resend</dt>
+                      <dd>
+                        Email delivery and recipient-level contact preferences.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Browser</dt>
+                      <dd>
+                        Temporary cart and form intent; never authoritative
+                        commercial state.
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <figcaption id="authority-caption">
+                  The server does not replace the providers. It validates the
+                  request, coordinates side effects, and stores enough durable
+                  state to explain and repair them.
+                </figcaption>
+              </figure>
+
+              <p>
+                The Supabase menu cache is a projection of Square's operational
+                catalog, not a competing product catalog. Likewise, an order
+                status row can record a staff intent before Square confirms it,
+                but public tracking shows only the latest provider-confirmed
+                event.
+              </p>
+            </section>
+
+            <section id="checkout" aria-labelledby="checkout-title">
+              <h2 id="checkout-title">Ordering is a two-stage protocol</h2>
+              <p>
+                Draft creation and payment confirmation are separate. This makes
+                the Square order, server-calculated total, and payment
+                idempotency key stable before the payment request begins.
+              </p>
+
+              <figure
+                class="zg-diagram zg-diagram--sequence"
+                aria-labelledby="sequence-caption"
+              >
+                <svg
+                  viewBox="0 0 980 720"
+                  role="img"
+                  aria-labelledby="sequence-title sequence-desc"
+                >
+                  <title id="sequence-title">Order and payment sequence</title>
+                  <desc id="sequence-desc">
+                    The browser submits cart intent. The API reloads menu and
+                    schedule state, validates and calculates totals, creates a
+                    Square draft, and records a pending local order. The browser
+                    tokenizes payment with Square and confirms using a stable
+                    key. The API claims the attempt, compares the Square total,
+                    captures payment, marks the projection paid, exposes it to
+                    staff, and queues confirmation email.
+                  </desc>
+                  <defs>
+                    <marker
+                      id="zg-arrow-3"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                    </marker>
+                  </defs>
+                  <g class="zg-sequence-actors">
+                    <text x="110" y="35" text-anchor="middle">Browser</text>
+                    <text x="370" y="35" text-anchor="middle">API</text>
+                    <text x="630" y="35" text-anchor="middle">Square</text>
+                    <text x="875" y="35" text-anchor="middle">Supabase</text>
+                    <path d="M110 52 V690"></path>
+                    <path d="M370 52 V690"></path>
+                    <path d="M630 52 V690"></path>
+                    <path d="M875 52 V690"></path>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="92" r="17"></circle>
+                    <text x="40" y="98" text-anchor="middle">1</text>
+                    <path d="M110 92 H370"></path>
+                    <text x="240" y="81" text-anchor="middle">
+                      cart + customer + pickup intent
+                    </text>
+                  </g>
+                  <g class="zg-sequence-work">
+                    <rect x="260" y="120" width="220" height="84" rx="8"></rect>
+                    <text x="370" y="148" text-anchor="middle">
+                      Rebuild authority
+                    </text>
+                    <text
+                      x="370"
+                      y="171"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      menu · sold-out · modifiers
+                    </text>
+                    <text
+                      x="370"
+                      y="192"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      hours · promotion · cents
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="242" r="17"></circle>
+                    <text x="40" y="248" text-anchor="middle">2</text>
+                    <path d="M370 242 H630"></path>
+                    <text x="500" y="231" text-anchor="middle">
+                      create idempotent draft order
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="300" r="17"></circle>
+                    <text x="40" y="306" text-anchor="middle">3</text>
+                    <path d="M370 300 H875"></path>
+                    <text x="623" y="289" text-anchor="middle">
+                      persist pending order + line items + payment key
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="362" r="17"></circle>
+                    <text x="40" y="368" text-anchor="middle">4</text>
+                    <path d="M110 362 H630"></path>
+                    <text x="370" y="351" text-anchor="middle">
+                      Square SDK tokenizes card or wallet
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="422" r="17"></circle>
+                    <text x="40" y="428" text-anchor="middle">5</text>
+                    <path d="M110 422 H370"></path>
+                    <text x="240" y="411" text-anchor="middle">
+                      confirm with order, token, stable key
+                    </text>
+                  </g>
+                  <g class="zg-sequence-work">
+                    <rect x="260" y="452" width="220" height="66" rx="8"></rect>
+                    <text x="370" y="480" text-anchor="middle">
+                      Claim payment attempt
+                    </text>
+                    <text
+                      x="370"
+                      y="503"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      retrieve draft · compare totals
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="557" r="17"></circle>
+                    <text x="40" y="563" text-anchor="middle">6</text>
+                    <path d="M370 557 H630"></path>
+                    <text x="500" y="546" text-anchor="middle">
+                      capture with the same idempotency key
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="615" r="17"></circle>
+                    <text x="40" y="621" text-anchor="middle">7</text>
+                    <path d="M370 615 H875"></path>
+                    <text x="623" y="604" text-anchor="middle">
+                      mark paid · operationally visible · queue email
+                    </text>
+                  </g>
+                  <g class="zg-sequence-step">
+                    <circle cx="40" cy="670" r="17"></circle>
+                    <text x="40" y="676" text-anchor="middle">8</text>
+                    <path d="M370 670 H110"></path>
+                    <text x="240" y="659" text-anchor="middle">
+                      return tracking token + confirmed totals
+                    </text>
+                  </g>
+                </svg>
+                <div
+                  class="zg-diagram-linear"
+                  aria-label="Text version of the checkout sequence"
+                >
+                  <ol>
+                    <li>
+                      <strong>Submit intent.</strong
+                      ><span
+                        >The browser sends item IDs, modifier IDs, customer
+                        details, and pickup preference.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Revalidate.</strong
+                      ><span
+                        >The server reloads menu and schedule state, checks
+                        constraints, and calculates integer-cent totals.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Create the draft.</strong
+                      ><span
+                        >Square receives an idempotent order; Supabase records a
+                        non-operational pending projection and payment
+                        key.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Tokenize payment.</strong
+                      ><span
+                        >The Square browser SDK returns a source token; raw card
+                        details do not become application state.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Claim and compare.</strong
+                      ><span
+                        >The API claims the payment attempt, retrieves the
+                        Square draft, and rejects a total mismatch.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Capture once.</strong
+                      ><span
+                        >Square receives the stable idempotency key. Ambiguous
+                        failures retain the claim for a same-key retry.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Activate operations.</strong
+                      ><span
+                        >Only captured payment makes the order visible to the
+                        kitchen; confirmation delivery becomes retryable
+                        work.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+                <figcaption id="sequence-caption">
+                  Pending and failed drafts are intentionally excluded from
+                  staff order queues. Payment is the boundary between checkout
+                  state and operational work.
+                </figcaption>
+              </figure>
+
+              <h3>Why ambiguous failures matter</h3>
+              <p>
+                A timeout does not prove that Square rejected a payment. The
+                request might have reached the provider while the response was
+                lost. Releasing the claim and inventing a new key could charge
+                again. The implementation releases a payment claim only before
+                the provider request starts or after a definitive rejection.
+                Timeouts, conflicts, rate limits, and malformed responses retain
+                the original claim and key.
+              </p>
+            </section>
+
+            <section id="operations" aria-labelledby="operations-title">
+              <h2 id="operations-title">
+                The kitchen sees a controlled state machine
+              </h2>
+              <p>
+                Once payment is captured, staff move the order through an
+                ordered workflow. The local event records the operator's intent.
+                A corresponding Square fulfillment update then confirms that the
+                provider reached the same state.
+              </p>
+              <ol
+                class="zg-state-flow"
+                aria-label="Kitchen fulfillment sequence"
+              >
+                <li>
+                  <strong>Received</strong
+                  ><span>captured payment makes the order operational</span>
+                </li>
+                <li>
+                  <strong>Preparing</strong
+                  ><span>maps to Square fulfillment <code>RESERVED</code></span>
+                </li>
+                <li>
+                  <strong>Ready</strong
+                  ><span
+                    >maps to <code>PREPARED</code>; customer notification
+                    follows confirmation</span
+                  >
+                </li>
+                <li>
+                  <strong>Completed</strong
+                  ><span>maps to <code>COMPLETED</code></span>
+                </li>
+              </ol>
+              <p>
+                Forward-only transitions are enforced in the database, not only
+                hidden in the interface. An update uses the current Square order
+                version and retries once after a version conflict. If Square
+                already has the requested state, the retry is treated as
+                converged rather than issuing another update.
+              </p>
+              <aside class="zg-callout">
+                <h3>Customer tracking is intentionally behind staff intent</h3>
+                <p>
+                  Staff can see a failed or pending provider update so they can
+                  repair it. Customers see the latest Square-confirmed event. A
+                  button click in an admin interface is not itself proof that an
+                  order is ready.
+                </p>
+              </aside>
+            </section>
+
+            <section id="notifications" aria-labelledby="notifications-title">
+              <h2 id="notifications-title">
+                Notifications are durable side effects
+              </h2>
+              <p>
+                Order and catering emails do not disappear because Resend is
+                temporarily unavailable, and email failure does not make an
+                otherwise valid Square webhook fail. The system persists a
+                delivery row with its workflow, payload, provider transaction
+                ID, retry count, bounded error state, and stable idempotency
+                key.
+              </p>
+              <p>
+                A tokenized claim prevents concurrent workers from sending the
+                same delivery. Stale claims can be reclaimed. The same key is
+                passed to Resend, so application-level and provider-level
+                deduplication reinforce each other.
+              </p>
+            </section>
+
+            <section id="failure-recovery" aria-labelledby="recovery-title">
+              <h2 id="recovery-title">
+                Webhooks are the fast path; reconciliation is the correctness
+                path
+              </h2>
+              <p>
+                Square webhooks update the local projection quickly, but no
+                durable system should assume every webhook arrives exactly once.
+                Signature verification establishes authenticity; a reclaimable
+                event claim establishes single processing; mirroring is
+                idempotent; scheduled reconciliation repairs anything the event
+                path missed.
+              </p>
+
+              <figure
+                class="zg-diagram zg-diagram--recovery"
+                aria-labelledby="recovery-caption"
+              >
+                <svg
+                  viewBox="0 0 920 590"
+                  role="img"
+                  aria-labelledby="recovery-diagram-title recovery-desc"
+                >
+                  <title id="recovery-diagram-title">
+                    Failure and recovery loop
+                  </title>
+                  <desc id="recovery-desc">
+                    Square sends a signed event. The API verifies it and claims
+                    its event ID. A new event mirrors into Supabase and marks
+                    the claim processed; a duplicate stops safely. If processing
+                    fails, the claim becomes reclaimable. Independently, a
+                    scheduled search retrieves updated orders and completed
+                    refunds, mirrors each idempotently, and advances its
+                    watermark only when the entire batch succeeds.
+                  </desc>
+                  <defs>
+                    <marker
+                      id="zg-arrow-4"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                    </marker>
+                  </defs>
+                  <g class="zg-node zg-node--authority">
+                    <rect x="45" y="48" width="190" height="78" rx="8"></rect>
+                    <text x="140" y="80" text-anchor="middle">
+                      Square event
+                    </text>
+                    <text
+                      x="140"
+                      y="104"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      order · payment · refund
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M235 87 H315"></path>
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="315" y="48" width="250" height="78" rx="8"></rect>
+                    <text x="440" y="80" text-anchor="middle">
+                      Verify signature
+                    </text>
+                    <text
+                      x="440"
+                      y="104"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      parse + validate payload
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M565 87 H645"></path>
+                  <g class="zg-node zg-node--state">
+                    <rect x="645" y="48" width="230" height="78" rx="8"></rect>
+                    <text x="760" y="80" text-anchor="middle">
+                      Claim event ID
+                    </text>
+                    <text
+                      x="760"
+                      y="104"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      token + attempt count
+                    </text>
+                  </g>
+
+                  <path class="zg-edge" d="M760 126 V204 H630"></path>
+                  <g class="zg-decision">
+                    <path d="M510 204 L630 149 L750 204 L630 259 Z"></path>
+                    <text x="630" y="197" text-anchor="middle">new claim?</text>
+                    <text
+                      x="630"
+                      y="219"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      duplicate stops safely
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M510 204 H390"></path>
+                  <g class="zg-node zg-node--state">
+                    <rect x="140" y="163" width="250" height="82" rx="8"></rect>
+                    <text x="265" y="196" text-anchor="middle">
+                      Mirror provider state
+                    </text>
+                    <text
+                      x="265"
+                      y="220"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      monotonic + idempotent
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M265 245 V318"></path>
+                  <g class="zg-node zg-node--primary">
+                    <rect x="140" y="318" width="250" height="80" rx="8"></rect>
+                    <text x="265" y="350" text-anchor="middle">
+                      Mark processed
+                    </text>
+                    <text
+                      x="265"
+                      y="374"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      or release failed claim
+                    </text>
+                  </g>
+
+                  <g class="zg-recovery-divider">
+                    <path d="M45 447 H875"></path>
+                    <text x="60" y="433">Independent repair path</text>
+                  </g>
+                  <g class="zg-node zg-node--runtime">
+                    <rect x="45" y="478" width="225" height="78" rx="8"></rect>
+                    <text x="157" y="510" text-anchor="middle">
+                      Scheduled worker
+                    </text>
+                    <text
+                      x="157"
+                      y="534"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      search since watermark
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M270 517 H345"></path>
+                  <g class="zg-node zg-node--authority">
+                    <rect x="345" y="478" width="230" height="78" rx="8"></rect>
+                    <text x="460" y="510" text-anchor="middle">
+                      Orders + refunds
+                    </text>
+                    <text
+                      x="460"
+                      y="534"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      continue past malformed records
+                    </text>
+                  </g>
+                  <path class="zg-edge" d="M575 517 H650"></path>
+                  <g class="zg-node zg-node--state">
+                    <rect
+                      x="650"
+                      y="466"
+                      width="225"
+                      height="102"
+                      rx="8"
+                    ></rect>
+                    <text x="762" y="498" text-anchor="middle">
+                      Replay safely
+                    </text>
+                    <text
+                      x="762"
+                      y="522"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      advance watermark only
+                    </text>
+                    <text
+                      x="762"
+                      y="545"
+                      text-anchor="middle"
+                      class="zg-node-sub"
+                    >
+                      when every record succeeds
+                    </text>
+                  </g>
+                  <path
+                    class="zg-edge zg-edge--loop"
+                    d="M762 568 V582 H157 V556"
+                  ></path>
+                </svg>
+                <div
+                  class="zg-diagram-linear"
+                  aria-label="Text version of the failure and recovery loop"
+                >
+                  <ol>
+                    <li>
+                      <strong>Authenticate the event.</strong
+                      ><span
+                        >Verify the Square signature against the exact raw
+                        request body and notification URL.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Claim the event ID.</strong
+                      ><span
+                        >A duplicate exits without running provider side effects
+                        again; stale work can be reclaimed.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Mirror monotonically.</strong
+                      ><span
+                        >Later pending or failed snapshots cannot erase captured
+                        or refunded payment state.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Persist delivery failures.</strong
+                      ><span
+                        >Customer email remains retryable without rejecting a
+                        correct commerce update.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Reconcile independently.</strong
+                      ><span
+                        >Scheduled searches replay updated orders and completed
+                        refunds idempotently.</span
+                      >
+                    </li>
+                    <li>
+                      <strong>Refuse a false checkpoint.</strong
+                      ><span
+                        >The watermark advances only after the whole batch
+                        succeeds, so failed records return next run.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+                <figcaption id="recovery-caption">
+                  Fast event delivery and periodic state comparison are
+                  complementary. The first reduces latency; the second protects
+                  correctness.
+                </figcaption>
+              </figure>
+
+              <div
+                class="zg-failure-table"
+                role="region"
+                aria-label="Failure behavior"
+                tabindex="0"
+              >
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Failure</th>
+                      <th>Unsafe reaction</th>
+                      <th>Implemented response</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Duplicate webhook</td>
+                      <td>Process twice</td>
+                      <td>Event-ID claim returns duplicate and stops.</td>
+                    </tr>
+                    <tr>
+                      <td>Payment response lost</td>
+                      <td>Create another charge</td>
+                      <td>
+                        Retain claim and retry the same Square idempotency key.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Late pending snapshot</td>
+                      <td>Downgrade captured payment</td>
+                      <td>Monotonic mirror preserves terminal progress.</td>
+                    </tr>
+                    <tr>
+                      <td>Square version conflict</td>
+                      <td>Overwrite newer state</td>
+                      <td>Retrieve the latest version once and converge.</td>
+                    </tr>
+                    <tr>
+                      <td>Notification outage</td>
+                      <td>Lose email or fail commerce event</td>
+                      <td>
+                        Persist failed delivery and acknowledge correct mirror
+                        work.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>One malformed reconcile record</td>
+                      <td>Skip it forever</td>
+                      <td>
+                        Process healthy records, fail the batch checkpoint,
+                        replay safely.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section id="data-model" aria-labelledby="data-title">
+              <h2 id="data-title">A projection-oriented data model</h2>
+              <p>
+                The database does not attempt to duplicate every Square object.
+                It stores application-facing records, the provider identifiers
+                required to correlate them, and the event state needed for safe
+                work.
+              </p>
+
+              <figure
+                class="zg-diagram zg-diagram--data"
+                aria-labelledby="data-caption"
+              >
+                <svg
+                  viewBox="0 0 980 630"
+                  role="img"
+                  aria-labelledby="data-diagram-title data-desc"
+                >
+                  <title id="data-diagram-title">
+                    Simplified Zube's Grub data model
+                  </title>
+                  <desc id="data-desc">
+                    Orders connect to order items, status events, promotions,
+                    locations, refund applications, and notification deliveries.
+                    Menu cache projects Square catalog data. Locations connect
+                    to schedule slots. Webhook events and job state support
+                    provider synchronization. Catering inquiries connect to
+                    quotes and notification delivery.
+                  </desc>
+                  <defs>
+                    <marker
+                      id="zg-arrow-5"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                    </marker>
+                  </defs>
+                  <path class="zg-relation" d="M480 160 H275"></path>
+                  <path class="zg-relation" d="M480 190 H275 V320"></path>
+                  <path class="zg-relation" d="M590 235 V320"></path>
+                  <path class="zg-relation" d="M700 190 H815 V320"></path>
+                  <path class="zg-relation" d="M700 150 H815"></path>
+                  <path class="zg-relation" d="M480 110 H275"></path>
+                  <path class="zg-relation" d="M590 80 V42"></path>
+                  <g class="zg-entity zg-entity--primary">
+                    <rect x="480" y="90" width="220" height="145" rx="8"></rect>
+                    <text x="500" y="120">orders</text>
+                    <text x="500" y="149" class="zg-entity-field">
+                      square_order_id
+                    </text>
+                    <text x="500" y="172" class="zg-entity-field">
+                      payment + status
+                    </text>
+                    <text x="500" y="195" class="zg-entity-field">
+                      money in cents
+                    </text>
+                    <text x="500" y="218" class="zg-entity-field">
+                      pickup + public token
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect x="65" y="70" width="210" height="106" rx="8"></rect>
+                    <text x="85" y="100">order_items</text>
+                    <text x="85" y="129" class="zg-entity-field">
+                      catalog IDs
+                    </text>
+                    <text x="85" y="152" class="zg-entity-field">
+                      variation + modifiers
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect x="65" y="270" width="210" height="120" rx="8"></rect>
+                    <text x="85" y="300">order_status_events</text>
+                    <text x="85" y="329" class="zg-entity-field">
+                      status_version
+                    </text>
+                    <text x="85" y="352" class="zg-entity-field">
+                      square_sync_status
+                    </text>
+                    <text x="85" y="375" class="zg-entity-field">
+                      notification status
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect
+                      x="480"
+                      y="320"
+                      width="220"
+                      height="106"
+                      rx="8"
+                    ></rect>
+                    <text x="500" y="350">truck_locations</text>
+                    <text x="500" y="379" class="zg-entity-field">
+                      public location
+                    </text>
+                    <text x="500" y="402" class="zg-entity-field">
+                      address + metadata
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect x="760" y="70" width="180" height="106" rx="8"></rect>
+                    <text x="780" y="100">promotions</text>
+                    <text x="780" y="129" class="zg-entity-field">
+                      rules + limits
+                    </text>
+                    <text x="780" y="152" class="zg-entity-field">
+                      redemption state
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect
+                      x="760"
+                      y="270"
+                      width="180"
+                      height="120"
+                      rx="8"
+                    ></rect>
+                    <text x="780" y="300">refund applications</text>
+                    <text x="780" y="329" class="zg-entity-field">
+                      Square refund ID
+                    </text>
+                    <text x="780" y="352" class="zg-entity-field">
+                      amount + status
+                    </text>
+                    <text x="780" y="375" class="zg-entity-field">
+                      idempotent result
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect x="480" y="10" width="220" height="60" rx="8"></rect>
+                    <text x="500" y="39">customer identity</text>
+                    <text
+                      x="650"
+                      y="39"
+                      text-anchor="end"
+                      class="zg-entity-field"
+                    >
+                      optional relation
+                    </text>
+                  </g>
+
+                  <path class="zg-relation" d="M590 426 V485 H355"></path>
+                  <path class="zg-relation" d="M590 426 V485 H815"></path>
+                  <g class="zg-entity zg-entity--projection">
+                    <rect x="65" y="475" width="290" height="112" rx="8"></rect>
+                    <text x="85" y="505">menu_cache</text>
+                    <text x="85" y="534" class="zg-entity-field">
+                      Square catalog projection
+                    </text>
+                    <text x="85" y="557" class="zg-entity-field">
+                      variations · modifiers · sold-out
+                    </text>
+                  </g>
+                  <g class="zg-entity">
+                    <rect
+                      x="480"
+                      y="475"
+                      width="220"
+                      height="112"
+                      rx="8"
+                    ></rect>
+                    <text x="500" y="505">schedule_slots</text>
+                    <text x="500" y="534" class="zg-entity-field">
+                      location · service type
+                    </text>
+                    <text x="500" y="557" class="zg-entity-field">
+                      public vs staff detail
+                    </text>
+                  </g>
+                  <g class="zg-entity zg-entity--recovery">
+                    <rect
+                      x="760"
+                      y="475"
+                      width="180"
+                      height="112"
+                      rx="8"
+                    ></rect>
+                    <text x="780" y="505">recovery state</text>
+                    <text x="780" y="534" class="zg-entity-field">
+                      webhook_events
+                    </text>
+                    <text x="780" y="557" class="zg-entity-field">
+                      job_state · deliveries
+                    </text>
+                  </g>
+                </svg>
+                <div
+                  class="zg-diagram-linear"
+                  aria-label="Text version of the simplified data model"
+                >
+                  <dl>
+                    <div>
+                      <dt>orders</dt>
+                      <dd>
+                        Core operational projection with Square IDs, money,
+                        payment state, workflow state, fulfillment, and a public
+                        tracking token.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>order_items + order_status_events</dt>
+                      <dd>
+                        Immutable purchase detail and versioned workflow
+                        history, including provider synchronization state.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>menu_cache</dt>
+                      <dd>
+                        Application-safe projection of Square items, variations,
+                        modifiers, price cents, and sold-out state.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>locations + schedule_slots</dt>
+                      <dd>
+                        Reusable places and dated public or staff-only service
+                        entries.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>refund + notification records</dt>
+                      <dd>
+                        Durable idempotency and retry boundaries for external
+                        side effects.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>webhook_events + job_state</dt>
+                      <dd>
+                        Claims, attempt state, and incremental reconciliation
+                        checkpoint.
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <figcaption id="data-caption">
+                  This is a conceptual map, not a complete schema. The canonical
+                  schema is the ordered migration history; generated types
+                  follow it.
+                </figcaption>
+              </figure>
+            </section>
+
+            <section id="security" aria-labelledby="security-title">
+              <h2 id="security-title">Trust boundaries are product behavior</h2>
+              <p>
+                Security is most useful here when it is expressed as explicit
+                ownership and failure behavior rather than a list of tools.
+              </p>
+              <ul class="zg-principles">
+                <li>
+                  <strong>Untrusted input is parsed at the server.</strong
+                  ><span
+                    >Checkout, catering, admin, and webhook contracts validate
+                    before privileged work.</span
+                  >
+                </li>
+                <li>
+                  <strong>The client cannot authorize money.</strong
+                  ><span
+                    >Server code reconstructs the cart and totals; money is
+                    stored and compared in integer cents.</span
+                  >
+                </li>
+                <li>
+                  <strong>Secrets stay behind the API.</strong
+                  ><span
+                    >Service-role credentials and provider secrets are not
+                    browser configuration.</span
+                  >
+                </li>
+                <li>
+                  <strong>Provider events prove origin.</strong
+                  ><span
+                    >Square webhooks use the raw body and configured
+                    notification URL for signature verification.</span
+                  >
+                </li>
+                <li>
+                  <strong
+                    >Staff identity and staff authority are separate.</strong
+                  ><span
+                    >Supabase authentication establishes identity; an allowed
+                    role establishes access. Cloudflare Access adds defense in
+                    depth.</span
+                  >
+                </li>
+                <li>
+                  <strong
+                    >Public projections are smaller than internal
+                    records.</strong
+                  ><span
+                    >Customer tracking omits provider-sync internals and only
+                    exposes confirmed workflow events.</span
+                  >
+                </li>
+                <li>
+                  <strong>The edge rejects obvious abuse early.</strong
+                  ><span
+                    >Same-origin mutation checks, request-size ceilings,
+                    security headers, and durable rate limits run before
+                    application logic.</span
+                  >
+                </li>
+              </ul>
+            </section>
+
+            <section id="testing" aria-labelledby="testing-title">
+              <h2 id="testing-title">Testing follows the boundaries</h2>
+              <p>
+                The repository separates fast domain checks from tests that need
+                a real database or provider sandbox. That matters because the
+                most consequential behavior crosses systems.
+              </p>
+              <div class="zg-test-layers">
+                <div>
+                  <h3>Contract and domain tests</h3>
+                  <p>
+                    Checkout validation, ordering windows, menu mapping, status
+                    transitions, public projections, refunds, authentication,
+                    and notification claims.
+                  </p>
+                </div>
+                <div>
+                  <h3>Database tests</h3>
+                  <p>
+                    Row-level security, checkout functions, monotonic payment
+                    state, forward-only workflows, atomic claims, and refund
+                    application.
+                  </p>
+                </div>
+                <div>
+                  <h3>Provider verification</h3>
+                  <p>
+                    Square sandbox checkout, catalog parity, webhook behavior,
+                    production identity gates, and Resend readiness.
+                  </p>
+                </div>
+                <div>
+                  <h3>Deployment checks</h3>
+                  <p>
+                    Backend and storefront lint/typecheck/build, Cloudflare dry
+                    run, environment and secret checks, live route verification,
+                    and focused browser coverage.
+                  </p>
+                </div>
+              </div>
+              <p>
+                The important point is not the number of tests. It is that every
+                ownership boundary has a verification strategy: what the browser
+                may send, what the server recalculates, what the database
+                enforces, what the provider confirms, and what the deployment
+                must expose.
+              </p>
+            </section>
+
+            <section id="tradeoffs" aria-labelledby="tradeoffs-title">
+              <h2 id="tradeoffs-title">
+                The decisions that keep the system coherent
+              </h2>
+              <div class="zg-decisions">
+                <article>
+                  <h3>Square owns commerce</h3>
+                  <p>
+                    Using the provider as authority avoids a second catalog and
+                    payment ledger. The cost is projection logic, provider
+                    version handling, and reconciliation.
+                  </p>
+                </article>
+                <article>
+                  <h3>Supabase stores operational projections</h3>
+                  <p>
+                    Staff can search, operate, audit, and recover work without
+                    forcing every UI read through Square. The projection must
+                    never silently outrank provider truth.
+                  </p>
+                </article>
+                <article>
+                  <h3>Public and staff interfaces are separate</h3>
+                  <p>
+                    The storefront stays customer-focused while staff get repair
+                    state and operational controls. A shared deployment still
+                    prevents origin and release fragmentation.
+                  </p>
+                </article>
+                <article>
+                  <h3>Pickup is native; delivery remains external</h3>
+                  <p>
+                    The website specializes around a workflow it can operate
+                    reliably. DoorDash and Grubhub retain their own customer
+                    transactions and delivery logistics.
+                  </p>
+                </article>
+                <article>
+                  <h3>Reconciliation is a first-class feature</h3>
+                  <p>
+                    Webhooks optimize latency. Scheduled comparison provides
+                    eventual convergence when events are delayed, duplicated, or
+                    missed.
+                  </p>
+                </article>
+                <article>
+                  <h3>Remove systems that create false complexity</h3>
+                  <p>
+                    The current migration history removes the internal delivery
+                    path and rewards system. Fewer authorities and fewer
+                    half-owned workflows make the remaining product easier to
+                    operate correctly.
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <section id="evidence" aria-labelledby="evidence-title">
+              <h2 id="evidence-title">Implementation evidence and limits</h2>
+              <p>
+                This article was reconstructed from the current private
+                application repository. The repository is not presented as
+                public source, so the paths below identify the implementation
+                concepts without creating misleading external links.
+              </p>
+              <dl class="zg-evidence-list">
+                <div>
+                  <dt>Runtime and routing</dt>
+                  <dd>
+                    <code>ARCHITECTURE.md</code>, <code>worker.js</code>,
+                    <code>wrangler.jsonc</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Checkout protocol</dt>
+                  <dd>
+                    <code>lib/checkout/service.ts</code>,
+                    <code>app/api/checkout/*</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Kitchen synchronization</dt>
+                  <dd>
+                    <code>lib/orders/status.ts</code>,
+                    <code>lib/orders/public-view.ts</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Provider event handling</dt>
+                  <dd>
+                    <code>lib/webhooks/square/*</code>,
+                    <code>lib/jobs/reconcile.ts</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Durable notifications</dt>
+                  <dd>
+                    <code>lib/notifications/*</code>, notification migrations
+                  </dd>
+                </div>
+                <div>
+                  <dt>Schema and access</dt>
+                  <dd>
+                    <code>supabase/migrations/</code>, <code>SCHEMA.md</code>
+                  </dd>
+                </div>
+              </dl>
+              <p class="zg-status-note">
+                <strong>Current status:</strong> the repository targets the
+                production domains through Cloudflare and configures production
+                Square checkout. This article explains implemented architecture,
+                not independently audited uptime or business-performance
+                results.
+              </p>
+            </section>
+          </div>
+        </div>
+
+        <footer class="zg-article-end shell">
+          <div>
+            <p>Continue exploring</p>
+            <h2>Engineering work, explained through the system.</h2>
+          </div>
+          <div class="action-row">
+            <a
+              class="action action--primary"
+              href="https://zubesgrub.com"
+              target="_blank"
+              rel="noreferrer"
+              >Visit Zube's Grub <span aria-hidden="true">↗</span></a
+            >
+            <a class="action" href="/work-writing/"
+              >Back to Work &amp; Writing</a
+            >
+          </div>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer shell">
+      <p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p>
+      <a href="mailto:bjfifi1@gmail.com">Contact ↗</a>
+    </footer>
+  </body>
+</html>

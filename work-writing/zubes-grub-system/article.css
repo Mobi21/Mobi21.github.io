@@ -1,0 +1,898 @@
+.zg-article {
+  --zg-orange: #b84f1b;
+  --zg-orange-dark: #86340f;
+  --zg-orange-soft: #f2e0d4;
+  --zg-green: #176347;
+  --zg-green-soft: #dcebe4;
+  --zg-blue: #294f73;
+  --zg-blue-soft: #dde8ef;
+  --zg-graphite: #182722;
+  --zg-code: #e8edea;
+}
+
+.zg-hero {
+  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(3rem, 7vw, 6rem);
+}
+
+.zg-hero .breadcrumb {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.zg-hero-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.zg-hero h1 {
+  max-width: 11ch;
+  margin-top: 0.8rem;
+  color: var(--zg-graphite);
+  font-size: clamp(3.15rem, 8vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.zg-hero-summary {
+  display: grid;
+  align-content: end;
+  gap: 2rem;
+}
+
+.zg-deck {
+  max-width: 38rem;
+  color: var(--ink-soft);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.48;
+}
+
+.zg-hero-meta {
+  display: grid;
+  border-top: 1px solid var(--line-strong);
+}
+
+.zg-hero-meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.65rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.zg-hero-meta dt {
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+}
+
+.zg-hero-meta dd {
+  color: var(--zg-graphite);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.zg-system-overview {
+  padding-block: clamp(2rem, 6vw, 5rem);
+  background: var(--zg-graphite);
+  color: #f7f8f4;
+}
+
+.zg-overview-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.zg-overview-heading > div {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.zg-overview-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.zg-overview-heading p {
+  max-width: 46rem;
+  color: #c8d1cb;
+}
+
+.zg-diagram-hint {
+  color: #aebbb4 !important;
+  font-size: 0.75rem;
+}
+
+.zg-diagram {
+  margin-block: 2rem;
+}
+
+.zg-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font-sans);
+}
+
+.zg-diagram figcaption {
+  max-width: 74ch;
+  margin-top: 1rem;
+  color: var(--ink-muted);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+.zg-system-overview .zg-diagram figcaption {
+  color: #aebbb4;
+}
+
+.zg-lane rect {
+  fill: #20302a;
+  stroke: #3e5048;
+  stroke-width: 1;
+}
+
+.zg-lane-label {
+  fill: #95a69d;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.zg-node rect,
+.zg-sequence-work rect,
+.zg-entity rect {
+  fill: #ffffff;
+  stroke: #9fb0a7;
+  stroke-width: 1.25;
+}
+
+.zg-node text,
+.zg-sequence-work text,
+.zg-entity text {
+  fill: #182722;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.zg-node .zg-node-sub,
+.zg-sequence-work .zg-node-sub {
+  fill: #51635a;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.zg-node--primary rect {
+  fill: #efc4a8;
+  stroke: #d06c31;
+}
+
+.zg-node--runtime rect {
+  fill: #dbe6e0;
+  stroke: #749486;
+}
+
+.zg-node--authority rect {
+  fill: #f2d7c6;
+  stroke: #b84f1b;
+}
+
+.zg-node--state rect {
+  fill: #dce7ec;
+  stroke: #64879a;
+}
+
+.zg-node--interface rect {
+  fill: #f3f5f0;
+  stroke: #9fb0a7;
+}
+
+.zg-node-link:focus-visible .zg-node rect,
+.zg-node-link:hover .zg-node rect {
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.zg-edge,
+.zg-relation {
+  fill: none;
+  stroke: #87a095;
+  stroke-width: 2;
+  marker-end: url(#zg-arrow);
+}
+
+.zg-edge--dashed {
+  stroke-dasharray: 7 6;
+}
+
+.zg-note-node rect {
+  fill: #293c34;
+}
+
+.zg-note-node text {
+  fill: #d7dfda;
+  font-size: 11px;
+}
+
+.zg-diagram-linear {
+  display: none;
+}
+
+.zg-reading-layout {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+.zg-toc {
+  display: none;
+}
+
+.zg-prose {
+  min-width: 0;
+}
+
+.zg-prose > section {
+  display: grid;
+  gap: 1.1rem;
+  padding-block: clamp(2.7rem, 6vw, 5rem);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 6rem;
+}
+
+.zg-prose > section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.zg-prose h2 {
+  max-width: 21ch;
+  color: var(--zg-graphite);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.zg-prose h3 {
+  margin-top: 1.25rem;
+  color: var(--zg-graphite);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.zg-prose p,
+.zg-prose li,
+.zg-prose dd {
+  color: var(--ink-soft);
+}
+
+.zg-prose p,
+.zg-prose ul,
+.zg-prose ol:not(.zg-state-flow) {
+  max-width: 70ch;
+}
+
+.zg-prose strong {
+  color: var(--zg-graphite);
+}
+
+.zg-prose code,
+.zg-code-map code,
+.zg-evidence-list code {
+  padding: 0.1em 0.33em;
+  border-radius: 0.2rem;
+  background: var(--zg-code);
+  color: var(--zg-graphite);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.88em;
+}
+
+.zg-lead {
+  color: var(--zg-graphite) !important;
+  font-size: clamp(1.18rem, 2vw, 1.4rem);
+  line-height: 1.58;
+}
+
+.zg-callout {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 70ch;
+  margin-top: 1rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid #aabcb3;
+  border-radius: 0.35rem;
+  background: var(--zg-green-soft);
+}
+
+.zg-callout h3 {
+  margin: 0;
+}
+
+.zg-callout p {
+  color: #304b3f;
+}
+
+.zg-callout--scope {
+  background: var(--zg-blue-soft);
+  border-color: #a9bfca;
+}
+
+.zg-callout--scope p {
+  color: #354e5b;
+}
+
+.zg-requirements {
+  display: grid;
+  margin-block: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.zg-requirements div {
+  display: grid;
+  gap: 0.45rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.zg-requirements dt {
+  color: var(--zg-graphite);
+  font-weight: 700;
+}
+
+.zg-code-map {
+  display: grid;
+  margin-block: 1.3rem;
+  border-block: 1px solid var(--line-strong);
+}
+
+.zg-code-map div {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.4fr) 1fr;
+  gap: 1rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.zg-code-map div:last-child {
+  border-bottom: 0;
+}
+
+.zg-code-map span {
+  color: var(--ink-soft);
+}
+
+.zg-authority-ring {
+  fill: none;
+  stroke: #c8d5cf;
+  stroke-width: 34;
+}
+
+.zg-diagram--authority .zg-edge,
+.zg-diagram--sequence .zg-edge,
+.zg-diagram--recovery .zg-edge,
+.zg-diagram--data .zg-edge {
+  stroke: #718980;
+  marker-end: url(#zg-arrow-2);
+}
+
+.zg-diagram--authority,
+.zg-diagram--sequence,
+.zg-diagram--recovery,
+.zg-diagram--data {
+  width: min(112%, 60rem);
+  margin-block: 2rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--line-strong);
+  border-radius: 0.35rem;
+  background: #f9faf7;
+}
+
+.zg-sequence-actors text {
+  fill: #182722;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.zg-sequence-actors path {
+  stroke: #bdc9c3;
+  stroke-width: 1;
+  stroke-dasharray: 5 7;
+}
+
+.zg-sequence-step path {
+  fill: none;
+  stroke: #6c8579;
+  stroke-width: 2;
+  marker-end: url(#zg-arrow-3);
+}
+
+.zg-sequence-step circle {
+  fill: var(--zg-orange);
+}
+
+.zg-sequence-step > text:first-of-type {
+  fill: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.zg-sequence-step > text:last-of-type {
+  fill: #35483f;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.zg-state-flow {
+  display: grid;
+  max-width: none;
+  margin: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: flow;
+}
+
+.zg-state-flow li {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 0 1rem 3.25rem;
+  border-bottom: 1px solid var(--line);
+  counter-increment: flow;
+}
+
+.zg-state-flow li::before {
+  content: counter(flow);
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--zg-orange-soft);
+  color: var(--zg-orange-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.zg-state-flow span {
+  color: var(--ink-muted);
+  font-size: 0.84rem;
+}
+
+.zg-decision path {
+  fill: #f4e8de;
+  stroke: #b87041;
+  stroke-width: 1.25;
+}
+
+.zg-decision text {
+  fill: #51270f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.zg-decision .zg-node-sub {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.zg-diagram--recovery .zg-edge {
+  marker-end: url(#zg-arrow-4);
+}
+
+.zg-recovery-divider path {
+  stroke: #aebdb6;
+  stroke-width: 1;
+}
+
+.zg-recovery-divider text {
+  fill: #687b72;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.zg-edge--loop {
+  stroke-dasharray: 6 5;
+}
+
+.zg-failure-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  border-block: 1px solid var(--line-strong);
+}
+
+.zg-failure-table table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.zg-failure-table th,
+.zg-failure-table td {
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.zg-failure-table th {
+  color: var(--zg-graphite);
+  font-size: 0.75rem;
+}
+
+.zg-failure-table td {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.zg-failure-table td:first-child {
+  color: var(--zg-graphite);
+  font-weight: 700;
+}
+
+.zg-relation {
+  stroke: #9aaba3;
+  stroke-width: 1.5;
+  marker-end: none;
+}
+
+.zg-entity text {
+  font-size: 15px;
+}
+
+.zg-entity .zg-entity-field {
+  fill: #5c6c64;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.zg-entity--primary rect {
+  fill: var(--zg-orange-soft);
+  stroke: var(--zg-orange);
+}
+
+.zg-entity--projection rect {
+  fill: var(--zg-blue-soft);
+  stroke: #6f91a1;
+}
+
+.zg-entity--recovery rect {
+  fill: var(--zg-green-soft);
+  stroke: #6d9985;
+}
+
+.zg-principles,
+.zg-evidence-list {
+  display: grid;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+  list-style: none;
+}
+
+.zg-principles li,
+.zg-evidence-list div {
+  display: grid;
+  gap: 0.35rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.zg-principles span,
+.zg-evidence-list dd {
+  color: var(--ink-soft);
+}
+
+.zg-test-layers,
+.zg-decisions {
+  display: grid;
+  gap: 0;
+  margin-block: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.zg-test-layers > div,
+.zg-decisions article {
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.zg-test-layers h3,
+.zg-decisions h3 {
+  margin: 0 0 0.45rem;
+}
+
+.zg-status-note {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--surface-raised);
+}
+
+.zg-article-end {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+  padding-block: clamp(3rem, 8vw, 6rem);
+  border-top: 1px solid var(--line-strong);
+}
+
+.zg-article-end > div:first-child {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.zg-article-end > div:first-child > p {
+  color: var(--zg-orange-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.zg-article-end h2 {
+  max-width: 20ch;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 44rem) {
+  .zg-hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+    align-items: end;
+  }
+
+  .zg-requirements,
+  .zg-test-layers,
+  .zg-decisions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .zg-requirements div:nth-child(odd),
+  .zg-test-layers > div:nth-child(odd),
+  .zg-decisions article:nth-child(odd) {
+    padding-right: 1.5rem;
+  }
+
+  .zg-requirements div:nth-child(even),
+  .zg-test-layers > div:nth-child(even),
+  .zg-decisions article:nth-child(even) {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .zg-state-flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-block: 1px solid var(--line);
+  }
+
+  .zg-state-flow li {
+    padding: 3.6rem 1rem 1rem 0;
+    border-bottom: 0;
+  }
+
+  .zg-state-flow li + li {
+    padding-left: 1rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .zg-state-flow li::before {
+    left: 0;
+  }
+
+  .zg-state-flow li + li::before {
+    left: 1rem;
+  }
+
+  .zg-principles li,
+  .zg-evidence-list div {
+    grid-template-columns: minmax(11rem, 0.42fr) 1fr;
+    gap: 1.5rem;
+  }
+
+  .zg-article-end {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+@media (min-width: 66rem) {
+  .zg-reading-layout {
+    grid-template-columns: 12rem minmax(0, 48rem);
+    justify-content: center;
+  }
+
+  .zg-toc {
+    position: sticky;
+    top: 6.5rem;
+    display: block;
+    align-self: start;
+  }
+
+  .zg-toc > p {
+    margin-bottom: 0.8rem;
+    color: var(--zg-graphite);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .zg-toc ol {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .zg-toc a {
+    display: block;
+    padding-block: 0.25rem;
+    color: var(--ink-muted);
+    font-size: 0.74rem;
+    line-height: 1.35;
+    transition:
+      color var(--ease),
+      transform var(--ease);
+  }
+
+  .zg-toc a:hover,
+  .zg-toc a:focus-visible {
+    color: var(--zg-orange-dark);
+    transform: translateX(0.2rem);
+  }
+}
+
+@media (max-width: 43.99rem) {
+  .zg-hero h1 {
+    font-size: clamp(3rem, 17vw, 4.4rem);
+  }
+
+  .zg-diagram svg {
+    display: none;
+  }
+
+  .zg-diagram-linear {
+    display: block;
+  }
+
+  .zg-diagram-linear ol,
+  .zg-diagram-linear dl {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line-strong);
+    list-style: none;
+  }
+
+  .zg-diagram-linear li,
+  .zg-diagram-linear dl div {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .zg-diagram-linear strong,
+  .zg-diagram-linear dt {
+    color: var(--zg-graphite);
+    font-weight: 700;
+  }
+
+  .zg-diagram-linear span,
+  .zg-diagram-linear dd {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+
+  .zg-system-overview .zg-diagram-linear ol {
+    border-color: #506159;
+  }
+
+  .zg-system-overview .zg-diagram-linear li {
+    border-color: #3e5048;
+  }
+
+  .zg-system-overview .zg-diagram-linear strong {
+    color: #fff;
+  }
+
+  .zg-system-overview .zg-diagram-linear span {
+    color: #b9c6bf;
+  }
+
+  .zg-diagram--authority,
+  .zg-diagram--sequence,
+  .zg-diagram--recovery,
+  .zg-diagram--data {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .zg-code-map div {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .zg-failure-table {
+    overflow: visible;
+    border-block: 0;
+  }
+
+  .zg-failure-table table,
+  .zg-failure-table thead,
+  .zg-failure-table tbody,
+  .zg-failure-table tr,
+  .zg-failure-table th,
+  .zg-failure-table td {
+    display: block;
+    min-width: 0;
+  }
+
+  .zg-failure-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .zg-failure-table tr {
+    padding-block: 1rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .zg-failure-table td {
+    padding: 0.22rem 0;
+    border: 0;
+  }
+
+  .zg-failure-table td:nth-child(2)::before {
+    content: "Risk: ";
+    color: var(--ink-muted);
+    font-weight: 700;
+  }
+
+  .zg-failure-table td:nth-child(3)::before {
+    content: "Response: ";
+    color: var(--ink-muted);
+    font-weight: 700;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zg-toc a {
+    transition: none;
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .zg-toc,
+  .zg-article-end {
+    display: none;
+  }
+
+  .zg-system-overview {
+    background: #fff;
+    color: #000;
+  }
+
+  .zg-system-overview .zg-overview-heading p,
+  .zg-system-overview .zg-diagram figcaption {
+    color: #333;
+  }
+
+  .zg-reading-layout {
+    display: block;
+    padding: 2rem 0;
+  }
+}
