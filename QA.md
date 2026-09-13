@@ -24,6 +24,6 @@ All 12 existing portfolio routes were rebuilt or integrated into the new visual 
 The Kora sample does not execute an agent or reproduce the full native app. KS App uses an explicitly identified workflow illustration, not a hosted release. WorldBuilder remains ongoing exploration. Browser checks and source scans are not a certification of exhaustive assistive-technology support or production backend behavior. Those claims are not made by the site.
 
 ## Publication
-Local candidate accepted; publishing through the existing main-branch GitHub Pages source. Final live verification is recorded in the task result.
+Local candidate accepted and committed as d824093. Published through the existing main-branch GitHub Pages source; final live verification is recorded in the task result.
 
 Final local pass: all12 routes fit320/390/1440px. Zube diagram width corrected to container width; long-form spacing tightened while preserving content. KS project selection/search/no-results/draft/task/activity/reset verified. Kora iframe loads. Menu Escape returns focus, reduced-motion emulation gives0s transitions and auto scrolling; tablet768px homepage inspected. Viewport/media emulation restored.

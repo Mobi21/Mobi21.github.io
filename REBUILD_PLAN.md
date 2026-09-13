@@ -1,6 +1,6 @@
 # Portfolio rebuild — implementation plan
 
-Status: implementation complete; local acceptance passed; publication in progress.
+Status: implemented and locally verified. Deployment verification is recorded in the task result.
 Owner: primary Codex agent, with bounded independent project and QA audits.
 Site: https://mobolaji.builtbykora.com
 
