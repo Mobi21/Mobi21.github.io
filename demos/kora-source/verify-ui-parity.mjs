@@ -1,0 +1,3 @@
+import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
+const base=process.argv[2];if(!base)throw new Error('Usage: node verify-ui-parity.mjs <original apps/gui/src>');
+let count=0;const differences=[];function visit(dir){for(const ent of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,ent.name);if(ent.isDirectory()){visit(file);continue;}if(ent.name.includes('.test.'))continue;const relative=path.relative(base,file),copy=path.join(import.meta.dirname,'upstream',relative);if(!fs.existsSync(copy)||!fs.readFileSync(file).equals(fs.readFileSync(copy)))differences.push(relative);count++;}}visit(base);console.log(JSON.stringify({filesChecked:count,differences},null,2));if(differences.length)process.exitCode=1;

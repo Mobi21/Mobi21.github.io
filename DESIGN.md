@@ -10,7 +10,7 @@ Self-hosted variable Onest, 100–900; SIL OFL included. Ordinary prose16px mini
 1360px max shell, 40px desktop edges,16px phone edges. Header88px desktop/72px mobile. Breakpoints1100/800/600px. Main home two-column intro/product arrangement collapses to a compact intro followed by product at phone widths. Feature treatments differentiated by product. Corner radii6–12px. Action controls44–48px, subtle translate/color feedback. No shadows layered onto bordered cards.
 
 ## Behavior
-Native links and buttons; visible3px focus outlines. Mobile navigation supports Escape/outside click and no-JS fallback. Reduced motion removes movement. Kora iframe loads on explicit interaction, with standalone link. KS illustration supports local project selection/search/task review/draft/activity/reset. No sample action sends data.
+Native links and buttons; visible3px focus outlines. Mobile navigation supports Escape/outside click and no-JS fallback. Reduced motion removes movement. Kora iframe loads on explicit interaction, with standalone link. Its renderer is the complete pinned public application: preserve its original shell, routes and styles, with fixture adapters underneath. No alternative portfolio panes. Full replacement preview QA is ongoing. KS illustration supports local project selection/search/task review/draft/activity/reset. No sample action sends data.
 
 ## Reading
 Shared nav/footer/font on all articles. Long-form diagrams retain their specific visual systems; mobile alternatives preserve their information. Text and controls must meet contrast targets and remain usable at320px and enlarged text. Do not infer completion from source scans alone: inspect the rendered pages.

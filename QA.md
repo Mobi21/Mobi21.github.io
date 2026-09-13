@@ -1,5 +1,8 @@
 # Portfolio rebuild verification — September 13, 2026
 
+## Current Kora correction
+The reduced Kora demo described in the historical results below was rejected. The replacement now mounts the full unchanged production App, providers, routes and styles from pinned public commit 2276bbdf996ad081ea2622801121a97ee8a65499. Separate fixture adapters supply sample data. It is not the latest dirty private checkout. Full replacement browser verification is ongoing; earlier reduced-demo screenshots, interaction checks and publication do not qualify the replacement. See demos/kora-source/QA.md.
+
 ## Scope
 All 12 existing portfolio routes were rebuilt or integrated into the new visual system. Eight core pages are generated, four articles retain their authored content and diagrams. The separate Kora Studio business site was not changed.
 
@@ -11,7 +14,7 @@ All 12 existing portfolio routes were rebuilt or integrated into the new visual 
 - External public project/studio/client links returned HTTP 200 during verification.
 - Demo production build passes. Source revision, third-party notices, build instructions, and detailed demo QA are retained under demos/kora-source.
 
-## Visual and interaction review
+## Historical visual and interaction review (initial publication)
 - Independent source typography review and isolated mechanical scan were reconciled with browser findings.
 - Desktop 1440px and phones 390/320px sampled across all routes. Screenshots retained locally under output/qa (excluded from publication).
 - Mobile homepage reaches first product image around541px at390px, versus1675px before rebuild.
@@ -21,9 +24,13 @@ All 12 existing portfolio routes were rebuilt or integrated into the new visual 
 - Article font requests are local; titles use compact mobile sizes; diagrams retain mobile text alternatives and contained table/code scrolling.
 
 ## Limits
-The Kora sample does not execute an agent or reproduce the full native app. KS App uses an explicitly identified workflow illustration, not a hosted release. WorldBuilder remains ongoing exploration. Browser checks and source scans are not a certification of exhaustive assistive-technology support or production backend behavior. Those claims are not made by the site.
+The current Kora preview renders the full pinned public UI but does not execute the native backend or a live agent. KS App uses an explicitly identified workflow illustration, not a hosted release. WorldBuilder remains ongoing exploration. Browser checks and source scans are not a certification of exhaustive assistive-technology support or production backend behavior. Those claims are not made by the site.
 
 ## Publication
 Local candidate accepted and committed as d824093. Published through the existing main-branch GitHub Pages source; final live verification is recorded in the task result.
 
 Final local pass: all12 routes fit320/390/1440px. Zube diagram width corrected to container width; long-form spacing tightened while preserving content. KS project selection/search/no-results/draft/task/activity/reset verified. Kora iframe loads. Menu Escape returns focus, reduced-motion emulation gives0s transitions and auto scrolling; tablet768px homepage inspected. Viewport/media emulation restored.
+
+## Real Kora replacement verification
+
+The full public App now mounts unchanged. Browser review covered all main workspaces and settings categories, project task creation, session switching, explicit live-AI unavailability, desktop/phone rendering and navigation inside the portfolio iframe. See demos/kora-source/QA.md for the exact scope and limitations. The portfolio now uses assets/projects/kora-real-workspace.png.

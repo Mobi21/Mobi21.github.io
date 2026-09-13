@@ -14,7 +14,7 @@ Introduce the person directly. Show work early. Lead with Kora, KS App, and deli
 
 ## Evidence boundaries
 - Kora has public source at github.com/korastudios/Kora. Pi supplies the open-source agent foundation; Mobolaji built the surrounding personal context/tools/product/runtime integrations.
-- Static Kora demo vendors public commit 2276bbdf996ad081ea2622801121a97ee8a65499. Production ProjectsWorkspace is reused; shell, conversations, Brain, and details are bounded adaptations. All data is fictional and ephemeral. Prepared conversations are illustrative, not recorded agent runs. No live AI/provider/native runtime runs in the demo.
+- Static Kora demo vendors public commit 2276bbdf996ad081ea2622801121a97ee8a65499. The full production App, providers, route tree, shell and styles are retained byte-for-byte; separate adapters supply fictional data. This is the pinned public revision, not the latest dirty private checkout. Browser qualification of the replacement is ongoing. No live AI/provider/native runtime runs in the demo.
 - Kora's changing-week evaluation harness is implemented and under development. Do not claim rival-agent wins or finished qualification.
 - KS App source implements shared permission-controlled services, skills/tools, durable conversations/workflows, approvals and action identities. It is not ready to sell. Portfolio workflow is an explicitly labeled illustration, not actual UI or live AI. Standalone Inbox was canceled.
 - WorldBuilder's current Seed-to-Frame/domain/durable state work is incomplete. Do not revive historical 511-test or finished generation claims.

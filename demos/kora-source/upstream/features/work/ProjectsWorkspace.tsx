@@ -398,7 +398,7 @@ function NewGoal({ open, onOpenChange, onPlanWithKora, services }: { open: boole
             ? `Help me shape this Project and identify the first useful Tasks. Current draft:\n\nProject: ${title.trim() || "Not named yet"}\nOutcome: ${purpose.trim() || "Not described yet"}${area.trim() ? `\nArea: ${area.trim()}` : ""}${targetDate ? `\nTarget date: ${targetDate}` : ""}`
             : "Help me shape a new Project and identify the first useful Tasks.";
           reset(); onOpenChange(false); onPlanWithKora(draft);
-        }}><Sparkles size={15} aria-hidden="true" />View conversation example</Button>
+        }}><Sparkles size={15} aria-hidden="true" />Plan with Kora</Button>
         <span />
         <Button type="button" tone="secondary" onClick={close}>Cancel</Button>
         <Button type="submit" tone="primary" loading={create.isPending}><Plus size={15} aria-hidden="true" />Create Project</Button>

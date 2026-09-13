@@ -33,7 +33,7 @@ document.querySelectorAll("[data-load-demo]").forEach((button) =>
     const frame = document.createElement("iframe");
     frame.src = container.dataset.embed;
     frame.title = "Kora interactive sample with fictional data";
-    frame.sandbox = "allow-scripts allow-same-origin";
+    frame.sandbox = "allow-scripts allow-same-origin allow-downloads";
     container.replaceChildren(frame);
     frame.addEventListener("load", () => frame.focus(), { once: true });
   }),

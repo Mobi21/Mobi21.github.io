@@ -39,7 +39,7 @@ The user delegates design and implementation decisions and explicitly requests s
 ### 4. Kora — /projects/kora/
 
 - Before implementation, independent subagent deep dive into current/public React UI, native bridge, runtime boundaries, assets, license, and build constraints.
-- Determine whether the real UI can build as a static browser application backed by deterministic synthetic fixtures. Prefer a small adapter or bounded extraction over a visual imitation.
+- Determine whether the real UI can build as a static browser application backed by deterministic synthetic fixtures. Use the full unchanged production App, routes and styles with a fixture adapter; do not extract a reduced shell or author replacement panes.
 - If feasible, embed the isolated demo lazily with an open-fullscreen option, keyboard access, reset, clear synthetic-data labeling, and functional navigation. Do not connect providers, native APIs, real accounts, or credentials. Preserve upstream attribution.
 - If reuse would be disproportionately invasive, use actual product screenshots and a narrowly scoped honest interactive tour; document the decision instead of implying UI reuse.
 - Present public GitHub prominently. Explain personal contribution around Pi, local state, tools/skills, retrieval, and shared surfaces.
@@ -115,6 +115,6 @@ For each project: inspect AGENTS.md and relevant README/product docs; trace code
 - Kora UI-reuse audit and KS App/WorldBuilder content audits dispatched.
 
 - Rebuilt eight core pages and integrated all four articles with the shared design.
-- Kora static sample ships with production Work components and bounded adapted panes.
+- Earlier reduced Kora sample was rejected. Replacement mounts the full unchanged pinned public application; source parity and full route/browser qualification are in progress.
 - Independent content, mechanical typography, and rendered desktop/mobile audits completed; material findings corrected.
 - Current resume synchronized; local checks pass. Publishing through existing main-branch GitHub Pages source.

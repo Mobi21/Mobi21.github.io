@@ -1,11 +1,30 @@
-# Browser verification — 2026-09-13
+# Full Kora application verification — September 13, 2026
 
-Built production assets and served repository root on loopback port 5198. Inspected Chrome through CUA.
+## Current candidate
 
-Verified production Work page renders synthetic records; cards view changes and shows linked next action; project link opens adapted detail; complete/reopen action changes task state; add task appears immediately; production new-project form creates a local project and opens its detail; prepared conversation examples switch; Brain search accepts query; responsive Brain and Conversation layouts inspected at 390px; corrected rail overflow at 320px and confirmed document scrollWidth equals viewport width. Browser application produced no errors; unrelated Grammarly extension warnings appeared during form testing.
+The actual public App, entrypoint, providers, route tree and styles now run against fixture adapters. Full browser route review and representative interaction checks completed on September 13, 2026. Build success alone does not establish route/data correctness.
 
-Built JavaScript scan found none of the real runtime connection strings: /__kora/, prepare_runtime, runtime_unreachable, x-kora-review-key, api.openai.com, or localhost runtime URLs. Published CSP sets connect-src none. QA did not exercise every optional field in the upstream project form, every board stage, or keyboard/screen-reader behavior exhaustively. The upstream controls retain their existing focus and accessible semantics.
+The source baseline is public commit 2276bbdf996ad081ea2622801121a97ee8a65499, not the dirty private checkout. `verify-ui-parity.mjs` compares every non-test source file byte-for-byte. Fixture adapters are separate from upstream.
 
-Changes are fixture-only and ephemeral. No production data or native backend was used.
+## Historical checks — superseded reduced demo
 
-Final audit: verified board stage mutation (dinner Planned to In progress), project query filtering, cards/list view switching, filter sheet open/close, reset, and connected conversation disclosure. Chrome CDP observed only same-origin document/script/style/font resources on reload (plus installed extension resources); zero network requests during reset and conversation interactions. Captured 1280×820 demo conversation and production Work cards screenshots. Fixed project detail status labeling for paused/idea states.
+An earlier reduced shell was tested for cards, project creation, task edits, search, prepared conversations and phone widths. It also received static-only network inspection. The user rejected that implementation. Those results and its conversation/work screenshots are historical only and must not be cited as full-application verification.
+
+## Browser verification
+
+- Rendered Work overview, projects, tasks, timeline, archive, project detail and task detail; Brain home, memory, pages, people, sources and created outputs; Calendar; Life overview, Today, all Money and Wellbeing pages, About You; every settings category; and Conversation.
+- Created a task through the original Add Work dialog and confirmed it appeared in the original project table.
+- Switched from Lisbon to Portfolio using the original conversation manager and confirmed the title and transcript changed.
+- Submitted a message through the original composer; it displayed the explicit static-runtime limitation without inventing an AI response.
+- Fixed a Money summary response mismatch and a relative runtime import escaping the transport alias, then rechecked both flows.
+- Inspected original Work at desktop 1440px and phone 390px. The mobile Work navigation and stacked layout are retained from upstream.
+- Loaded the full application inside the portfolio iframe; used its original navigation to reach Brain, including keyboard activation.
+- Replaced the portfolio cover with a screenshot of the real Work screen (assets/projects/kora-real-workspace.png).
+
+These checks establish full UI inclusion and representative fixture behavior, not live backend parity. Model execution, authentication, provider sync, native windows, and external actions require the installed application. Sample records reset when the app reloads. Browser presentation settings and unsent drafts use the original local browser persistence.
+
+## Current mechanical checks
+- Source parity: 300 non-test files checked against public apps/gui/src; zero differences.
+- Fixture TypeScript suite passed with ES2022, bundler resolution, DOM libs and vite/client types across fixture.ts, brain-life-fixture.ts, work-calendar-fixture.ts, settings-fixture.ts and desktop.ts. Initial invocation without vite/client reported ImportMeta.env; adding the build environment types resolved it.
+- Production build passed after correcting aliases to resolve absolute module identity from importer paths, covering both ../lib/runtime and ./runtime imports.
+- Final bundle scan has no native connection implementation markers (native runtime is not connected, prepare_runtime, x-kora-review-key, /__kora/). The review_gateway_unreachable identifier remains in a production UI error-label mapping, not transport code. Browser session switching and the Money overview passed after these corrections.

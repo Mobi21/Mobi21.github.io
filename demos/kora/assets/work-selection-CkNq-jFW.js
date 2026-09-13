@@ -1,0 +1,1 @@
+function e(e){return e.flatMap(e=>[e.item,...e.children.items])}function t(e){return e.find(e=>e.kind!==`milestone`&&e.state===`active`)??e.find(e=>e.kind!==`milestone`&&e.state===`planned`)??e.find(e=>e.kind!==`milestone`&&e.state===`blocked`)}export{t as n,e as t};
