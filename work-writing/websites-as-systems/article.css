@@ -9,10 +9,10 @@
 }
 
 .systems-hero {
-  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 4.75rem);
+  padding-block: clamp(1.5rem, 4vw, 3rem) 2.5rem;
 }
 
-.systems-hero .breadcrumb { margin-bottom: clamp(2.5rem, 6vw, 5rem); }
+.systems-hero .breadcrumb { margin-bottom: 1.5rem; }
 
 .systems-hero-grid {
   display: grid;
@@ -20,10 +20,10 @@
 }
 
 .systems-hero h1 {
-  max-width: 13ch;
+  max-width: 17ch;
   margin-top: 1rem;
-  font-size: clamp(2.75rem, 6.8vw, 5.25rem);
-  line-height: 1.01;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.06;
   letter-spacing: -0.035em;
 }
 
@@ -48,17 +48,17 @@
 
 .systems-thesis {
   max-width: 72rem;
-  margin-top: clamp(2.5rem, 6vw, 5rem);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
   border: 1px solid var(--line-strong);
   background: var(--systems-field);
 }
 
 .systems-thesis p {
   max-width: 58rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.45rem, 3vw, 2.3rem);
-  line-height: 1.28;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.6;
   letter-spacing: -0.018em;
 }
 
@@ -106,12 +106,12 @@
 .systems-prose > section {
   display: grid;
   gap: 1.25rem;
-  padding-block: clamp(3rem, 7vw, 5.5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
   border-bottom: 1px solid var(--line);
   scroll-margin-top: 5.5rem;
 }
 
-.systems-prose > section:first-child { padding-top: clamp(2.75rem, 6vw, 4.5rem); }
+.systems-prose > section:first-child { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 
 .systems-prose p,
 .systems-prose li {
@@ -127,7 +127,7 @@
 .article-opening h2,
 .section-heading h2 {
   max-width: 24ch;
-  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
@@ -181,7 +181,7 @@
 .svg-node text,
 .spectrum-stop text {
   fill: #10213d;
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 700;
   text-anchor: middle;
@@ -210,7 +210,7 @@
 .svg-branch-label,
 .spectrum-axis {
   fill: #5f6f79;
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   font-size: 12px;
   text-anchor: middle;
 }
@@ -379,7 +379,7 @@
 }
 
 @media (min-width: 44rem) {
-  .systems-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr); align-items: end; }
+  .systems-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr); align-items: start; }
   .operation-list article { grid-template-columns: 9rem 1fr; gap: 1.5rem; }
   .operation-list h3 { grid-column: 1; }
   .operation-list p { grid-column: 2; }
@@ -391,7 +391,7 @@
 }
 
 @media (max-width: 43.99rem) {
-  .systems-hero h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); overflow-wrap: anywhere; }
+  .systems-hero h1 { font-size: clamp(2.1rem, 9vw, 3rem); overflow-wrap: anywhere; }
   .diagram-canvas { display: none; }
   .systems-diagram figcaption { margin-top: 0; }
   .diagram-transcript { margin-top: 0.75rem; }

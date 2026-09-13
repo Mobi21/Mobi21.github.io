@@ -1,0 +1,38 @@
+@layer components {
+  .tooltip-specimen { min-height: 100dvh; background: var(--layer-canvas); color: var(--carbon); }
+  .tooltip-specimen__drag { min-width: 0; }
+  .tooltip-specimen__main { min-height: 0; overflow: auto; }
+  .tooltip-specimen__fixtures { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .tooltip-specimen__fixtures button {
+    min-height: var(--control-sm);
+    padding: 0 var(--space-2);
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+  }
+  .tooltip-specimen__fixtures button[data-selected] { background: var(--selection-soft); color: var(--carbon); }
+  .tooltip-specimen__stage {
+    position: relative;
+    display: flex;
+    min-height: min(420px, calc(100dvh - 300px));
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--hairline);
+  }
+  .tooltip-specimen__notice { position: absolute; bottom: var(--space-3); display: flex; align-items: center; gap: var(--space-2); color: var(--muted); font-size: var(--text-meta); }
+  .tooltip-specimen__stage[data-edge="top"] .tooltip-specimen__trigger,
+  .tooltip-specimen__stage[data-edge="right"] .tooltip-specimen__trigger,
+  .tooltip-specimen__stage[data-edge="bottom"] .tooltip-specimen__trigger,
+  .tooltip-specimen__stage[data-edge="left"] .tooltip-specimen__trigger { position: fixed; z-index: var(--z-sticky); }
+  .tooltip-specimen__stage[data-edge="top"] .tooltip-specimen__trigger { top: calc(var(--window-bar-height) + var(--space-2)); left: 50%; transform: translateX(-50%); }
+  .tooltip-specimen__stage[data-edge="right"] .tooltip-specimen__trigger { top: 50%; right: var(--space-2); transform: translateY(-50%); }
+  .tooltip-specimen__stage[data-edge="bottom"] .tooltip-specimen__trigger { bottom: var(--space-2); left: 50%; transform: translateX(-50%); }
+  .tooltip-specimen__stage[data-edge="left"] .tooltip-specimen__trigger { top: 50%; left: var(--space-2); transform: translateY(-50%); }
+  @media (max-width: 720px) {
+    .tooltip-specimen__stage { min-height: 300px; }
+    .tooltip-specimen__fixtures button { min-height: var(--coarse-target); }
+  }
+}

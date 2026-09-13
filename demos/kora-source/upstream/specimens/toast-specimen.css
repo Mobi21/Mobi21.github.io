@@ -1,0 +1,24 @@
+@layer components {
+  .toast-specimen { min-height: 100dvh; background: var(--layer-canvas); color: var(--carbon); }
+  .toast-specimen__drag { min-width: 0; }
+  .toast-specimen__main { min-height: 0; overflow: auto; }
+  .toast-specimen__fixtures { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .toast-specimen__fixtures button {
+    min-height: var(--control-sm);
+    padding: 0 var(--space-2);
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+  }
+  .toast-specimen__fixtures button[data-selected] { background: var(--selection-soft); color: var(--carbon); }
+  .toast-specimen__stage { display: grid; max-width: 64ch; gap: var(--space-3); padding-top: var(--space-5); }
+  .toast-specimen__stage p { margin: 0; color: var(--graphite); }
+  .toast-specimen__stage [role="status"] { color: var(--carbon); }
+  .toast-specimen__hint { font-size: var(--text-meta); }
+  @media (max-width: 720px) {
+    .toast-specimen__fixtures button { min-height: var(--coarse-target); }
+  }
+}

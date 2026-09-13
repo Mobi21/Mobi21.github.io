@@ -1,0 +1,39 @@
+@layer components {
+  .menu-specimen { min-height: 100dvh; background: var(--layer-canvas); color: var(--carbon); }
+  .menu-specimen__drag { min-width: 0; }
+  .menu-specimen__main { min-height: 0; overflow: auto; }
+  .menu-specimen__fixtures { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .menu-specimen__fixtures button {
+    min-height: var(--control-sm);
+    padding: 0 var(--space-2);
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+  }
+  .menu-specimen__fixtures button[data-selected] { background: var(--selection-soft); color: var(--carbon); }
+  .menu-specimen__stage {
+    position: relative;
+    display: flex;
+    min-height: min(420px, calc(100dvh - 300px));
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--hairline);
+  }
+  .menu-specimen__trigger { gap: var(--space-2); }
+  .menu-specimen__notice { position: absolute; bottom: var(--space-3); display: flex; align-items: center; gap: var(--space-2); color: var(--muted); font-size: var(--text-meta); }
+  .menu-specimen__stage[data-edge="top"] .menu-specimen__trigger,
+  .menu-specimen__stage[data-edge="right"] .menu-specimen__trigger,
+  .menu-specimen__stage[data-edge="bottom"] .menu-specimen__trigger,
+  .menu-specimen__stage[data-edge="left"] .menu-specimen__trigger { position: fixed; z-index: var(--z-sticky); }
+  .menu-specimen__stage[data-edge="top"] .menu-specimen__trigger { top: calc(var(--window-bar-height) + var(--space-2)); left: 50%; transform: translateX(-50%); }
+  .menu-specimen__stage[data-edge="right"] .menu-specimen__trigger { top: 50%; right: var(--space-2); transform: translateY(-50%); }
+  .menu-specimen__stage[data-edge="bottom"] .menu-specimen__trigger { bottom: var(--space-2); left: 50%; transform: translateX(-50%); }
+  .menu-specimen__stage[data-edge="left"] .menu-specimen__trigger { top: 50%; left: var(--space-2); transform: translateY(-50%); }
+  @media (max-width: 720px) {
+    .menu-specimen__stage { min-height: 300px; }
+    .menu-specimen__fixtures button { min-height: var(--coarse-target); }
+  }
+}

@@ -1,0 +1,112 @@
+@layer features {
+  .settings-capability-layout {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    grid-template-columns: 224px minmax(0, 1fr);
+    background: var(--layer-canvas);
+  }
+
+  .settings-capability-layout:has(.k-workspace-local-nav[data-collapsed="true"]) { grid-template-columns: 56px minmax(0, 1fr); }
+
+  .settings-capability-layout__navigation {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border-right: 1px solid var(--hairline);
+    background: var(--layer-chrome);
+  }
+
+  .settings-capability-layout__stage {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    overscroll-behavior: contain;
+    scrollbar-color: var(--hairline-strong) transparent;
+  }
+
+  @media (max-width: 999px) {
+    .settings-capability-layout { grid-template-columns: minmax(0, 1fr); }
+    .settings-capability-layout__navigation { display: none; }
+  }
+
+  @media (min-width: 1000px) and (max-width: 1180px) {
+    .settings-capability-layout__stage > .k-page-frame__local-nav-bar { display: none; }
+  }
+
+  .k-settings-frame { width: 100%; height: 100%; min-width: 0; min-height: 0; }
+  .k-settings-frame .k-page-frame__content { max-width: calc(72rem + 2 * var(--page-gutter)); margin-inline: 0 auto; gap: var(--space-6); align-content: start; }
+
+  /* Settings groups carry the surface; their contents retain the shared
+     controls and use one quiet inset rather than a stack of border rows. */
+  .k-settings-frame .k-settings-section {
+    min-width: 0;
+    margin: 0;
+    padding: var(--space-5);
+    gap: var(--space-4);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-panel);
+    background: var(--layer-raised);
+  }
+  .k-settings-frame .k-settings-section + .k-settings-section { margin-top: var(--space-4); }
+  .k-settings-frame .k-settings-section .k-page-section__header { min-width: 0; }
+  .k-settings-frame .k-settings-section .k-page-section__description { max-width: 65ch; }
+  .k-settings-frame .k-settings-section[data-layout="split"] {
+    grid-template-columns: minmax(10rem, .9fr) minmax(0, 3fr);
+    column-gap: var(--space-7);
+  }
+  .k-settings-frame .k-settings-section[data-layout="split"] .k-page-section__header { padding-top: var(--space-1); }
+
+  .k-settings-list { display: grid; gap: var(--space-2); min-width: 0; }
+  .k-settings-list > .k-item {
+    min-width: 0;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-control);
+    background: var(--layer-canvas);
+  }
+  .k-settings-list > .k-item:hover { border-color: var(--hairline-strong); }
+  .k-settings-list .k-item__primary { min-height: var(--row-double); padding: var(--space-3); align-items: flex-start; }
+  .k-settings-list .k-item__copy > strong { white-space: normal; overflow-wrap: anywhere; }
+  .k-settings-list .k-item__description { white-space: normal; overflow-wrap: anywhere; }
+  .k-settings-frame .k-settings-section[data-layout="split"] .k-settings-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  }
+  .k-settings-frame .k-page-header__breadcrumb .settings-back-link { margin-bottom: 0; }
+  .settings-preference { display: grid; grid-template-columns: minmax(10rem, 1fr) minmax(0, 3fr); align-items: start; gap: var(--space-6); padding-block: var(--space-3); }
+  .settings-preference__identity { display: grid; gap: var(--space-2); min-width: 0; }
+  .settings-preference__identity h2 { margin: 0; font-size: var(--text-body); font-weight: var(--weight-strong); line-height: var(--leading-body); }
+  .settings-preference__identity p { margin: 0; max-width: 45ch; color: var(--graphite); font-size: var(--text-meta); line-height: var(--leading-meta); }
+  .settings-preference__control { min-width: 0; display: grid; gap: var(--space-3); justify-items: stretch; }
+  .settings-preference__control > .k-segmented { justify-self: start; }
+
+  /* Schematic previews communicate appearance choices without fake app data. */
+  .appearance-preview { display: grid; width: 100%; height: 6rem; grid-template-columns: 22% 1fr; overflow: hidden; border: 1px solid var(--hairline); border-radius: var(--radius-control); background: Canvas; color: CanvasText; }
+  .appearance-preview[data-theme-preview="light"] { color-scheme: light; }
+  .appearance-preview[data-theme-preview="dark"] { color-scheme: dark; }
+  .appearance-preview[data-theme-preview="system"] { color-scheme: light dark; }
+  .appearance-preview[data-density-preview] { background: var(--layer-canvas); color: var(--graphite); }
+  .appearance-preview__rail { display: grid; align-content: start; gap: var(--space-2); padding: var(--space-3) var(--space-2); background: color-mix(in srgb, currentColor 8%, transparent); }
+  .appearance-preview__rail i { height: var(--space-1); border-radius: var(--radius-hair); background: currentColor; opacity: .25; }
+  .appearance-preview__page { display: grid; align-content: start; gap: var(--space-3); padding: var(--space-3); }
+  .appearance-preview__page > b { width: 42%; height: var(--space-1); border-radius: var(--radius-hair); background: currentColor; opacity: .6; }
+  .appearance-preview__page > span { display: grid; gap: var(--space-2); }
+  .appearance-preview__page i { height: var(--space-1); width: 85%; background: currentColor; opacity: .15; border-radius: var(--radius-hair); }
+  .appearance-preview__page i:nth-child(2) { width: 65%; }
+  .appearance-preview[data-density-preview="compact"] .appearance-preview__page > span { gap: var(--space-1); }
+  @media (max-width: 1100px) {
+    .settings-preference { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+    .k-settings-frame .k-page-frame__content { gap: var(--space-5); }
+    .k-settings-frame .k-settings-section[data-layout="split"] { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-3); }
+    .k-settings-frame .k-settings-section[data-layout="split"] .k-page-section__header { padding-top: 0; }
+  }
+  @media (max-width: 759px) {
+    .k-settings-frame .k-settings-section { padding: var(--space-4); }
+    .k-settings-frame .k-settings-section[data-layout="split"] .k-settings-list { grid-template-columns: minmax(0, 1fr); }
+  }
+}

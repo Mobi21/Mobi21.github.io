@@ -1,0 +1,25 @@
+{
+  "command": "copy_troubleshooting_details",
+  "args": {
+    "details": {
+      "phase": "degraded",
+      "observedAt": "2026-08-19T20:00:00Z",
+      "storageState": "attention",
+      "storageIntegrity": "failed",
+      "storageLastCheckedAt": "2026-08-19T19:59:00Z",
+      "schemaVersion": 35,
+      "modelCredentialState": "configured",
+      "integrationsConnected": 2,
+      "integrationsNeedsAttention": 1,
+      "runtimeBuild": "0.1.0",
+      "revision": 4,
+      "windowsVersion": "11.0.26100",
+      "webviewVersion": "140.0.3485.54",
+      "currentError": {
+        "code": "storage_integrity_failed",
+        "message": "Local data needs attention.",
+        "requestId": "request-1"
+      }
+    }
+  }
+}

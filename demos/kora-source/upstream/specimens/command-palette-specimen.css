@@ -1,0 +1,20 @@
+@layer components {
+  .command-palette-specimen { min-height: 100dvh; background: var(--layer-canvas); color: var(--carbon); }
+  .command-palette-specimen__drag { min-width: 0; }
+  .command-palette-specimen__main { min-height: 0; overflow: auto; }
+  .command-palette-specimen__ledger {
+    display: grid;
+    grid-template-columns: minmax(120px, .6fr) minmax(240px, 2fr) minmax(100px, .5fr);
+    min-height: 54px;
+    align-items: center;
+    gap: var(--space-3);
+    border-block: 1px solid var(--hairline);
+    color: var(--muted);
+    font-size: var(--text-label);
+  }
+  .command-palette-specimen__ledger strong { color: var(--carbon); font-weight: var(--weight-medium); }
+  .command-palette-specimen [role="status"] { color: var(--muted); font-size: var(--text-meta); }
+  @media (max-width: 720px) {
+    .command-palette-specimen__ledger { grid-template-columns: 1fr; padding-block: var(--space-3); }
+  }
+}

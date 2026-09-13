@@ -1,40 +1,16 @@
-# Portfolio design system
+# Design
 
 ## Direction
-
-The site is a calm, light, recruiter-first personal portfolio that shares Kora Studio's editorial restraint without copying its marketing layout. The information architecture remains Home, Projects, Work & Writing, and About. Short recruiter-facing summaries come first, with technical depth on dedicated pages.
-
-The visual system avoids generic developer-portfolio tropes: no near-black canvas, neon accent, glass panels, gradients, fake dashboards, tag clouds, or repetitive card grids. Real product screenshots and client work provide the visual interest.
+Approachable, precise, hands-on. A personal product portfolio with a compact introduction beside a substantial Kora preview; immediately accessible work, then the person and engineering details. White canvas for daytime reading, navy text, committed blue Kora field, sage KS preview, orange client-work field. Product visuals carry identity. No huge serif preambles, test-score panels, fake live demos, decorative gradients, or repeated marketing icon cards.
 
 ## Typography
+Self-hosted variable Onest, 100–900; SIL OFL included. Ordinary prose16px minimum on mobile, articles17px desktop. Headings550–680 weight; fluid hero sizes34–76px, no tighter than -.04em. Reading measures68–75ch; introductory lines deliberately shorter. Metadata12–14px. Product previews may contain small source UI text but have readable surrounding explanations.
 
-- Display: Marcellus, weight 400, for a composed editorial voice connected to Kora Studio.
-- Interface and body: Manrope, weights 400–700.
-- Small labels are uppercase Manrope with measured tracking; monospace is reserved for literal code samples.
-- Body copy is at least 16px with generous leading. Display type is fluid but deliberately smaller than the previous oversized treatment.
+## Components and composition
+1360px max shell, 40px desktop edges,16px phone edges. Header88px desktop/72px mobile. Breakpoints1100/800/600px. Main home two-column intro/product arrangement collapses to a compact intro followed by product at phone widths. Feature treatments differentiated by product. Corner radii6–12px. Action controls44–48px, subtle translate/color feedback. No shadows layered onto bordered cards.
 
-## Color
+## Behavior
+Native links and buttons; visible3px focus outlines. Mobile navigation supports Escape/outside click and no-JS fallback. Reduced motion removes movement. Kora iframe loads on explicit interaction, with standalone link. KS illustration supports local project selection/search/task review/draft/activity/reset. No sample action sends data.
 
-- Canvas: warm mineral white `#f4f6f2`.
-- Primary ink: deep blue `#10213d`.
-- Supporting text: softened blue-gray.
-- Accent: restrained slate blue `#294f73`.
-- Raised editorial fields use pale blue-gray or eucalyptus-tinted neutrals.
-- Color is sparse. Product and client artifacts carry most of the palette.
-
-## Composition
-
-- Maximum shell width: 74rem.
-- The homepage hero uses an editorial two-column composition on large screens and a direct single-column flow on small screens.
-- Major work is organized with hairlines, space, and one quiet lead-project field—not rows of identical cards.
-- Borders are thin, corners are subtle, and hover changes are functional rather than decorative.
-- Buttons use compact framed geometry inspired by Kora Studio's restraint while remaining clearly personal to Mobolaji.
-
-## Accessibility and responsiveness
-
-- Navigation collapses below 40rem and maintains 44px minimum targets.
-- The site remains usable at 320px and at 400% zoom.
-- Text and controls target WCAG AA contrast.
-- Focus is always visible.
-- Reduced motion removes nonessential transitions.
-- Interactive project fixtures always retain a no-JavaScript reading path.
+## Reading
+Shared nav/footer/font on all articles. Long-form diagrams retain their specific visual systems; mobile alternatives preserve their information. Text and controls must meet contrast targets and remain usable at320px and enlarged text. Do not infer completion from source scans alone: inspect the rendered pages.

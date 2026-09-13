@@ -1,0 +1,35 @@
+@layer features {
+  body { overflow: hidden; }
+  #root { width: 100vw; height: 100vh; }
+  .dialog-specimen__main { grid-area: pane; min-width: 0; min-height: 0; }
+  .dialog-specimen__drag { min-width: 24px; height: 100%; flex: 1; }
+  .dialog-specimen__fixtures { overflow: hidden; border: 1px solid var(--hairline); border-radius: var(--radius-panel); background: var(--layer-raised); }
+  .dialog-specimen__fixtures > button { display: flex; width: 100%; min-height: var(--row-single); align-items: center; justify-content: space-between; gap: var(--space-3); padding-inline: var(--space-3); border: 0; border-top: 1px solid var(--hairline); background: transparent; color: var(--carbon); font: inherit; text-align: left; }
+  .dialog-specimen__fixtures > button:first-child { border-top: 0; }
+  .dialog-specimen__fixtures > button[data-selected] { background: var(--layer-sunken); color: var(--selection); font-weight: var(--weight-medium); }
+  .dialog-specimen__fixtures small { color: var(--muted); font-size: var(--text-label); }
+  .dialog-specimen__open { margin-top: var(--space-4); }
+  .dialog-specimen__copy { color: var(--graphite); }
+  .dialog-specimen__consequence, .dialog-specimen__result, .dialog-specimen__guard, .dialog-specimen__error { display: flex; align-items: flex-start; gap: var(--space-3); }
+  .dialog-specimen__consequence > svg, .dialog-specimen__error > svg, .dialog-specimen__guard > svg { flex: 0 0 auto; color: var(--danger); }
+  .dialog-specimen__consequence p, .dialog-specimen__result p, .dialog-specimen__guard p { color: var(--graphite); }
+  .dialog-specimen__consequence strong, .dialog-specimen__result strong, .dialog-specimen__guard strong { color: var(--carbon); }
+  .dialog-specimen__result > svg { flex: 0 0 auto; color: var(--positive); }
+  .dialog-specimen__form { display: grid; gap: var(--space-4); }
+  .dialog-specimen__error { padding: var(--space-3); border-radius: var(--radius-control); background: var(--danger-soft); color: var(--danger-ink); }
+  .dialog-specimen__guard { padding: var(--space-3); border-radius: var(--radius-control); background: var(--warning-soft); }
+  .dialog-specimen__document { display: grid; gap: var(--space-5); max-width: 72ch; margin-inline: auto; }
+  .dialog-specimen__document > h3 { font-size: var(--text-section); }
+  .dialog-specimen__document section { display: grid; gap: var(--space-1); }
+  .dialog-specimen__document h4 { color: var(--carbon); }
+  .dialog-specimen__document p { color: var(--graphite); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dialog-specimen__fixtures > button:hover { background: var(--layer-sunken); }
+}
+
+@media (max-width: 679px) {
+  .dialog-specimen__fixtures small { display: none; }
+  .kora-modal__actions > .button { flex: 1 1 auto; }
+}

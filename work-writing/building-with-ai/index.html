@@ -8,11 +8,15 @@
   <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/building-with-ai/">
   <title>How I Build With AI — Mobolaji Ogunbiyi</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=399ff7a">
+  <link rel="stylesheet" href="/styles.css?v=20260913">
   <script src="/script.js" defer></script>
+
+  <meta property="og:title" content="How I Build With AI — Mobolaji Ogunbiyi">
+  <meta property="og:description" content="Mobolaji Ogunbiyi's practical workflow for using AI agents while retaining engineering judgment, review, and testing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/work-writing/building-with-ai/">
+  <meta property="og:image" content="https://mobolaji.builtbykora.com/assets/projects/kora-conversation-workspace.webp">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -21,7 +25,7 @@
       <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
       <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
-        <a href="/">Home</a><a href="/projects/">Projects</a><a href="/work-writing/" aria-current="page">Work &amp; Writing</a><a href="/about/">About</a>
+        <a href="/projects/">Work</a><a href="/about/">About</a><a href="/assets/resume.pdf">Resume</a><a href="mailto:bjfifi1@gmail.com">Contact ↗</a>
       </nav>
     </div>
   </header>
@@ -31,8 +35,8 @@
       <header class="article-hero">
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/work-writing/">Work &amp; Writing</a><span>/</span><span aria-current="page">How I build with AI</span></nav>
         <p class="piece-type">Engineering Workflow</p>
-        <h1>How I build with AI without outsourcing engineering judgment</h1>
-        <p class="article-deck">I use agents to increase the amount of grounded implementation and verification I can do—not to avoid understanding the system or deciding what “correct” means.</p>
+        <h1>Building with AI, with engineering judgment</h1>
+        <p class="article-deck">My workflow for turning agent-assisted implementation into software I can explain, review, and maintain.</p>
         <p class="article-meta">Mobolaji Ogunbiyi · Working method</p>
       </header>
 
@@ -58,7 +62,7 @@
         <section>
           <h2>Test outcomes at the level where they matter</h2>
           <p>Unit tests are useful for contracts; they are not the complete proof of a product. I combine them with integration checks, persisted-state inspection, browser verification, fixture-driven workflows, and evaluation datasets depending on the system.</p>
-          <p>That approach appears across my projects: Kora has repeatable retrieval scenarios and integrity checks, KS App exercises a month of synthetic multi-company operations, and WorldBuilder verifies durable workflow, evaluation, and bounded repair mechanics offline.</p>
+          <p>In Kora, I built a harness for changing workweek scenarios, memory, authorization, and recovery after restarts. In KS App, I trace browser and AI actions through the same permission-controlled services. Each check answers a specific question about behavior; a test count alone does not establish product quality.</p>
         </section>
 
         <section>
@@ -97,6 +101,6 @@
     </article>
   </main>
 
-  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+  <footer class="site-footer shell"><div><a class="footer-invite" href="mailto:bjfifi1@gmail.com">Let’s build something useful. <span aria-hidden="true">↗</span></a><p>Software engineering & applied AI · Graduating May 2027</p></div><div class="footer-links"><a href="/assets/resume.pdf">Resume</a><a href="https://github.com/Mobi21">GitHub</a><a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/">LinkedIn</a><a href="/work-writing/">Writing</a></div><p class="copyright">© 2026 Mobolaji Ogunbiyi · Built with care in Maryland.</p></footer>
 </body>
 </html>

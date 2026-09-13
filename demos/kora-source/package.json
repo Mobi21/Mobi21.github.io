@@ -1,0 +1,43 @@
+{
+  "name": "kora-portfolio-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node notices.mjs && vite build",
+    "dev": "vite --host 127.0.0.1 --port 5198"
+  },
+  "dependencies": {
+    "@assistant-ui/react": "^0.14.26",
+    "@base-ui/react": "1.6.0",
+    "@tanstack/react-query": "5.101.2",
+    "@tanstack/react-virtual": "3.14.8",
+    "@tauri-apps/api": "2.11.1",
+    "lucide-react": "1.24.0",
+    "motion": "12.42.2",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router-dom": "7.18.2",
+    "streamdown": "^2.5.0",
+    "temporal-polyfill": "^0.3.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/mona-sans": "^5.3.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "^14.6.6",
+    "@types/node": "^24.12.4",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "axe-core": "^4.13.0",
+    "jsdom": "29.1.1",
+    "typescript": "5.9.3",
+    "vite": "8.1.4",
+    "vitest": "4.1.11"
+  },
+  "overrides": {
+    "dompurify": "3.4.14",
+    "mermaid": "11.17.0"
+  }
+}

@@ -1,0 +1,55 @@
+﻿@layer features {
+  /* Source truth is shared across Life data surfaces. */
+  .today-source {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-2) 0 var(--space-3);
+    color: var(--graphite);
+    font-size: var(--text-label);
+    line-height: 1.4;
+  }
+
+  .today-source > svg {
+    flex: 0 0 auto;
+  }
+
+  .today-source > span {
+    min-width: 0;
+  }
+
+  .today-source--unavailable {
+    color: var(--signal);
+  }
+
+  /* The primitive emits `button button--<tone>`; `kora-button` is never rendered. */
+  .today-source .button {
+    min-height: 28px;
+    margin-left: auto;
+  }
+
+  .today-source-skeleton {
+    display: grid;
+    gap: var(--space-2);
+    width: min(360px, 100%);
+    margin: var(--space-2) 0 var(--space-3);
+  }
+
+  .today-source-skeleton span {
+    height: 8px;
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    animation: today-source-gather 1.2s ease-in-out infinite alternate;
+  }
+
+  .today-source-skeleton span:last-child {
+    width: 68%;
+  }
+
+  /* Lives here because this is the only file that uses it. Defining it in
+     today.css made the animation depend on bundle concatenation order. */
+  @keyframes today-source-gather {
+    from { opacity: .55; }
+    to { opacity: 1; }
+  }
+}

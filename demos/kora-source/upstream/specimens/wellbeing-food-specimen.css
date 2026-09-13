@@ -1,0 +1,11 @@
+html, body, #root, .wellbeing-food-specimen { width: 100%; min-width: 0; height: 100%; margin: 0; }
+.wellbeing-food-specimen { display: grid; grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; background: var(--canvas); }
+.wellbeing-food-specimen__controls { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-raised); }
+.wellbeing-food-specimen__controls > div { display: grid; gap: 1px; }
+.wellbeing-food-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+.wellbeing-food-specimen > .view-bar { position: static; }
+.wellbeing-food-specimen .wellbeing-food-workspace { min-height: 0; overflow: auto; }
+@media (max-width: 680px) {
+  .wellbeing-food-specimen__controls { align-items: flex-start; padding-block: var(--space-2); }
+  .wellbeing-food-specimen__controls > div span { display: none; }
+}

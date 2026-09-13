@@ -1,0 +1,169 @@
+@layer components {
+  .k-dense-data { display: grid; min-width: 0; align-content: start; gap: var(--space-3); container: k-collection / inline-size; }
+  .k-dense-data__selection {
+    display: flex;
+    min-height: var(--control-md);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid color-mix(in srgb, var(--assistant) 34%, var(--hairline));
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, var(--assistant) 7%, var(--layer-raised));
+    color: var(--carbon);
+    font-size: var(--text-body);
+  }
+  .k-dense-data__selection > div { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .k-dense-data__viewport {
+    min-width: 0;
+    overflow-x: auto;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-object);
+    background: var(--layer-canvas);
+    overscroll-behavior-inline: contain;
+  }
+  .k-dense-data__table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: var(--carbon);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+  }
+  .k-dense-data__table :where(th, td) {
+    min-width: 0;
+    height: var(--row-single);
+    padding: var(--space-1) var(--row-pad-x);
+    border-bottom: 1px solid color-mix(in srgb, var(--hairline) 60%, transparent);
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .k-dense-data__table thead th {
+    height: var(--control-sm);
+    padding-block: 0;
+    background: var(--layer-raised);
+    color: var(--muted);
+    font-size: var(--text-meta);
+    font-weight: var(--weight-medium);
+    letter-spacing: normal;
+  }
+  .k-dense-data__table tbody tr:last-child > * { border-bottom: 0; }
+  .k-dense-data__table tbody tr { transition: background-color var(--dur-instant) var(--ease-out); }
+  .k-dense-data__table tbody tr[data-selected] { background: color-mix(in srgb, var(--assistant) 7%, transparent); }
+  .k-dense-data__table tbody tr[data-active] { background: var(--surface); }
+  .k-dense-data__table tbody tr:focus-within { background: var(--surface); }
+  @media (hover: hover) and (pointer: fine) {
+    .k-dense-data__table tbody tr:not(.k-dense-data__skeleton-row):hover { background: var(--surface); }
+  }
+  .k-dense-data__table th[scope="row"] { font-weight: var(--weight-medium); white-space: normal; overflow-wrap: anywhere; }
+  .k-dense-data__table tbody td:not(.k-dense-data__select-cell) { color: var(--graphite); }
+  .k-dense-data__table th[scope="row"] :is(a, .k-dense-data__open) {
+    display: flex;
+    min-width: 0;
+    min-height: var(--control-sm);
+    align-items: center;
+    border-radius: var(--radius-control);
+    color: inherit;
+    text-decoration: none;
+    text-align: start;
+  }
+  .k-dense-data__open { width: 100%; padding: 0; border: 0; background: none; font: inherit; cursor: pointer; }
+  .k-dense-data__table th[scope="row"] :is(a, .k-dense-data__open):focus-visible { outline: 0; box-shadow: var(--focus); }
+  .k-dense-data__sort { display: inline-flex; min-height: var(--control-sm); align-items: center; gap: var(--space-1); padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+  .k-dense-data__sort:focus-visible { outline: 0; box-shadow: var(--focus); border-radius: var(--radius-control); }
+  .k-dense-data__compact-sort { display: none; }
+  .k-dense-data__table [data-align="end"] { text-align: right; font-variant-numeric: tabular-nums; }
+  .k-dense-data__table :where(th, td).k-dense-data__select-cell {
+    width: 48px;
+    padding-right: var(--space-1);
+    padding-left: var(--space-2);
+  }
+  .k-dense-data__compact-head,
+  .k-dense-data__compact-summary { display: none; }
+  .k-dense-data__select-column { width: 48px; }
+  .k-dense-data__compact-column { width: 0; visibility: collapse; }
+  .k-dense-data__intermediate-meta { display: none; }
+  .k-dense-data__skeleton-row span {
+    display: block;
+    width: 72%;
+    height: 12px;
+    border-radius: var(--radius-hair);
+    background: linear-gradient(90deg, var(--surface), var(--field), var(--surface));
+    background-size: 220% 100%;
+    animation: k-dense-data-loading 1.2s var(--ease-out) infinite;
+  }
+  @keyframes k-dense-data-loading { to { background-position: -220% 0; } }
+  .k-dense-data__footer {
+    display: flex;
+    min-height: var(--control-md);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    color: var(--muted);
+    font-size: var(--text-meta);
+  }
+  .k-dense-data__summary { display: grid; gap: 2px; }
+  .k-dense-data__summary > span + span { color: var(--graphite); }
+  .k-dense-data__pagination { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .k-dense-data__pagination .button[aria-disabled="true"] { cursor: default; opacity: .5; }
+  @container k-collection (max-width: 64rem) {
+    .k-dense-data__table [data-wide-only] { display: none; }
+    .k-dense-data__table col[data-wide-only] { visibility: collapse; }
+  }
+  @container k-collection (min-width: 48.01rem) and (max-width: 64rem) {
+    .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-column { width: 24ch; visibility: visible; }
+    .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-head,
+    .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-summary[data-intermediate="true"] { display: table-cell; }
+    .k-dense-data__intermediate-meta { display: block; color: var(--graphite); font-size: var(--text-meta); line-height: var(--leading-meta); white-space: normal; }
+    .k-dense-data__mobile-meta { display: none; }
+  }
+  @container k-collection (max-width: 48rem) {
+    .k-dense-data__compact-sort { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+    .k-dense-data__compact-sort .button { min-height: var(--control-sm); }
+    .k-dense-data__table colgroup { display: none; }
+    .k-dense-data__table { min-width: 0; table-layout: fixed; }
+    .k-dense-data__table thead th { display: none; }
+    .k-dense-data__table thead th:first-child,
+    .k-dense-data__table thead th.k-dense-data__select-cell + th { display: table-cell; width: auto; }
+    .k-dense-data__table thead th.k-dense-data__select-cell { width: 44px; }
+    .k-dense-data__table tbody tr > :where(th, td) {
+      display: none;
+      height: auto;
+      padding: var(--space-2);
+      white-space: normal;
+    }
+    .k-dense-data__table tbody tr > .k-dense-data__select-cell { display: table-cell; width: 44px; }
+    .k-dense-data__table tbody tr > th[scope="row"] { display: table-cell; width: auto; }
+    .k-dense-data__table th[scope="row"] :is(a, .k-dense-data__open) { min-height: var(--coarse-target); }
+    .k-dense-data__table thead th.k-dense-data__compact-head,
+    .k-dense-data__table tbody tr > .k-dense-data__compact-summary {
+      display: table-cell;
+      width: 42%;
+      color: var(--graphite);
+      font-size: var(--text-meta);
+      line-height: var(--leading-meta);
+      overflow-wrap: anywhere;
+    }
+    .k-dense-data__mobile-meta { display: inline; }
+    .k-dense-data__intermediate-meta { display: none; }
+    .k-dense-data__table tbody .k-dense-data__skeleton-row > td:first-child { display: table-cell; }
+    .k-dense-data__footer { align-items: flex-start; flex-direction: column; }
+  }
+  @media (any-pointer: coarse) {
+    .k-dense-data__table th[scope="row"] :is(a, .k-dense-data__open) { min-height: var(--coarse-target); }
+    .k-dense-data__select-cell .k-checkbox { width: var(--coarse-target); height: var(--coarse-target); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .k-dense-data__table tbody tr { transition: none; }
+    .k-dense-data__skeleton-row span { animation-duration: 1ms; animation-iteration-count: 1; }
+  }
+  @media (forced-colors: active) {
+    .k-dense-data__viewport,
+    .k-dense-data__selection { border-color: CanvasText; }
+    .k-dense-data__table tbody tr[data-selected] { outline: 2px solid Highlight; outline-offset: -2px; }
+  }
+}

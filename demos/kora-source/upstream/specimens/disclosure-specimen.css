@@ -1,0 +1,38 @@
+@layer components {
+  .disclosure-specimen { min-height: 100dvh; background: var(--layer-canvas); color: var(--carbon); }
+  .disclosure-specimen__drag { min-width: 0; }
+  .disclosure-specimen__main { min-height: 0; overflow: auto; }
+  .disclosure-specimen__fixtures { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .disclosure-specimen__fixtures button {
+    min-height: var(--control-sm);
+    padding: 0 var(--space-2);
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+  }
+  .disclosure-specimen__fixtures button[data-selected] { background: var(--selection-soft); color: var(--carbon); }
+  .disclosure-specimen__stage { display: grid; gap: var(--space-4); padding-top: var(--space-5); }
+  .disclosure-specimen__stage > .k-disclosure { width: min(100%, 840px); }
+  .disclosure-specimen__stage > .status-text { color: var(--muted); font-size: var(--text-meta); }
+  .disclosure-specimen__prose { display: grid; gap: var(--space-3); max-width: 68ch; }
+  .disclosure-specimen__prose p,
+  .disclosure-specimen__actions p { margin: 0; }
+  .disclosure-specimen__actions { display: grid; gap: var(--space-4); }
+  .disclosure-specimen__actions > div { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .disclosure-specimen__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+  .disclosure-specimen__facts > div { display: grid; gap: 2px; padding-right: var(--space-4); }
+  .disclosure-specimen__facts dt { color: var(--muted); font-size: var(--text-micro); }
+  .disclosure-specimen__facts dd { margin: 0; color: var(--carbon); font-size: var(--text-label); }
+  @media (max-width: 720px) {
+    /* Qualification chrome still affects layout-shift scoring. Two stable
+       columns keep the late UI-font swap from moving the final fixture control
+       onto a new row above the Disclosure under review. */
+    .disclosure-specimen__fixtures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .disclosure-specimen__fixtures button { width: 100%; }
+    .disclosure-specimen__fixtures button { min-height: var(--coarse-target); }
+    .disclosure-specimen__facts { grid-template-columns: 1fr; gap: var(--space-3); }
+  }
+}

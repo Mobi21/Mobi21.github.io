@@ -1,0 +1,174 @@
+@layer features {
+  /* One row, not two: the 40px sub-nav band this reserved space for now lives
+     in the sidebar. The workspace fills its pane region. */
+  .life-workspace {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+    background: var(--layer-canvas);
+  }
+
+  .life-workspace[data-has-navigation="true"] {
+    grid-template-columns: 224px minmax(0, 1fr);
+  }
+
+  .life-workspace[data-has-navigation="true"]:has(.k-workspace-local-nav[data-collapsed="true"]) {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .life-workspace__navigation {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border-right: 1px solid var(--hairline);
+    background: var(--layer-chrome);
+  }
+
+  .life-domain-nav-title {
+    display: grid;
+    gap: var(--space-1);
+    color: var(--carbon);
+    font-size: var(--text-body);
+    font-weight: var(--weight-section);
+    letter-spacing: normal;
+  }
+
+  .life-domain-nav-title > a {
+    display: inline-flex;
+    width: fit-content;
+    min-height: var(--control-sm);
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--muted);
+    font-size: var(--text-meta);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+
+  .life-domain-nav-title > a:hover { color: var(--carbon); }
+  .life-domain-nav-title > a:focus-visible { outline: 0; box-shadow: var(--focus-ring); }
+
+  .life-domain-nav-title > strong {
+    color: var(--carbon);
+    font-size: var(--text-body);
+    font-weight: var(--weight-section);
+  }
+
+  .life-domain-nav-title > small {
+    color: var(--muted);
+    font-size: var(--text-meta);
+    font-weight: var(--weight-normal);
+    line-height: var(--leading-meta);
+  }
+
+  .life-nav {
+    display: flex;
+    min-width: 0;
+    align-items: stretch;
+    gap: var(--space-1);
+    padding-inline: var(--space-3);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--layer-chrome);
+    box-shadow: inset 0 1px var(--edge-top), inset 0 -1px var(--edge-bottom);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .life-nav::-webkit-scrollbar { display: none; }
+
+  .life-nav a {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    min-width: max-content;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    color: var(--graphite);
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+
+  .life-nav a:hover,
+  .life-nav a[aria-current="page"] { color: var(--carbon); }
+  .life-nav a:active { transform: translateY(1px); }
+  .life-nav a:focus-visible { outline: 0; box-shadow: var(--focus-inset); }
+  .life-nav a > * { position: relative; z-index: var(--z-local-content); }
+
+  .life-nav a > .life-nav__active {
+    position: absolute;
+    z-index: var(--z-local-underlay);
+    inset: var(--space-1) 0 0;
+    border-radius: var(--radius-control) var(--radius-control) 0 0;
+    background: var(--surface);
+    box-shadow: inset 0 -2px var(--signal);
+  }
+
+  .life-stage {
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .life-context-strip {
+    display: none;
+    min-height: var(--control-lg);
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--layer-chrome);
+    color: var(--muted);
+    font-size: var(--text-label);
+  }
+
+  .life-context-strip a {
+    display: inline-flex;
+    min-height: var(--control-md);
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--graphite);
+    text-decoration: none;
+  }
+
+  .life-context-strip a:hover { color: var(--carbon); }
+  .life-context-strip a:focus-visible { outline: 0; box-shadow: var(--focus-ring); }
+  .life-context-strip strong { color: var(--carbon); font-weight: var(--weight-medium); }
+
+  /* Life owns one desktop navigation rail. Domain routes contribute their
+     own destinations to that same slot instead of docking a second rail or
+     switching to an unrelated tab grammar inside the page. */
+  @media (min-width: 1181px) {
+    .life-workspace[data-life-scope="wellbeing"] .wellbeing-frame[data-has-sidebar="true"] {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .life-workspace[data-life-scope="wellbeing"] .wellbeing-frame > .k-page-frame__sidebar,
+    .life-workspace[data-life-scope="money"] .life-stage .money-local-navigation {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .life-nav { padding-inline: var(--space-2); }
+    .life-nav a { padding-inline: var(--space-2); }
+  }
+
+  @media (max-width: 1180px) {
+    .life-workspace[data-has-navigation="true"] { grid-template-columns: minmax(0, 1fr); }
+    .life-workspace__navigation { display: none; }
+    .life-context-strip { display: flex; }
+    .life-workspace[data-life-scope="about-you"] .life-stage {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+  }
+
+  @media (any-pointer: coarse) {
+    .life-context-strip a { min-height: var(--coarse-target); }
+  }
+}

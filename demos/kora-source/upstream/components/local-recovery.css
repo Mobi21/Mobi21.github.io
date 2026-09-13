@@ -1,0 +1,25 @@
+@layer components {
+  .local-recovery { display: grid; gap: var(--space-4); color: var(--graphite); font-size: var(--text-label); line-height: 1.6; }
+  .local-recovery p { margin: 0; }
+  .local-recovery__callout, .local-recovery__panel {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4);
+    padding: var(--space-4); border: 1px solid var(--hairline); border-radius: var(--radius-panel); background: var(--surface);
+    text-align: left;
+  }
+  .local-recovery__callout { justify-content: flex-start; }
+  .local-recovery__callout > svg { flex: 0 0 auto; }
+  .local-recovery__callout p, .local-recovery__panel p { margin-top: var(--space-1); font-size: var(--text-micro); line-height: 1.5; }
+  .local-recovery__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .local-recovery__facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin: var(--space-3) 0; background: var(--hairline); }
+  .local-recovery__facts > div { display: grid; gap: var(--space-1); min-width: 0; padding: var(--space-3); background: var(--canvas); }
+  .local-recovery__facts span, .local-recovery__panel small { color: var(--graphite); font-size: var(--text-micro); }
+  .local-recovery__facts strong { overflow-wrap: anywhere; color: var(--carbon); }
+  .local-recovery__success { display: flex; align-items: center; gap: var(--space-1); color: var(--success); font-size: var(--text-micro); }
+  .local-recovery--startup { width: min(720px, 100%); margin-top: var(--space-5); }
+  .local-recovery--startup .local-recovery__actions { justify-content: center; }
+
+  @media (max-width: 680px) {
+    .local-recovery__panel { display: grid; }
+    .local-recovery__facts { grid-template-columns: 1fr 1fr; }
+  }
+}

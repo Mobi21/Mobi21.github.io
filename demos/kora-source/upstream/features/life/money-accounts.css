@@ -1,0 +1,118 @@
+@layer features {
+  .money-accounts-workspace { min-width: 0; min-height: 100%; }
+  .money-accounts-workspace .k-page-frame { --workspace-frame-inspector: clamp(324px, 27vw, 384px); }
+  .money-accounts-workspace .k-page-frame__content { gap: var(--space-4); container: money-accounts-stage / inline-size; }
+  .money-accounts-panels { display: grid; min-width: 0; align-items: start; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: var(--space-4); }
+  .money-accounts-panel { min-width: 0; border: 1px solid var(--hairline); border-radius: var(--radius-card); background: var(--layer-raised); box-shadow: var(--shadow-raised); overflow: hidden; }
+  .money-accounts-panel--accounts, .money-accounts-panel--sources { display: grid; align-content: start; gap: 0; }
+  .money-accounts-panels > .money-accounts-panel--sources:only-child { grid-column: 1 / -1; }
+
+  .money-accounts-coverage { display: grid; min-height: 72px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-4) var(--space-5); }
+  .money-accounts-coverage > svg { color: var(--accent); }
+  .money-accounts-coverage > div { display: grid; min-width: 0; gap: 2px; }
+  .money-accounts-coverage span, .money-accounts-coverage p { color: var(--muted); font-size: var(--text-micro); }
+  .money-accounts-coverage h2, .money-accounts-coverage p { margin: 0; }
+  .money-accounts-coverage h2 { color: var(--carbon); font-size: var(--text-body); line-height: 1.3; }
+  .money-accounts-coverage ul { display: flex; flex-wrap: wrap; justify-content: end; gap: var(--space-2) var(--space-4); margin: 0; padding: 0; color: var(--muted); font-size: var(--text-label); list-style: none; }
+  .money-accounts-coverage li { white-space: nowrap; }
+  .money-accounts-coverage li b { color: var(--carbon); font-variant-numeric: tabular-nums; }
+  .money-accounts-panel--sources:has(.money-sources) .money-accounts-coverage { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+  .money-accounts-panel--sources:has(.money-sources) .money-accounts-coverage ul,
+  .money-accounts-panel--sources:has(.money-sources) .money-accounts-coverage > .button { grid-column: 2; justify-content: start; justify-self: start; }
+  .money-accounts-notice { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-block: 1px solid var(--warning); color: var(--graphite); font-size: var(--text-label); }
+
+  .money-accounts-section { display: grid; gap: var(--space-2); }
+  .money-accounts-section > header { display: flex; min-height: 38px; align-items: start; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) var(--space-5) var(--space-2); }
+  .money-accounts-section > header > div { display: grid; gap: 2px; }
+  .money-accounts-section h2, .money-accounts-section p { margin: 0; }
+  .money-accounts-section h2 { color: var(--carbon); font-size: var(--text-body); }
+  .money-accounts-section > header p, .money-accounts-section > header > span { color: var(--muted); font-size: var(--text-micro); }
+
+  .money-source-groups { display: grid; gap: var(--space-4); }
+  .money-source-groups > section { display: grid; gap: var(--space-1); }
+  .money-source-groups h3 { margin: 0; padding-inline: var(--space-5); color: var(--muted); font-size: var(--text-label); font-weight: var(--weight-medium); }
+  .money-source-list, .money-account-list { display: grid; align-content: start; grid-auto-rows: max-content; margin: 0; padding: 0; border-top: 1px solid var(--hairline); list-style: none; }
+  .money-source-list > li, .money-account-list > li { border-bottom: 1px solid var(--hairline); }
+  .money-source-list > li:last-child, .money-account-list > li:last-child { border-bottom: 0; }
+  .money-source-row { display: grid; min-height: 58px; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: start; gap: var(--space-2) var(--space-3); padding: var(--space-3) var(--space-5); }
+  .money-source-freshness { grid-column: 2 / -1; }
+  .money-source-row .k-badge { grid-column: 3; grid-row: 1; }
+  .money-source-icon, .money-account-icon { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid var(--hairline); border-radius: var(--radius-control); color: var(--muted); }
+  .money-source-identity, .money-source-freshness, .money-account-identity, .money-account-freshness { display: grid; min-width: 0; gap: 2px; }
+  .money-source-identity strong, .money-source-freshness strong, .money-account-identity strong, .money-account-freshness strong { color: var(--carbon); font-size: var(--text-label); overflow-wrap: anywhere; white-space: normal; }
+  .money-source-identity small, .money-source-freshness small, .money-account-identity small, .money-account-freshness small { color: var(--muted); font-size: var(--text-micro); overflow-wrap: anywhere; white-space: normal; }
+  .money-source-list details { padding: 0 var(--space-5) var(--space-3) calc(var(--space-5) + 32px + var(--space-3)); }
+  .money-source-list summary, .money-account-detail summary { min-height: var(--control-md); cursor: pointer; color: var(--muted); font-size: var(--text-label); }
+  .money-source-list details dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin: var(--space-2) 0; }
+  .money-source-list details dl > div { display: grid; gap: 2px; }
+  .money-source-list details dt { color: var(--muted); font-size: var(--text-micro); }
+  .money-source-list details dd { margin: 0; overflow-wrap: anywhere; font-size: var(--text-label); }
+  .money-source-recovery { display: inline-flex; min-height: var(--coarse-target); align-items: center; padding-inline: var(--space-2); border-radius: var(--radius-control); font-size: var(--text-label); }
+
+  .money-account-list a { display: grid; min-height: 56px; grid-template-columns: 32px minmax(190px, 1fr) minmax(180px, .8fr) auto minmax(112px, auto); align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-5); border-radius: var(--radius-control); color: inherit; text-decoration: none; }
+  .money-account-list a:hover { background: var(--layer-well); }
+  .money-account-list a:active { background: var(--surface-strong); }
+  .money-account-list a:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .money-account-amount { justify-self: end; color: var(--carbon); font-weight: var(--weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .money-account-muted { color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-normal); white-space: normal; }
+  .money-accounts-panel--accounts > .k-content-state { margin: 0 var(--space-5) var(--space-5); }
+
+  .money-account-detail { display: grid; height: 100%; min-width: 0; align-content: start; gap: var(--space-5); overflow: auto; padding: var(--space-5); }
+  .money-account-detail > header { display: flex; align-items: start; justify-content: space-between; gap: var(--space-3); padding-bottom: var(--space-4); border-bottom: 1px solid var(--hairline); }
+  .money-account-detail > header > div { display: grid; min-width: 0; gap: 2px; }
+  .money-account-detail > header span, .money-account-detail dt { color: var(--muted); font-size: var(--text-label); }
+  .money-account-detail h2, .money-account-detail h3, .money-account-detail p { margin: 0; }
+  .money-account-detail h2 { overflow-wrap: anywhere; font-size: var(--text-headline); line-height: 1.2; }
+  .money-account-detail h2:focus { outline: 0; }
+  .money-account-detail h3 { font-size: var(--text-body); }
+  .money-account-detail > p, .money-account-detail > section > p { color: var(--muted); font-size: var(--text-label); line-height: 1.5; }
+  .money-account-detail__balance { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-3); border-block: 1px solid var(--hairline-strong); }
+  .money-account-detail__balance .money-account-amount { justify-self: start; font-size: var(--text-page); }
+  .money-account-detail__facts, .money-account-detail details dl { display: grid; margin: 0; }
+  .money-account-detail__facts > div, .money-account-detail details dl > div { display: grid; grid-template-columns: minmax(94px, .65fr) minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-account-detail__facts dd, .money-account-detail details dd { display: grid; min-width: 0; gap: 2px; margin: 0; overflow-wrap: anywhere; font-size: var(--text-label); }
+  .money-account-detail__facts small { color: var(--muted); font-size: var(--text-micro); line-height: 1.45; }
+  .money-account-detail > section { display: grid; gap: var(--space-3); }
+  .money-account-detail__activity { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--hairline); list-style: none; }
+  .money-account-detail__activity li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-account-detail__activity li > span:nth-child(2) { display: grid; min-width: 0; gap: 2px; }
+  .money-account-detail__activity strong, .money-account-detail__activity small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .money-account-detail__activity small { color: var(--muted); font-size: var(--text-micro); }
+  .money-account-detail__activity li > span:last-child { font-size: var(--text-label); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .money-account-detail__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-accounts-workspace .money-collection-pagination { display: grid; min-height: 52px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-5); border: 1px solid var(--hairline); border-radius: var(--radius-card); background: var(--layer-raised); }
+  .money-accounts-workspace .money-collection-pagination > span { justify-self: center; color: var(--muted); font-size: var(--text-label); font-variant-numeric: tabular-nums; }
+  .money-accounts-workspace .money-collection-pagination > span:focus { outline: 0; }
+
+  @container money-accounts-stage (max-width: 70rem) {
+    .money-accounts-panels { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 959px) {
+    .money-source-row { grid-template-columns: 32px minmax(0, 1fr) auto; }
+    .money-source-freshness { grid-column: 2 / -1; }
+    .money-source-row .k-badge { grid-column: 3; grid-row: 1; }
+    .money-account-list a { grid-template-columns: 32px minmax(0, 1fr) auto; align-items: start; }
+    .money-account-freshness { grid-column: 2; }
+    .money-account-list .k-badge { grid-column: 3; grid-row: 1; }
+    .money-account-amount { grid-column: 3; grid-row: 2; align-self: center; }
+  }
+  @media (max-width: 759px) {
+    .money-accounts-coverage { grid-template-columns: auto minmax(0, 1fr); }
+    .money-accounts-coverage ul, .money-accounts-coverage > .button { grid-column: 2; justify-content: start; justify-self: start; }
+  }
+  @media (max-width: 679px) {
+    .money-accounts-viewbar-label, .money-accounts-viewbar-action svg { display: none; }
+    .money-source-row { grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--space-2); padding-inline: var(--space-4); }
+    .money-source-groups h3 { padding-inline: var(--space-4); }
+    .money-source-list details { padding-inline: var(--space-4); padding-left: calc(var(--space-4) + 28px + var(--space-2)); }
+    .money-source-list details dl { grid-template-columns: 1fr; }
+    .money-account-list a { grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--space-2); padding-inline: var(--space-4); }
+    .money-account-freshness strong { font-size: var(--text-micro); }
+    .money-account-list .k-badge { display: none; }
+    .money-accounts-workspace .money-collection-pagination { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .money-accounts-workspace .money-collection-pagination > span { grid-column: 1 / -1; grid-row: 1; }
+    .money-accounts-workspace .money-collection-pagination .button { width: 100%; }
+  }
+  @media (any-pointer: coarse) { .money-account-list a, .money-source-list summary, .money-account-detail summary { min-height: var(--coarse-target); } }
+  @media (prefers-reduced-motion: reduce) { .money-account-list a { scroll-behavior: auto; } }
+}

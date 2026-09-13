@@ -1,0 +1,75 @@
+@layer components {
+  .k-chart { min-width: 0; border-block: 1px solid var(--hairline); background: var(--layer-canvas); color: var(--text); }
+  .k-chart__header { display: flex; min-width: 0; align-items: start; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) 0 var(--space-3); }
+  .k-chart__header h2, .k-chart__header p { margin: 0; }
+  .k-chart__header h2 { font-size: var(--text-section); line-height: var(--leading-section); }
+  .k-chart__header p { max-width: 68ch; margin-top: var(--space-1); color: var(--muted); font-size: var(--text-meta); }
+  .k-chart__count { flex: none; color: var(--muted); font-size: var(--text-meta); font-variant-numeric: tabular-nums; }
+  .k-chart__qualification { display: flex; align-items: start; gap: var(--space-2); margin: 0 0 var(--space-2); padding: var(--space-2) var(--space-3); border: 1px solid color-mix(in oklch, var(--warning) 28%, var(--hairline)); border-radius: var(--radius-sm); background: color-mix(in oklch, var(--warning) 7%, transparent); color: var(--graphite); font-size: var(--text-meta); }
+  .k-chart__qualification > svg { flex: 0 0 auto; margin-top: 1px; color: var(--warning); }
+  .k-chart__plot-wrap { position: relative; height: 240px; min-width: 0; overflow: hidden; border-block: 1px solid var(--hairline); background: var(--layer-sunken); }
+  .k-chart__plot { display: block; width: 100%; height: 240px; overflow: visible; }
+  .k-chart__axis-names { display: flex; justify-content: space-between; gap: var(--space-3); padding: 0 0 var(--space-1); color: var(--muted); font-size: var(--text-micro); }
+  .k-chart__axis { fill: none; stroke: var(--hairline-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__grid { stroke: color-mix(in oklch, var(--hairline) 75%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__y-tick, .k-chart__x-tick { fill: var(--muted); font-size: var(--text-micro); font-variant-numeric: tabular-nums; }
+  .k-chart__x-mark { stroke: var(--hairline-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__line { fill: none; stroke: var(--life); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .k-chart__point { fill: var(--layer-canvas); stroke: var(--life); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .k-chart__point[data-selected] { fill: var(--life); stroke: var(--layer-canvas); }
+  .k-chart__baseline { fill: color-mix(in oklch, var(--life) 10%, transparent); stroke: color-mix(in oklch, var(--life) 50%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__svg-label { fill: var(--muted); font-size: var(--text-micro); }
+  .k-chart__missing { fill: color-mix(in oklch, var(--muted) 7%, transparent); stroke: var(--hairline-strong); stroke-dasharray: 4 5; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__outage { fill: color-mix(in oklch, var(--warning) 10%, transparent); stroke: var(--warning); stroke-dasharray: 3 4; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__event { stroke: var(--assistant); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__event-dot { fill: var(--assistant); }
+  .k-chart__selection { stroke: color-mix(in oklch, var(--text) 48%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .k-chart__explorer { position: absolute; inset: 0; cursor: crosshair; outline: none; touch-action: none; }
+  .k-chart__explorer:focus-visible { box-shadow: var(--focus-inset); }
+  .k-chart__thumb { position: absolute; width: 24px; height: 24px; border: 2px solid var(--layer-canvas); border-radius: var(--radius-pill); background: var(--life); box-shadow: 0 0 0 2px color-mix(in oklch, var(--life) 58%, transparent); pointer-events: none; transform: translate(-50%, -50%); }
+  .k-chart__explorer:focus-visible .k-chart__thumb { box-shadow: 0 0 0 2px var(--layer-canvas), 0 0 0 5px var(--color-focus); }
+  .k-chart__selected { display: flex; min-width: 0; min-height: var(--control-lg); align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 1px solid var(--hairline); }
+  .k-chart__selected > div { display: grid; min-width: 0; grid-template-columns: max-content minmax(0, 1fr); align-items: baseline; gap: 2px var(--space-2); }
+  .k-chart__selected strong { font-size: var(--text-reading); font-variant-numeric: tabular-nums; }
+  .k-chart__selected span, .k-chart__selected small { min-width: 0; overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-meta); }
+  .k-chart__selected small { grid-column: 2; }
+  .k-chart__annotations { display: flex; margin: 0; padding: var(--space-2) 0; list-style: none; flex-wrap: wrap; gap: var(--space-2) var(--space-4); color: var(--muted); font-size: var(--text-meta); }
+  .k-chart__annotations strong { color: var(--text); }
+  .k-chart__data { padding: var(--space-2) 0 var(--space-3); }
+  .k-chart__data > summary { width: fit-content; min-height: var(--control-md); cursor: pointer; color: var(--graphite); font-size: var(--text-meta); font-weight: var(--weight-medium); line-height: var(--control-md); }
+  .k-chart__data > summary:focus-visible { border-radius: var(--radius-control); box-shadow: var(--focus); outline: none; }
+  .k-chart__table-wrap { max-height: 360px; overflow: auto; border-block: 1px solid var(--hairline); }
+  .k-chart__data table { width: 100%; border-collapse: collapse; font-size: var(--text-meta); }
+  .k-chart__data caption { padding: var(--space-2); text-align: left; color: var(--muted); }
+  .k-chart__data caption span, .k-chart__data caption small { display: block; }
+  .k-chart__data caption small { margin-top: var(--space-1); color: var(--graphite); font-size: var(--text-micro); }
+  .k-chart__data th, .k-chart__data td { padding: var(--space-2) var(--space-3); border-top: 1px solid var(--hairline); text-align: left; vertical-align: top; }
+  .k-chart__data thead th { position: sticky; z-index: 1; top: 0; background: var(--layer-canvas); color: var(--muted); font-weight: var(--weight-medium); }
+  .k-chart__data tbody tr[data-selected] { background: var(--surface-strong); }
+  .k-chart__state, .k-chart__empty { display: grid; min-height: 240px; place-content: center; justify-items: center; gap: var(--space-2); padding: var(--space-5); text-align: center; }
+  .k-chart__state p, .k-chart__empty p { max-width: 56ch; margin: 0; color: var(--muted); font-size: var(--text-meta); }
+  .k-chart__state-plot { display: flex; width: min(420px, 70vw); height: 72px; align-items: end; gap: var(--space-2); opacity: .55; }
+  .k-chart__state-plot span { height: 2px; background: var(--hairline-strong); flex: 1; }
+  .k-chart__state[data-state="loading"] .k-chart__state-plot span { animation: k-chart-pulse 1.4s ease-in-out infinite alternate; }
+  .k-chart__empty svg { width: min(560px, 76vw); height: 80px; }
+  .k-chart__empty path { fill: none; stroke: var(--hairline-strong); stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }
+  @keyframes k-chart-pulse { to { opacity: .3; } }
+  @media (max-width: 759px) {
+    .k-chart__header { padding-top: var(--space-3); }
+    .k-chart__header p { display: none; }
+    .k-chart__selected { align-items: stretch; flex-direction: column; }
+    .k-chart__selected > div { grid-template-columns: 1fr; }
+    .k-chart__selected small { grid-column: 1; }
+    .k-chart__selected .button { align-self: start; }
+    .k-chart__annotations { display: grid; }
+    .k-chart__plot [data-compact-hidden] { display: none; }
+    .k-chart__data th, .k-chart__data td { min-width: 9rem; padding-inline: var(--space-2); }
+  }
+  @media (any-pointer: coarse) {
+    .k-chart__explorer { margin-block: -2px; min-height: 44px; }
+    .k-chart__data > summary { min-height: var(--control-lg); line-height: var(--control-lg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .k-chart__state[data-state="loading"] .k-chart__state-plot span { animation: none; }
+  }
+}

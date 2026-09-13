@@ -1,0 +1,15 @@
+@layer app {
+  html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  .notification-specimen { min-height: 100%; background: var(--canvas); color: var(--carbon); }
+  .notification-specimen__drag { flex: 1; align-self: stretch; }
+  .notification-specimen__main { height: calc(100dvh - var(--window-bar-height)); overflow: auto; }
+  .notification-specimen__status { margin: 0; color: var(--muted); font-size: var(--text-meta); }
+  .notification-specimen__anchor { display: flex; min-height: 360px; align-items: flex-start; justify-content: flex-end; padding-top: var(--space-4); }
+  .notification-specimen__segments { display: inline-flex; padding: 2px; border-radius: var(--radius-control); background: var(--surface); }
+  .notification-specimen__segments button { min-height: var(--control-sm); padding: 0 var(--space-3); border: 0; border-radius: calc(var(--radius-control) - 2px); background: transparent; color: var(--muted); }
+  .notification-specimen__segments button[aria-pressed="true"] { background: var(--field); color: var(--carbon); box-shadow: var(--shadow-hairline); }
+  .notification-specimen__related { display: grid; border: 1px solid var(--hairline); border-radius: var(--radius-object); overflow: hidden; }
+  .notification-specimen__related button { display: flex; min-height: 58px; align-items: flex-start; justify-content: center; flex-direction: column; gap: 2px; padding: var(--space-3) var(--space-4); border: 0; border-bottom: 1px solid var(--hairline); background: var(--field); color: var(--carbon); text-align: left; }
+  .notification-specimen__related button:last-child { border-bottom: 0; }
+  .notification-specimen__related span { color: var(--muted); font-size: var(--text-meta); }
+}

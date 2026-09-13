@@ -4,3 +4,5 @@ Thumbs.db
 .vscode/
 .idea/
 portfolio-*.png
+__pycache__/
+output/qa/

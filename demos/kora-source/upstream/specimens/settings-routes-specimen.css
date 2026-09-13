@@ -1,0 +1,33 @@
+.settings-routes-specimen {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-canvas);
+  color: var(--text);
+}
+
+.settings-routes-specimen__controls {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-chrome);
+}
+
+.settings-routes-specimen__controls > div:first-child { display: grid; gap: 2px; }
+.settings-routes-specimen__controls strong { font-size: var(--font-size-sm); }
+.settings-routes-specimen__controls span { color: var(--muted); font-size: var(--font-size-xs); }
+.settings-routes-specimen__pickers { display: flex; align-items: center; gap: var(--space-2); }
+.settings-routes-specimen__app { min-height: 0; overflow: hidden; }
+.settings-routes-specimen__app > .pane { height: 100%; min-height: 0; }
+
+@media (max-width: 799px) {
+  .settings-routes-specimen__controls { align-items: stretch; flex-direction: column; }
+  .settings-routes-specimen__controls > div:first-child span { min-block-size: 2lh; }
+  .settings-routes-specimen__pickers { display: grid; grid-template-columns: 1fr 1fr; }
+}

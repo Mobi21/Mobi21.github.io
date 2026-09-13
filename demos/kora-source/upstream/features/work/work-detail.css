@@ -1,0 +1,21 @@
+.work-read__supporting-field {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  max-width: 65ch;
+}
+
+.work-read__supporting-field > span {
+  color: var(--muted);
+  font-size: var(--text-meta);
+  font-weight: var(--weight-medium);
+}
+
+.work-read__supporting-field > p {
+  margin: 0;
+  color: var(--graphite);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

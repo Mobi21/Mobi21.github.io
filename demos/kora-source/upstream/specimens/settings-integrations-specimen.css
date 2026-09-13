@@ -1,0 +1,29 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  .settings-integrations-specimen { display: grid; height: 100%; grid-template-rows: 44px minmax(0, 1fr); background: var(--layer-canvas); }
+  .settings-integrations-specimen__drag { min-width: 0; }
+  .settings-integrations-specimen__main { min-width: 0; min-height: 0; overflow: hidden; }
+  .settings-integrations-specimen__notice { display: grid; gap: 2px; padding: var(--space-3); border: 1px solid var(--hairline); border-radius: var(--radius-control); background: var(--warning-soft); color: var(--graphite); font-size: var(--text-label); }
+  .settings-integrations-specimen__notice strong { color: var(--carbon); }
+  .settings-integrations-specimen__state { display: grid; justify-items: start; gap: var(--space-2); max-width: 720px; padding: var(--space-5) 0; border-block: 1px solid var(--hairline); }
+  .settings-integrations-specimen__state p { max-width: 640px; margin: 0; color: var(--graphite); line-height: 1.5; }
+  .settings-integrations-specimen__recovery { display: grid; max-width: 720px; border-block: 1px solid var(--hairline); }
+  .settings-integrations-specimen__recovery .settings-integrations-specimen__state { border: 0; }
+  .settings-integrations-specimen__recovery-status { margin: calc(-1 * var(--space-3)) 0 var(--space-4); color: var(--graphite); font-size: var(--text-label); }
+  .settings-integrations-specimen__loading { display: grid; border-block: 1px solid var(--hairline); }
+  .settings-integrations-specimen__loading > span { display: grid; grid-template-columns: 34px minmax(180px, 1fr) 130px; gap: var(--space-3); align-items: center; min-height: 68px; padding: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .settings-integrations-specimen__loading > span:last-child { border-bottom: 0; }
+  .settings-integrations-specimen__loading i, .settings-integrations-specimen__loading b, .settings-integrations-specimen__loading em { display: block; border-radius: var(--radius-control); background: var(--surface); animation: dense-specimen-pulse 1.4s ease-in-out infinite alternate; }
+  .settings-integrations-specimen__loading i { width: 32px; height: 32px; }
+  .settings-integrations-specimen__loading b { width: min(360px, 72%); height: 24px; }
+  .settings-integrations-specimen__loading em { width: 130px; height: 24px; }
+  @keyframes dense-specimen-pulse { to { opacity: .45; } }
+  @media (max-width: 899px) {
+    .settings-integrations-specimen .k-page-header__description { display: block; }
+    .settings-integrations-specimen__loading > span { grid-template-columns: 32px minmax(0, 1fr); }
+    .settings-integrations-specimen__loading em { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .settings-integrations-specimen__loading i, .settings-integrations-specimen__loading b, .settings-integrations-specimen__loading em { animation: none; }
+  }
+}

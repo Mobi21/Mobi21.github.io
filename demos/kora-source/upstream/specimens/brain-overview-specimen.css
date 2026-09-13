@@ -1,0 +1,16 @@
+@layer specimens {
+  html, body, #root { width: 100%; min-width: 0; height: 100%; margin: 0; overflow: hidden; }
+  body { background: var(--layer-window); color: var(--carbon); font-family: var(--font-ui); }
+  * { box-sizing: border-box; }
+  .brain-overview-specimen { display: grid; width: 100%; height: 100%; grid-template-rows: auto auto minmax(0, 1fr); background: var(--layer-canvas); }
+  .brain-overview-specimen__controls { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-window); }
+  .brain-overview-specimen__controls > div { display: grid; min-width: 0; gap: 2px; }
+  .brain-overview-specimen__controls strong { font-size: var(--text-label); }
+  .brain-overview-specimen__controls span { overflow: hidden; color: var(--graphite); font-size: var(--text-meta); text-overflow: ellipsis; white-space: nowrap; }
+  .brain-overview-specimen__controls .kora-select__trigger { min-width: 190px; }
+  .brain-overview-specimen > .brain-workspace { min-height: 0; }
+  @media (max-width: 720px) {
+    .brain-overview-specimen__controls { align-items: stretch; flex-direction: column; padding: var(--space-2) var(--space-3); }
+    .brain-overview-specimen__controls .kora-select__trigger { width: 100%; }
+  }
+}

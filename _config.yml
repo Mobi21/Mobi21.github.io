@@ -1,0 +1,9 @@
+exclude:
+  - demos/kora-source
+  - scripts
+  - README.md
+  - PRODUCT.md
+  - DESIGN.md
+  - REBUILD_PLAN.md
+  - QA.md
+  - output

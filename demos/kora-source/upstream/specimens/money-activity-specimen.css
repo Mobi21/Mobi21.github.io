@@ -1,0 +1,13 @@
+@layer specimens {
+  .money-activity-specimen { display: grid; height: 100dvh; grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; background: var(--canvas); color: var(--carbon); }
+  .money-activity-specimen__controls { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-5); border-bottom: 1px solid var(--hairline-strong); background: var(--layer-raised); }
+  .money-activity-specimen__controls > div { display: grid; gap: 1px; }
+  .money-activity-specimen__controls strong { font-size: var(--text-label); }
+  .money-activity-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+  .money-activity-specimen .view-bar { position: static; }
+  .money-activity-specimen .money-activity-workspace { height: auto; min-height: 0; }
+  @media (max-width: 759px) {
+    .money-activity-specimen__controls { padding-inline: var(--space-4); }
+    .money-activity-specimen__controls span { max-width: 280px; }
+  }
+}

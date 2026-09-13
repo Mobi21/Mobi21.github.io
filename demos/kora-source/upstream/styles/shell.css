@@ -1,0 +1,678 @@
+/*
+ * The shell: location-bearing window bar, exceptional status region, optional
+ * Kora conversation rail, and the route pane. Ordinary ready state has no
+ * permanent status bar.
+ *
+ * One top bar is permanent. A route bar exists only behind the explicit legacy
+ * migration boundary in ViewBar.tsx; migrated PageHeaders own page identity.
+ */
+
+@layer components {
+  .app-shell {
+    isolation: isolate;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--window-bar-height) minmax(0, 1fr);
+    grid-template-areas:
+      "windowbar"
+      "pane";
+    width: 100%;
+    height: 100%;
+    background: var(--layer-canvas);
+    --workspace-tone: var(--assistant);
+    --workspace-wash: var(--assistant-soft);
+    --shell-sidebar: color-mix(in oklch, var(--workspace-tone) 8%, var(--layer-chrome));
+  }
+
+  .app-shell[data-workspace="today"] { --workspace-tone: var(--signal); --workspace-wash: var(--signal-soft); }
+  .app-shell[data-workspace="work"] { --workspace-tone: var(--work); --workspace-wash: var(--work-soft); }
+  .app-shell[data-workspace="calendar"] { --workspace-tone: var(--calendar); --workspace-wash: var(--calendar-soft); }
+  .app-shell[data-workspace="brain"] { --workspace-tone: var(--brain); --workspace-wash: var(--brain-soft); }
+  .app-shell[data-workspace="life"] { --workspace-tone: var(--life); --workspace-wash: var(--life-soft); }
+  .app-shell[data-workspace="settings"] { --workspace-tone: var(--graphite); --workspace-wash: var(--layer-sunken); }
+
+  .skip-link {
+    position: fixed;
+    z-index: var(--z-critical);
+    top: var(--space-2);
+    left: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-control);
+    background: var(--layer-raised);
+    box-shadow: var(--focus), var(--shadow-raised);
+    color: var(--carbon);
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-4)));
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  /* ── Window bar ──────────────────────────────────────────────────────
+     Owns the current location, drag region, window controls and global actions.
+     Workspace atmosphere stays on the location icon and selected control. */
+  .window-bar {
+    grid-area: windowbar;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-inline: var(--space-3) 0;
+    background: var(--layer-chrome);
+  }
+
+  .window-bar__brand {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+    color: var(--carbon);
+    font-size: var(--text-label);
+    font-weight: var(--weight-strong);
+  }
+  .window-bar__brand > svg { flex: 0 0 auto; color: var(--assistant); }
+
+  .window-bar__actions { display: flex; height: 100%; align-items: center; gap: 2px; }
+  .window-bar .icon-button { width: var(--control-sm); height: var(--control-sm); }
+  .shell-kora-trigger { position: relative; }
+  .shell-kora-trigger__state {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--layer-chrome);
+    border-radius: 50%;
+    background: var(--success);
+  }
+  .shell-kora-trigger[data-state="working"] .shell-kora-trigger__state { background: var(--assistant); }
+  .shell-kora-trigger[data-state="limited"] .shell-kora-trigger__state { background: var(--warning); }
+  .navigation-toggle {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
+    min-height: var(--control-sm);
+    align-items: center;
+    gap: var(--space-1);
+    padding-inline: var(--space-2);
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--assistant);
+    white-space: nowrap;
+  }
+  .navigation-toggle__label { color: var(--carbon); font-size: var(--text-label); font-weight: var(--weight-strong); line-height: 1; }
+  .navigation-toggle__chevron { color: var(--muted); flex: 0 0 auto; }
+  .navigation-toggle[aria-expanded="true"] { background: var(--assistant-soft); color: var(--assistant); }
+
+  .shell-command-trigger {
+    width: var(--control-sm);
+    min-width: var(--control-sm);
+    height: var(--control-sm);
+    padding: 0;
+    background: var(--layer-sunken);
+    color: var(--graphite);
+    cursor: pointer;
+    transition: background var(--dur-instant) var(--ease-out), color var(--dur-instant) var(--ease-out), transform var(--dur-instant) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .navigation-toggle:hover { background: var(--layer-sunken); }
+    .shell-command-trigger:hover { background: var(--layer-sunken); color: var(--carbon); }
+  }
+  .shell-command-trigger:active { transform: scale(.985); }
+  .shell-command-trigger:focus-visible { outline: 0; box-shadow: var(--focus); }
+
+  /* ── Sidebar ─────────────────────────────────────────────────────────
+     Chrome is DIMMER than the pane. Orientation should recede once the
+     user has arrived; the content area is where the work is. */
+  .nav-rail {
+    grid-area: sidebar;
+    min-width: 0;
+    padding: var(--space-2) 0;
+    background: var(--shell-sidebar);
+    box-shadow: inset -1px 0 0 var(--hairline);
+  }
+
+  .nav-rail__primary,
+  .nav-rail__foot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  .nav-rail__foot {
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--hairline);
+  }
+
+  .nav-rail__item[data-atmosphere="kora"] { --destination-tone: var(--assistant); --destination-wash: var(--assistant-soft); }
+  .nav-rail__item[data-atmosphere="today"] { --destination-tone: var(--signal); --destination-wash: var(--signal-soft); }
+  .nav-rail__item[data-atmosphere="work"] { --destination-tone: var(--work); --destination-wash: var(--work-soft); }
+  .nav-rail__item[data-atmosphere="calendar"] { --destination-tone: var(--calendar); --destination-wash: var(--calendar-soft); }
+  .nav-rail__item[data-atmosphere="brain"] { --destination-tone: var(--brain); --destination-wash: var(--brain-soft); }
+  .nav-rail__item[data-atmosphere="life"] { --destination-tone: var(--life); --destination-wash: var(--life-soft); }
+  .nav-rail__item[data-atmosphere="settings"] { --destination-tone: var(--graphite); --destination-wash: var(--layer-sunken); }
+  .nav-rail__item--active {
+    background: var(--destination-wash);
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--destination-tone) 24%, var(--hairline));
+  }
+  .nav-rail__item--active > svg { color: var(--destination-tone); }
+  .nav-rail__item::before { background: var(--destination-tone); }
+
+  .navigation-expanded-panel {
+    position: absolute;
+    z-index: var(--z-panel);
+    top: var(--window-bar-height);
+    bottom: 0;
+    overflow: hidden;
+    background: var(--shell-sidebar);
+    box-shadow: inset -1px 0 0 var(--hairline), var(--shadow-overlay);
+    will-change: transform, opacity;
+  }
+
+  .navigation-expanded-panel > .sidebar {
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+  }
+
+  .sidebar {
+    z-index: var(--z-rail);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: var(--space-2);
+    overflow-y: auto;
+    box-shadow: inset -1px 0 0 var(--hairline);
+    background: var(--shell-sidebar);
+    scrollbar-color: var(--hairline-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  .sidebar__group { display: grid; gap: 2px; align-content: start; }
+  .sidebar__group--sections { margin-top: var(--space-4); }
+  .sidebar__foot { margin-top: auto; padding-top: var(--space-4); }
+
+  /* 12px, not the 11px the reference sidebars use: Kora's type floor is 12px and
+     that rule is about legibility at small sizes on Windows. Uppercase, tracked
+     and muted is what makes this read as a group label instead of content — the
+     one place that treatment is correct, per the sidebar-grouping convention in
+     Linear ("Workspace"/"Favorites") and Notion ("Teamspaces"/"Private"). */
+  .sidebar__group-label {
+    padding: var(--space-1) var(--space-2) var(--space-2);
+    color: var(--muted);
+    font-size: var(--text-micro);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--track-micro);
+  }
+
+  .sidebar__workspace,
+  .sidebar__section-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-md);
+    padding-inline: var(--space-2);
+    border-radius: var(--radius-control);
+    color: var(--muted);
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: color var(--dur-instant) var(--ease-out), background var(--dur-instant) var(--ease-out);
+  }
+
+  .sidebar__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .sidebar__workspace:hover,
+    .sidebar__section-row:hover { background: var(--layer-sunken); color: var(--carbon); }
+  }
+
+  .sidebar__workspace:active,
+  .sidebar__section-row:active { transform: scale(.99); }
+
+  .sidebar__workspace:focus-visible,
+  .sidebar__section-row:focus-visible { outline: 0; box-shadow: var(--focus); }
+
+  /* Muted text for inactive items, full ink for the active one — the whole
+     hierarchy of the sidebar, and one of the three changes Linear called out. */
+  .sidebar__workspace[data-owns],
+  .sidebar__section-row--active { color: var(--carbon); font-weight: var(--weight-medium); }
+
+  .sidebar__workspace[data-owns] { background: var(--workspace-wash); }
+  .sidebar__workspace[data-owns] > svg { color: var(--workspace-tone); }
+
+  /* The labelled drawer has more room than the compact rail, so its active
+     workspace receives a stronger, bounded cue as well as weight and color. */
+  .navigation-drawer .sidebar__workspace[data-owns] {
+    background: color-mix(in oklch, var(--workspace-tone) 28%, var(--layer-sunken));
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--workspace-tone) 42%, var(--hairline));
+  }
+
+  /* The moving selection surface for sub-scopes.
+     Child-qualified and :not()-excluded from the lift rule below: `> *` sets
+     position:relative to raise the real content above this span, and it would
+     otherwise match the span itself — turning it back into a grid item that
+     steals the icon column and shunts the label right. Same failure the
+     segmented control and the settings nav each hit independently. */
+  .sidebar__section-row > .sidebar__active {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: var(--radius-control);
+    background: var(--workspace-wash);
+  }
+  .navigation-drawer .sidebar__section-row--active > .sidebar__active {
+    background: color-mix(in oklch, var(--workspace-tone) 24%, var(--layer-sunken));
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--workspace-tone) 34%, var(--hairline));
+  }
+  .sidebar__section-row > *:not(.sidebar__active) { position: relative; z-index: 1; }
+
+  .sidebar__bullet {
+    width: 4px;
+    height: 4px;
+    margin-inline: var(--space-2);
+    border-radius: 50%;
+    background: currentColor;
+    opacity: .5;
+  }
+
+  .sidebar__count {
+    color: var(--muted);
+    font-size: var(--text-micro);
+    font-variant-numeric: tabular-nums;
+  }
+  .sidebar__count--unavailable { font-family: var(--font-mono); }
+
+  .sidebar__kbd {
+    color: var(--muted);
+    font-family: inherit;
+    font-size: var(--text-micro);
+    opacity: 0;
+    transition: opacity var(--dur-instant) var(--ease-out);
+  }
+  .sidebar__workspace:hover .sidebar__kbd,
+  .sidebar__workspace:focus-visible .sidebar__kbd { opacity: 1; }
+
+  /* ── Pane ────────────────────────────────────────────────────────────
+     The pane owns its whole region. The first row collapses to zero for every
+     migrated route; only the declared content owner scrolls. */
+  .pane {
+    grid-area: pane;
+    position: relative;
+    display: grid;
+    grid-template-rows: var(--view-bar-height) minmax(0, 1fr);
+    min-width: 0;
+    min-height: 0;
+    background: var(--layer-canvas);
+  }
+
+  .pane:has(> .view-bar--empty) {
+    grid-template-rows: 0 minmax(0, 1fr);
+  }
+
+  .view-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-width: 0;
+    padding-inline: var(--space-5) var(--space-4);
+    background: var(--layer-canvas);
+  }
+
+  .view-bar--empty { display: none; }
+
+  .view-bar__identity { display: flex; min-width: 0; align-items: center; gap: var(--space-3); }
+
+  .view-bar__leading { display: flex; flex: 0 0 auto; align-items: center; }
+  .view-bar__leading .icon-button { width: var(--control-sm); height: var(--control-sm); }
+
+  .view-bar--conversation { background: var(--layer-canvas); }
+  .view-bar--utility { justify-content: flex-end; }
+  .view-bar--utility:has(.view-bar__identity) { justify-content: space-between; }
+  .view-bar--conversation .view-bar__identity { gap: var(--space-2); }
+  .view-bar--conversation .view-bar__title { font-weight: var(--weight-strong); }
+  .view-bar--conversation .conversation-rail-toggle { color: var(--assistant); }
+  .view-bar--conversation .conversation-rail-toggle:hover,
+  .view-bar--conversation .conversation-rail-toggle:focus-visible { background: var(--assistant-soft); color: var(--assistant); }
+  .conversation-rail-toggle__label { display: none; }
+
+  .view-bar__context {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--graphite);
+    font-size: var(--text-label);
+    white-space: nowrap;
+  }
+  .view-bar__context > span {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: var(--workspace-tone);
+  }
+
+  .view-bar__title {
+    margin: 0;
+    color: var(--carbon);
+    overflow: hidden;
+    font-size: var(--text-section);
+    font-weight: var(--weight-section);
+    letter-spacing: var(--track-section);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .view-bar__meta {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: var(--text-micro);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .view-bar__actions { display: flex; max-width: 58%; flex: 0 1 auto; align-items: center; gap: var(--space-2); overflow-x: auto; scrollbar-width: none; }
+  .view-bar__actions::-webkit-scrollbar { display: none; }
+  .view-bar__actions .button { min-height: var(--control-md); }
+
+  .shell-connection-status { position: relative; color: var(--warning); }
+  .shell-connection-status[data-state="unavailable"],
+  .shell-connection-status[data-state="offline"] { color: var(--danger); }
+  .shell-connection-status[data-state="restarting"] svg { animation: shell-status-spin 1.2s linear infinite; }
+  @keyframes shell-status-spin { to { transform: rotate(360deg); } }
+  .shell-connection-popover { width: min(340px, calc(100vw - var(--space-6))); padding: var(--space-4); }
+  .shell-connection-popover__copy { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); color: var(--warning); }
+  .shell-connection-popover__copy span { display: grid; gap: var(--space-1); }
+  .shell-connection-popover__copy strong { color: var(--carbon); font-size: var(--text-label); }
+  .shell-connection-popover__copy small { color: var(--graphite); font-size: var(--text-meta); line-height: var(--leading-body); }
+  .shell-connection-popover__actions { display: flex; justify-content: flex-end; margin-top: var(--space-4); }
+
+  /* The content row fills the pane and does NOT scroll itself.
+     Scrolling belongs to whatever the surface actually is: a ledger and a detail
+     pane each scroll independently, a document scrolls as one. Making this row
+     scroll as well produced nested scroll containers — two scrollbars for one
+     list — and it is why ledgers could not reach the bottom of the window. */
+  .pane__content {
+    display: grid;
+    grid-row: 2;
+    grid-template-rows: minmax(0, 1fr);
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Every scroll container in the app gets the same thin, themed scrollbar.
+     Measured before this: 8 of 53 scroll containers styled theirs, so the other
+     45 rendered default Windows scrollbars mid-interface. */
+  .pane__content *::-webkit-scrollbar { width: 10px; height: 10px; }
+  .pane__content *::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: var(--radius-pill);
+    background-clip: content-box;
+    background-color: var(--hairline-strong);
+  }
+  .pane__content *::-webkit-scrollbar-track { background: transparent; }
+
+  .window-controls button { color: var(--graphite); }
+  .window-controls__close:hover { background: var(--danger); color: var(--color-surface-raised); }
+
+  .startup-shell {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: var(--window-bar-height) minmax(0, 1fr);
+    background: var(--layer-canvas);
+  }
+  .startup-shell__bar { grid-area: auto; }
+  .runtime-state { height: auto; background: var(--layer-canvas); }
+  .runtime-state h1 { color: var(--carbon); font-size: var(--text-page); letter-spacing: var(--track-page); line-height: var(--leading-page); text-wrap: balance; }
+  .runtime-state p { color: var(--graphite); font-size: var(--text-body); line-height: var(--leading-body); text-wrap: pretty; }
+  .runtime-state__kicker { color: var(--assistant); font-size: var(--text-label); }
+  .runtime-state p.runtime-state__safety { color: var(--positive); font-weight: var(--weight-medium); }
+  .runtime-state__recovery { max-width: 58ch; }
+  .runtime-state__details { display: grid; justify-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+  .runtime-state__details > div { max-width: 64ch; color: var(--muted); font-size: var(--text-meta); }
+  .runtime-state__details code { padding: var(--space-1) var(--space-2); border-radius: var(--radius-hair); background: var(--layer-sunken); color: var(--graphite); font-family: var(--font-mono); font-size: var(--text-meta); }
+
+  .navigation-drawer { width: min(var(--navigator-width), calc(100vw - var(--space-6))); background: color-mix(in oklch, var(--assistant) 4%, var(--layer-raised)); }
+  .navigation-drawer[data-side="left"] { left: 0; }
+  .navigation-drawer .kora-sheet__body { padding: 0; }
+  .navigation-drawer__body { min-height: 100%; padding: var(--space-3); }
+
+  .navigation-popover {
+    width: 304px;
+    max-height: min(480px, calc(100vh - var(--window-bar-height) - var(--space-4)));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: var(--hairline-strong) transparent;
+    transform-origin: top left;
+  }
+  .navigation-popover[data-starting-style],
+  .navigation-popover[data-ending-style] { opacity: 0; transform: translateY(-4px) scale(.98); }
+
+  .navigator { display: flex; min-height: 100%; flex-direction: column; gap: var(--space-2); }
+  .navigator[data-atmosphere="kora"] { --navigator-tone: var(--assistant); --navigator-wash: var(--assistant-soft); }
+  .navigator[data-atmosphere="today"] { --navigator-tone: var(--signal); --navigator-wash: var(--signal-soft); }
+  .navigator[data-atmosphere="work"] { --navigator-tone: var(--work); --navigator-wash: var(--work-soft); }
+  .navigator[data-atmosphere="calendar"] { --navigator-tone: var(--calendar); --navigator-wash: var(--calendar-soft); }
+  .navigator[data-atmosphere="brain"] { --navigator-tone: var(--brain); --navigator-wash: var(--brain-soft); }
+  .navigator[data-atmosphere="life"] { --navigator-tone: var(--life); --navigator-wash: var(--life-soft); }
+  .navigator[data-atmosphere="settings"] { --navigator-tone: var(--graphite); --navigator-wash: var(--layer-sunken); }
+  .navigator__group { display: grid; gap: 1px; align-content: start; }
+  .navigator__group-label { margin: 0; padding: 2px var(--space-2) var(--space-1); color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-medium); }
+  .navigator__workspace { position: relative; display: grid; min-height: var(--control-md); align-items: center; gap: var(--space-2); padding-inline: var(--space-2); border-radius: var(--radius-control); color: var(--graphite); font-size: var(--text-label); font-weight: var(--weight-medium); text-decoration: none; transition: color var(--dur-instant) var(--ease-out), background var(--dur-instant) var(--ease-out), transform var(--dur-instant) var(--ease-out); }
+  .navigator__workspace { grid-template-columns: 17px minmax(0, 1fr) auto; }
+  .navigator__pages { padding-bottom: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .navigator__section { display: grid; min-height: var(--control-md); grid-template-columns: 15px minmax(0, 1fr); align-items: center; gap: 1px var(--space-2); padding: var(--space-1) var(--space-2); border-radius: var(--radius-control); color: var(--graphite); font-size: var(--text-label); text-decoration: none; transition: color var(--dur-instant) var(--ease-out), background var(--dur-instant) var(--ease-out); }
+  .navigator__section > svg { grid-row: 1 / 3; color: var(--muted); }
+  .navigator__section small { overflow: hidden; color: var(--muted); font-size: var(--text-micro); line-height: var(--leading-meta); text-overflow: ellipsis; white-space: nowrap; }
+  .navigator__section[data-owns] { background: var(--navigator-wash); color: var(--carbon); }
+  .navigator__section[data-owns] > svg { color: var(--navigator-tone); }
+  .navigator__section:focus-visible { outline: 0; box-shadow: var(--focus); }
+  .navigator__workspace[data-atmosphere="kora"] { --destination-tone: var(--assistant); --destination-wash: var(--assistant-soft); }
+  .navigator__workspace[data-atmosphere="today"] { --destination-tone: var(--signal); --destination-wash: var(--signal-soft); }
+  .navigator__workspace[data-atmosphere="work"] { --destination-tone: var(--work); --destination-wash: var(--work-soft); }
+  .navigator__workspace[data-atmosphere="calendar"] { --destination-tone: var(--calendar); --destination-wash: var(--calendar-soft); }
+  .navigator__workspace[data-atmosphere="brain"] { --destination-tone: var(--brain); --destination-wash: var(--brain-soft); }
+  .navigator__workspace[data-atmosphere="life"] { --destination-tone: var(--life); --destination-wash: var(--life-soft); }
+  .navigator__workspace[data-atmosphere="settings"] { --destination-tone: var(--graphite); --destination-wash: var(--layer-sunken); }
+  .navigator__workspace[data-owns] { background: color-mix(in oklch, var(--destination-tone, var(--navigator-tone)) 8%, transparent); color: var(--carbon); }
+  .navigator__workspace[data-owns] > svg { color: var(--destination-tone); }
+  .navigator__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .navigator[data-presentation="popover"] .navigator__workspace { min-height: var(--control-sm); }
+  .navigator[data-presentation="popover"] .navigator__workspace .navigator__shortcut { display: none; }
+  .navigator__count { color: var(--muted); font-family: inherit; font-size: var(--text-micro); font-variant-numeric: tabular-nums; }
+  .navigator__shortcut { color: var(--muted); font-size: var(--text-micro); font-variant-numeric: tabular-nums; }
+  .navigator__workspace[data-owns] .navigator__shortcut { color: var(--graphite); }
+  @media (hover: hover) and (pointer: fine) {
+    .navigator__workspace:hover, .navigator__section:hover { background: var(--layer-sunken); color: var(--carbon); }
+  }
+  .navigator__workspace:active { transform: scale(.99); }
+  .navigator__workspace:focus-visible { outline: 0; box-shadow: var(--focus); }
+
+  .conversation-navigation-drawer { width: min(var(--navigator-width), calc(100vw - var(--space-6))); }
+  .conversation-navigation-drawer .kora-sheet__body { display: flex; min-height: 0; padding: 0; overflow: hidden; }
+  .conversation-navigation-drawer .conversation-rail--sheet { flex: 1; }
+
+  .conversation-rail {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    flex-direction: column;
+    contain: layout paint;
+    overflow: hidden;
+    background: color-mix(in oklch, var(--assistant) 6%, var(--layer-chrome));
+    box-shadow: inset -1px 0 0 var(--hairline);
+    will-change: auto;
+  }
+  .conversation-rail--sheet { background: var(--layer-raised); box-shadow: none; }
+  .conversation-rail--docked { padding: var(--space-4) var(--space-3); }
+  .conversation-rail--sheet { padding: 0 var(--space-3) var(--space-4); }
+  .conversation-rail__summary { margin: 0; padding: var(--space-3) 0 var(--space-2); color: var(--graphite); font-size: var(--text-micro); }
+  .conversation-rail--docked .conversation-rail__head {
+    min-height: var(--control-sm);
+    flex: 0 0 auto;
+    padding: 0 0 var(--space-3);
+    background: transparent;
+  }
+  .conversation-rail--docked .conversation-rail__head-title strong { font-size: var(--text-label); }
+  .conversation-rail--docked .conversation-rail__head .icon-button { width: var(--control-sm); height: var(--control-sm); }
+  .conversation-rail .conversation-rail__view-switch { padding: 0 0 var(--space-2); }
+  .conversation-rail .conversation-rail__controls { gap: var(--space-2); padding: 0 0 var(--space-3); }
+  .conversation-rail .conversation-rail__new {
+    min-height: var(--control-md);
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: 0 var(--space-2);
+    background: transparent;
+  }
+  .conversation-rail .conversation-rail__new-mark { width: 24px; height: 24px; flex-basis: 24px; background: var(--layer-raised); }
+  .conversation-rail .conversation-rail__new > span:last-child { display: block; }
+  .conversation-rail .conversation-rail__new small { display: none; }
+  .conversation-rail .conversation-rail__new strong { font-weight: var(--weight-medium); }
+  .conversation-rail .conversation-rail__new:hover:not(:disabled) { background: var(--layer-sunken); }
+  .conversation-rail .conversation-rail__search { height: 34px; }
+  .conversation-rail .conversation-rail__list,
+  .conversation-rail .conversation-rail__search-results,
+  .conversation-rail .conversation-history { padding: 0 0 var(--space-2); }
+  .conversation-rail .conversation-rail__list { overflow-x: hidden; }
+  .conversation-rail .conversation-rail__sticky-group {
+    height: var(--space-6);
+    margin-bottom: calc(-1 * var(--space-6));
+    padding: var(--space-2) var(--space-2) var(--space-1);
+    background: color-mix(in oklch, var(--assistant) 6%, var(--layer-chrome));
+    color: var(--muted);
+    font-weight: var(--weight-medium);
+  }
+  .conversation-rail--sheet .conversation-rail__sticky-group { background: var(--layer-raised); }
+  .conversation-rail .conversation-rail-row { min-height: var(--control-md); border-radius: var(--radius-control); }
+  .conversation-rail .conversation-rail-row--current {
+    background: color-mix(in oklch, var(--assistant) 7%, var(--layer-raised));
+    box-shadow: inset 0 0 0 1px var(--hairline);
+  }
+  .conversation-rail .conversation-rail-row--current::before { display: none; }
+  .conversation-rail .conversation-rail-row__open {
+    display: grid;
+    min-height: var(--control-md);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0 var(--space-2);
+  }
+  .conversation-rail .conversation-rail-row__title { font-size: var(--text-label); font-weight: var(--weight-normal); }
+  .conversation-rail .conversation-rail-row__meta { width: auto; max-width: 56px; font-size: var(--text-micro); }
+  .conversation-rail .conversation-rail-row--current .conversation-rail-row__title { font-weight: var(--weight-medium); }
+  .conversation-rail .conversation-rail-row--current .conversation-rail-row__open:disabled { opacity: 1; }
+  .conversation-rail .conversation-rail-row__actions { right: 2px; }
+  .conversation-rail .conversation-rail-row--current .conversation-rail-row__actions { background: color-mix(in oklch, var(--assistant) 7%, var(--layer-raised)); }
+  .conversation-rail .conversation-rail-state { min-height: 140px; padding: var(--space-3); }
+
+  .invalid-route {
+    display: grid;
+    min-width: 0;
+    min-height: 100%;
+    place-items: center;
+    padding: clamp(var(--space-5), 7vw, var(--space-8));
+    overflow: auto;
+    background: var(--layer-canvas);
+  }
+  .invalid-route .k-content-state { width: min(620px, 100%); }
+  .invalid-route code {
+    padding: 1px var(--space-1);
+    border-radius: var(--radius-hair);
+    background: var(--layer-sunken);
+    color: var(--carbon);
+    font-family: var(--font-mono);
+    overflow-wrap: anywhere;
+  }
+
+  /* ── Docked conversation rail ────────────────────────────────────────
+     The rail was `position: fixed`, so it sat outside layout flow and the pane
+     kept its full width underneath. The message lane then centred on the pane's
+     full box rather than on the visible region, leaving a measured 312px of dead
+     canvas to the right of every message. The previous plan recorded the lane at
+     "x=368 / width=760" as proof of alignment; those numbers are the proof of the
+     bug — the lane's centre was the window's centre, not the content area's.
+
+     Giving the shell a real rail column fixes the geometry at the source: the
+     pane genuinely narrows, so anything centred inside it is centred correctly.
+     :has() rather than a state class keeps the shell from needing to know whether
+     a conversation rail exists. */
+  .app-shell[data-conversation-rail] {
+    grid-template-columns: 0 minmax(0, 1fr);
+    grid-template-areas:
+      "windowbar windowbar"
+      "rail      pane";
+  }
+  .app-shell[data-conversation-rail="open"] { grid-template-columns: var(--conversation-rail-width) minmax(0, 1fr); }
+
+  .conversation-rail-slot {
+    grid-area: rail;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    will-change: transform, opacity;
+  }
+}
+
+@media (max-width: 899px) {
+  :root .app-shell,
+  :root .app-shell[data-conversation-rail] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "windowbar"
+      "pane";
+  }
+
+  .view-bar { padding-inline: var(--space-4); }
+  .view-bar__meta { display: none; }
+  .view-bar--conversation .conversation-rail-toggle {
+    display: inline-flex;
+    width: auto;
+    min-width: var(--control-sm);
+    height: var(--control-sm);
+    align-items: center;
+    gap: var(--space-1);
+    padding-inline: var(--space-2);
+  }
+  .view-bar--conversation .conversation-rail-toggle__label { display: inline; white-space: nowrap; }
+}
+
+@media (max-width: 760px) {
+  .window-bar { gap: var(--space-1); padding-left: var(--space-1); }
+  .window-bar__brand { gap: var(--space-1); }
+  .navigation-toggle { padding-inline: var(--space-1); }
+  .window-bar__actions { min-width: 0; }
+  .view-bar__context { max-width: 88px; overflow: hidden; text-overflow: ellipsis; }
+  .view-bar__actions { max-width: 52%; }
+  .global-status-notice { padding-inline: var(--space-3); }
+  .global-status-notice span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (any-pointer: coarse) {
+  .window-bar .icon-button,
+  .view-bar__leading .icon-button {
+    width: var(--coarse-target);
+    height: var(--coarse-target);
+  }
+  .view-bar__actions .button { min-height: var(--coarse-target); }
+  .view-bar--conversation .conversation-rail-toggle { width: auto; padding-inline: var(--space-2); }
+  .navigation-toggle,
+  .navigator__workspace,
+  .navigator__section { min-height: var(--coarse-target); }
+}

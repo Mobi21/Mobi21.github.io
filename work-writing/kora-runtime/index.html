@@ -8,11 +8,15 @@
   <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/kora-runtime/">
   <title>One Runtime, Three Surfaces — Mobolaji Ogunbiyi</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=399ff7a">
+  <link rel="stylesheet" href="/styles.css?v=20260913">
   <script src="/script.js" defer></script>
+
+  <meta property="og:title" content="One Runtime, Three Surfaces — Mobolaji Ogunbiyi">
+  <meta property="og:description" content="How Mobolaji Ogunbiyi designed Kora around one local runtime shared by a desktop app, Chrome extension, and CLI.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/work-writing/kora-runtime/">
+  <meta property="og:image" content="https://mobolaji.builtbykora.com/assets/projects/kora-conversation-workspace.webp">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -21,7 +25,7 @@
       <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
       <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
-        <a href="/">Home</a><a href="/projects/">Projects</a><a href="/work-writing/" aria-current="page">Work &amp; Writing</a><a href="/about/">About</a>
+        <a href="/projects/">Work</a><a href="/about/">About</a><a href="/assets/resume.pdf">Resume</a><a href="mailto:bjfifi1@gmail.com">Contact ↗</a>
       </nav>
     </div>
   </header>
@@ -43,7 +47,12 @@
 
       <div class="article-body">
         <section>
-          <h2>The problem was consistency, not another chat box</h2>
+          <h2>What I built around Pi</h2>
+          <p>I extended Pi’s open-source agent runtime into a Windows personal assistant: a React/Tauri application, CLI, Chrome extension, typed tools, persistent SQLite state, and hybrid retrieval over personal knowledge. Pi supplies the agent foundation; my work connects it to the interfaces, memory, tools, and lifecycle of the product.</p>
+          <p><a href="https://github.com/korastudios/Kora" target="_blank" rel="noopener noreferrer">Explore Kora’s public source ↗</a></p>
+        </section>
+        <section>
+          <h2>Keeping the assistant consistent across interfaces</h2>
           <p>Kora can be used from a Tauri desktop application, a command-line interface, and a Chrome extension. Each surface has a different interaction model, but the underlying work—retrieving context, selecting tools, updating state, and resuming a session—must stay consistent.</p>
           <p>Putting a separate agent loop inside every interface would have made each surface easy to start and difficult to trust. Tool behavior, prompts, memory rules, and session state would drift as soon as one client changed faster than the others.</p>
         </section>
@@ -57,7 +66,7 @@
             <div class="architecture-arrow" aria-hidden="true">→</div>
             <div class="architecture-node"><strong>Owned local state</strong><span>SQLite · files · browser and desktop actions</span></div>
           </div>
-          <p>The interfaces request work and render events. The runtime owns the behavior that must remain coherent: session control, tool and skill execution, context retrieval, and durable state. That also keeps private context on the user’s machine by default.</p>
+          <p>The interfaces request work and render events. The runtime owns session control, tool and skill execution, context retrieval, and durable state. SQLite and local files keep persistent context on the user’s machine; configured model providers receive the context needed for an inference request.</p>
         </section>
 
         <section>
@@ -78,7 +87,8 @@
 
         <section>
           <h2>How I check the boundary</h2>
-          <p>Kora’s current retrieval evaluation uses 185 synthetic search scenarios. The measured result is 99.2% ranking quality, with every correct result appearing in the top five and no safety or data-integrity failures in that suite. That evidence supports the retrieval boundary; it does not claim universal model accuracy or complete production reliability.</p>
+          <p>I built an evaluation harness around changing workweek scenarios: delayed information, revised plans, simulated-user interactions, controlled event timing, and fresh sessions after restarts. It inspects task completion, retained memory, authorization boundaries, and recovery alongside the conversation.</p>
+          <p>The harness is under development. Retained pilots exercise Kora itself, with separate simulated-user and blinded-review roles; cross-agent comparisons and final qualification remain future work. The useful result is a trace of what the assistant actually did and where its behavior needs improvement.</p>
         </section>
       </div>
 
@@ -89,6 +99,6 @@
     </article>
   </main>
 
-  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+  <footer class="site-footer shell"><div><a class="footer-invite" href="mailto:bjfifi1@gmail.com">Let’s build something useful. <span aria-hidden="true">↗</span></a><p>Software engineering & applied AI · Graduating May 2027</p></div><div class="footer-links"><a href="/assets/resume.pdf">Resume</a><a href="https://github.com/Mobi21">GitHub</a><a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/">LinkedIn</a><a href="/work-writing/">Writing</a></div><p class="copyright">© 2026 Mobolaji Ogunbiyi · Built with care in Maryland.</p></footer>
 </body>
 </html>

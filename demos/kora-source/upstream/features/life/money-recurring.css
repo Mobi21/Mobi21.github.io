@@ -1,0 +1,75 @@
+@layer features {
+  .money-recurring-workspace { min-height: 100%; }
+  .kora-sheet[data-purpose="properties"]:has(.money-recurring-form) { width: min(560px, calc(100vw - var(--space-7))); }
+  .money-recurring-workspace .k-page-frame { --workspace-frame-inspector: clamp(320px, 26vw, 372px); }
+  .money-recurring-workspace .k-page-frame__content { gap: var(--space-4); }
+  .money-recurring-notice { display: grid; min-height: 44px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-block: 1px solid var(--hairline); color: var(--graphite); font-size: var(--text-label); }
+  .money-recurring-notice svg { color: var(--warning); }
+  .money-recurring-notice a { display: inline-flex; min-height: var(--coarse-target); align-items: center; color: var(--carbon); font-weight: var(--weight-medium); text-decoration: none; }
+  .money-recurring-groups { display: grid; gap: var(--space-6); }
+  .money-recurring-groups > section { display: grid; }
+  .money-recurring-groups > section > header { display: flex; min-height: 36px; align-items: end; justify-content: space-between; gap: var(--space-3); padding: 0 var(--space-2) var(--space-2); border-block-end: 1px solid var(--hairline-strong); }
+  .money-recurring-groups h2 { margin: 0; color: var(--carbon); font-size: var(--text-label); font-weight: var(--weight-medium); letter-spacing: .01em; }
+  .money-recurring-groups header > span { color: var(--muted); font-size: var(--text-micro); font-variant-numeric: tabular-nums; }
+  .money-recurring-groups ol { display: grid; margin: 0; padding: 0; list-style: none; }
+  .money-recurring-groups li { border-block-end: 1px solid var(--hairline); }
+  .money-recurring-groups li > a { display: grid; min-height: 58px; grid-template-columns: 52px minmax(210px, 1fr) minmax(170px, .75fr) minmax(104px, auto); align-items: center; gap: var(--space-3); padding: var(--space-2); color: inherit; text-decoration: none; }
+  .money-recurring-groups li > a:hover { background: var(--layer-well); }
+  .money-recurring-groups li > a:focus-visible { position: relative; z-index: var(--z-local-content); border-radius: var(--radius-control); outline: 2px solid var(--focus); outline-offset: -2px; }
+  .money-recurring-date { display: grid; width: 42px; min-height: 44px; place-content: center; border-inline-end: 1px solid var(--hairline); text-align: center; }
+  .money-recurring-date b { color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-medium); letter-spacing: .08em; line-height: 1; }
+  .money-recurring-date strong { color: var(--carbon); font-size: var(--text-body); font-variant-numeric: tabular-nums; line-height: 1.25; }
+  .money-recurring-identity, .money-recurring-trust { display: grid; min-width: 0; gap: 2px; }
+  .money-recurring-identity > strong { color: var(--carbon); overflow-wrap: anywhere; white-space: normal; }
+  .money-recurring-identity small, .money-recurring-trust small { overflow: hidden; color: var(--muted); font-size: var(--text-micro); line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+  .money-recurring-trust { justify-items: start; }
+  .money-recurring-amount { justify-self: end; color: var(--carbon); font-weight: var(--weight-medium); font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; }
+  .money-recurring-muted { max-width: 112px; color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-normal); white-space: normal; }
+  .money-recurring-detail { display: grid; height: 100%; align-content: start; gap: var(--space-5); overflow: auto; padding: var(--space-5); }
+  .money-recurring-detail > header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: var(--space-3); }
+  .money-recurring-detail > header > div { display: grid; gap: var(--space-1); }
+  .money-recurring-detail > header span, .money-recurring-detail dt { color: var(--muted); font-size: var(--text-label); }
+  .money-recurring-detail h2, .money-recurring-detail h3, .money-recurring-detail p { margin: 0; }
+  .money-recurring-detail h2 { overflow-wrap: anywhere; font-size: var(--text-headline); line-height: 1.15; }
+  .money-recurring-detail h2:focus { outline: 0; }
+  .money-recurring-detail__lead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); padding-block: var(--space-4); border-block: 1px solid var(--hairline-strong); }
+  .money-recurring-detail__lead .money-recurring-amount { font-size: var(--text-page); }
+  .money-recurring-detail dl { display: grid; margin: 0; }
+  .money-recurring-detail dl > div { display: grid; min-width: 0; grid-template-columns: minmax(90px, .65fr) minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-recurring-detail dd { display: grid; min-width: 0; gap: 2px; margin: 0; }
+  .money-recurring-detail dd small { color: var(--muted); font-size: var(--text-micro); }
+  .money-recurring-detail > section { display: grid; gap: var(--space-3); }
+  .money-recurring-detail > section h3 { font-size: var(--text-body); }
+  .money-recurring-detail > section ol { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--hairline); list-style: none; }
+  .money-recurring-detail > section li { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-recurring-detail > section li span { display: grid; gap: 2px; }
+  .money-recurring-detail > section li small, .money-recurring-detail__qualification { color: var(--muted); font-size: var(--text-micro); line-height: 1.45; }
+  .money-recurring-detail summary { min-height: var(--control-md); cursor: pointer; font-size: var(--text-label); }
+  .money-recurring-detail__id { overflow-wrap: anywhere; font-family: var(--font-mono); font-size: var(--text-micro); }
+  .money-recurring-detail__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-recurring-form { display: grid; gap: var(--space-5); }
+  .money-recurring-form__error { margin: 0; color: var(--danger); font-size: var(--text-label); }
+  .money-recurring-conflict { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--warning); border-radius: var(--radius-control); background: var(--warning-soft); }
+  .money-recurring-conflict p { margin: 0; color: var(--graphite); font-size: var(--text-label); }
+  .money-recurring-conflict__comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+  .money-recurring-conflict__comparison section { display: grid; min-width: 0; gap: var(--space-1); padding: var(--space-3); border: 1px solid var(--hairline); border-radius: var(--radius-control); background: var(--canvas); }
+  .money-recurring-conflict__comparison span, .money-recurring-conflict__comparison small { color: var(--muted); font-size: var(--text-micro); }
+  .money-recurring-conflict__comparison strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .money-recurring-conflict__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-recurring-sheet-actions { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: var(--space-3); }
+  .money-recurring-sheet-actions > span:last-child { display: flex; gap: var(--space-2); }
+  .money-collection-pagination { display: grid; min-height: 52px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-2); border-block: 1px solid var(--hairline-strong); }
+  .money-collection-pagination > span { justify-self: center; color: var(--muted); font-size: var(--text-label); font-variant-numeric: tabular-nums; }
+  .money-collection-pagination > span:focus { outline: 0; }
+  .money-recurring-collection { display: grid; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--hairline-strong); border-radius: var(--radius-card); background: var(--layer-raised); }
+  .money-recurring-collection__intro { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--hairline-strong); }
+  .money-recurring-collection__intro strong { color: var(--carbon); font-size: var(--text-section); letter-spacing: var(--track-section); }
+  .money-recurring-collection__intro span { color: var(--muted); font-size: var(--text-label); }
+  .money-recurring-collection .money-recurring-groups { gap: var(--space-5); }
+  .money-recurring-collection .money-collection-pagination { margin-top: var(--space-1); }
+  @media (max-width: 679px) { .money-recurring-collection { padding: var(--space-4); } .money-recurring-collection__intro { align-items: start; flex-direction: column; gap: var(--space-1); } }
+  @media (max-width: 959px) { .money-recurring-workspace .k-page-frame__content { gap: var(--space-3); } .money-recurring-groups { gap: var(--space-4); } .money-recurring-collection { gap: var(--space-3); padding: var(--space-3); } .money-recurring-collection .money-recurring-groups { gap: var(--space-4); } .money-recurring-groups li > a { grid-template-columns: 48px minmax(0, 1fr) auto; } .money-recurring-trust { grid-column: 2; } .money-recurring-amount { grid-column: 3; grid-row: 1; } }
+  @media (max-width: 679px) { .money-recurring-groups li > a { min-height: 64px; grid-template-columns: 44px minmax(0, 1fr) auto; gap: var(--space-2); padding-inline: 0; } .money-recurring-date { width: 40px; } .money-recurring-trust small { display: none; } .money-recurring-trust .k-badge { max-width: 150px; } .money-recurring-amount { max-width: 96px; font-size: var(--text-label); } .money-recurring-notice { grid-template-columns: auto minmax(0, 1fr); } .money-recurring-notice a { grid-column: 2; justify-self: start; } .money-recurring-sheet-actions { display: grid; } .money-recurring-sheet-actions > span:last-child { display: grid; } .money-recurring-sheet-actions .button { width: 100%; } .money-recurring-conflict__comparison { grid-template-columns: 1fr; } .money-collection-pagination { grid-template-columns: repeat(2, minmax(0, 1fr)); } .money-collection-pagination > span { grid-column: 1 / -1; grid-row: 1; } .money-collection-pagination .button { width: 100%; } }
+  @media (any-pointer: coarse) { .money-recurring-groups li > a, .money-recurring-detail summary { min-height: var(--coarse-target); } }
+  @media (prefers-reduced-motion: reduce) { .money-recurring-groups li > a { scroll-behavior: auto; } }
+}

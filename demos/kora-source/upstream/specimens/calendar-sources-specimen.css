@@ -1,0 +1,15 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+  .calendar-sources-specimen { display: grid; grid-template-rows: auto auto minmax(0, 1fr); width: 100%; height: 100%; background: var(--canvas); color: var(--carbon); }
+  .calendar-sources-specimen__context { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: var(--space-3); padding: 0 var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-canvas); }
+  .calendar-sources-specimen__context h1 { margin: 0; font: inherit; font-weight: var(--weight-strong); }
+  .calendar-sources-specimen__context span, .calendar-sources-specimen__canvas { color: var(--graphite); font-size: var(--text-micro); }
+  .calendar-sources-specimen__canvas { display: grid; min-height: 0; place-items: center; background: var(--canvas); }
+}
+
+@media (max-width: 820px) {
+  @layer features {
+    .calendar-sources-specimen__context { min-height: 44px; padding-inline: var(--space-2); }
+    .calendar-sources-specimen__context span { display: none; }
+  }
+}

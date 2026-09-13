@@ -11,11 +11,11 @@
 }
 
 .zg-hero {
-  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(3rem, 7vw, 6rem);
+  padding-block: clamp(1.5rem, 4vw, 3rem) 2.5rem;
 }
 
 .zg-hero .breadcrumb {
-  margin-bottom: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
 }
 
 .zg-hero-grid {
@@ -24,18 +24,18 @@
 }
 
 .zg-hero h1 {
-  max-width: 11ch;
+  max-width: 17ch;
   margin-top: 0.8rem;
   color: var(--zg-graphite);
-  font-size: clamp(3.15rem, 8vw, 6rem);
-  line-height: 0.98;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.06;
   letter-spacing: -0.035em;
 }
 
 .zg-hero-summary {
   display: grid;
   align-content: end;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .zg-deck {
@@ -71,7 +71,7 @@
 }
 
 .zg-system-overview {
-  padding-block: clamp(2rem, 6vw, 5rem);
+  padding-block: 2.5rem;
   background: var(--zg-graphite);
   color: #f7f8f4;
 }
@@ -226,7 +226,7 @@
 .zg-reading-layout {
   display: grid;
   gap: clamp(2.5rem, 6vw, 6rem);
-  padding-block: clamp(4rem, 9vw, 8rem);
+  padding-block: clamp(2rem, 4vw, 3rem);
 }
 
 .zg-toc {
@@ -240,7 +240,7 @@
 .zg-prose > section {
   display: grid;
   gap: 1.1rem;
-  padding-block: clamp(2.7rem, 6vw, 5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
   border-top: 1px solid var(--line);
   scroll-margin-top: 6rem;
 }
@@ -253,7 +253,7 @@
 .zg-prose h2 {
   max-width: 21ch;
   color: var(--zg-graphite);
-  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   line-height: 1.08;
   letter-spacing: -0.025em;
 }
@@ -386,7 +386,7 @@
 .zg-diagram--sequence,
 .zg-diagram--recovery,
 .zg-diagram--data {
-  width: min(112%, 60rem);
+  width: 100%;
   margin-block: 2rem;
   padding: clamp(1rem, 2vw, 1.5rem);
   border: 1px solid var(--line-strong);
@@ -647,7 +647,7 @@
 @media (min-width: 44rem) {
   .zg-hero-grid {
     grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
-    align-items: end;
+    align-items: start;
   }
 
   .zg-requirements,
@@ -751,7 +751,7 @@
 
 @media (max-width: 43.99rem) {
   .zg-hero h1 {
-    font-size: clamp(3rem, 17vw, 4.4rem);
+    font-size: clamp(2.1rem, 9vw, 3rem);
   }
 
   .zg-diagram svg {
@@ -896,3 +896,8 @@
     padding: 2rem 0;
   }
 }
+
+/* Definition lists use the article grid rather than browser indentation. */
+.zg-article dl,.zg-article dd{margin:0}
+.zg-prose a:not(.action){text-decoration:underline;text-underline-offset:4px}
+.zg-hero-summary .case-actions{display:flex;flex-wrap:wrap;gap:12px}

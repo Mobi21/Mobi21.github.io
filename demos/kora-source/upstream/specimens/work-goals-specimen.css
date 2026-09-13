@@ -1,0 +1,10 @@
+.work-goals-specimen { min-height: 100vh; background: var(--canvas); color: var(--carbon); }
+.work-goals-specimen__controls { position: relative; z-index: var(--z-rail); min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+.work-goals-specimen__controls > div { min-width: 0; display: grid; gap: var(--space-1); }
+.work-goals-specimen__controls strong { font-size: var(--text-label); }
+.work-goals-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+.work-goals-specimen__controls .kora-select__trigger { min-width: 12rem; }
+@media (max-width: 760px) {
+  .work-goals-specimen__controls { align-items: stretch; flex-direction: column; }
+  .work-goals-specimen__controls .kora-select__trigger { width: 100%; }
+}

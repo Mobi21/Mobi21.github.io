@@ -1,0 +1,135 @@
+@layer features {
+  .money-plan-workspace { min-height: 100%; }
+  .money-plan-workspace .k-page-frame__content { gap: var(--space-4); }
+  .money-plan-workspace .money-local-navigation { flex: 0 0 auto; }
+  .money-plan-notice { display: grid; min-height: 44px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding-inline: var(--space-3); border-block: 1px solid var(--hairline); color: var(--graphite); font-size: var(--text-label); }
+  .money-plan-notice a { color: var(--carbon); font-weight: var(--weight-medium); text-decoration: none; }
+  .money-plan-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .72fr); align-items: start; gap: clamp(var(--space-5), 3vw, var(--space-8)); }
+  .money-plan-main, .money-plan-context { display: grid; min-width: 0; gap: var(--space-5); }
+  .money-plan-section, .money-plan-protection, .money-plan-guide, .money-plan-authority, .money-plan-empty { border-block-start: 1px solid var(--hairline-strong); }
+  .money-plan-section, .money-plan-protection, .money-plan-guide { display: grid; gap: var(--space-3); padding-block: var(--space-4); }
+  .money-plan-section > header, .money-plan-protection > header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: var(--space-4); }
+  .money-plan-section h2, .money-plan-protection h2, .money-plan-guide h2, .money-plan-empty h2 { margin: 0; font-size: var(--text-body); text-wrap: balance; }
+  .money-plan-section header p, .money-plan-protection header p, .money-plan-guide p, .money-plan-empty p { max-width: 68ch; margin: var(--space-1) 0 0; color: var(--muted); font-size: var(--text-label); line-height: 1.45; text-wrap: pretty; }
+  .money-plan-grid { display: grid; border-block: 1px solid var(--hairline); }
+  .money-plan-grid__head, .money-plan-grid__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(130px, .28fr) auto; align-items: center; gap: var(--space-4); min-height: 52px; padding-inline: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-plan-grid__head { min-height: 34px; color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-medium); }
+  .money-plan-grid__head > :nth-child(2), .money-plan-grid__row > :nth-child(2) { text-align: end; }
+  .money-plan-grid__row > span { display: grid; min-width: 0; gap: 2px; font-size: var(--text-label); font-variant-numeric: tabular-nums; }
+  .money-plan-grid__row strong, .money-plan-grid__row small { overflow-wrap: anywhere; white-space: normal; }
+  .money-plan-grid__row small { color: var(--muted); font-size: var(--text-micro); }
+  .money-plan-goals { display: grid; border-block: 1px solid var(--hairline); }
+  .money-plan-goals article { display: grid; gap: var(--space-3); padding: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-plan-goals article > header, .money-plan-goals article > footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+  .money-plan-goals article > header > div { display: grid; min-width: 0; gap: 2px; }
+  .money-plan-goals article strong { overflow-wrap: anywhere; }
+  .money-plan-goals article small, .money-plan-goals article footer { color: var(--muted); font-size: var(--text-micro); }
+  .money-plan-progress { height: 6px; overflow: hidden; border-radius: var(--radius-pill); background: var(--layer-sunken); }
+  .money-plan-progress > span { display: block; height: 100%; border-radius: inherit; background: var(--life); }
+  .money-plan-progress-unavailable { color: var(--muted); font-size: var(--text-label); }
+  .money-plan-context { position: sticky; top: calc(var(--view-bar-height) + var(--space-4)); }
+  .money-plan-equation { display: grid; border-block: 1px solid var(--hairline); }
+  .money-plan-equation > div { display: grid; min-width: 0; grid-template-columns: minmax(96px, .6fr) minmax(0, 1fr); align-items: baseline; gap: 2px var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .money-plan-equation > div > span { color: var(--muted); font-size: var(--text-label); }
+  .money-plan-equation > div > strong { justify-self: end; font-size: var(--text-body); font-variant-numeric: tabular-nums; text-align: end; }
+  .money-plan-equation > div > small { grid-column: 1 / -1; color: var(--muted); font-size: var(--text-micro); line-height: var(--leading-micro); }
+  .money-plan-setting-provenance { margin: var(--space-2) 0 0; color: var(--muted); font-size: var(--text-micro); line-height: var(--leading-micro); }
+  .money-plan-private-note { display: inline-flex; align-items: center; gap: var(--space-2); margin: 0; color: var(--muted); font-size: var(--text-label); }
+  .money-plan-guide > span { color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-medium); }
+  .money-plan-guide dl { display: grid; margin: 0; border-top: 1px solid var(--hairline); }
+  .money-plan-guide dl > div { display: flex; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .money-plan-guide dt { color: var(--muted); font-size: var(--text-label); }
+  .money-plan-guide dd { display: grid; justify-items: end; margin: 0; font-variant-numeric: tabular-nums; text-align: end; }
+  .money-plan-guide dd small { color: var(--muted); font-size: var(--text-micro); }
+  .money-plan-guide__unqualified dd strong { color: var(--carbon); font-size: var(--text-label); font-weight: var(--weight-medium); }
+  .money-plan-guide__unqualified dd small { color: var(--graphite); }
+  .money-plan-authority { padding-block: var(--space-3); color: var(--graphite); }
+  .money-plan-authority summary { min-height: var(--control-md); cursor: pointer; color: var(--carbon); font-size: var(--text-label); font-weight: var(--weight-medium); }
+  .money-plan-authority ul { display: grid; gap: var(--space-2); margin: var(--space-2) 0 0; padding-inline-start: var(--space-4); color: var(--muted); font-size: var(--text-label); line-height: 1.45; }
+  .money-plan-inline-empty, .money-plan-inline-archived { display: grid; min-height: 88px; align-content: center; gap: var(--space-1); padding: var(--space-3); border-block: 1px solid var(--hairline); }
+  .money-plan-inline-empty p, .money-plan-inline-archived p, .money-plan-archive-note { margin: 0; color: var(--muted); font-size: var(--text-label); line-height: 1.45; }
+  .money-plan-allocation-empty { display: grid; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--hairline); border-radius: var(--radius-control); background: var(--layer-sunken); }
+  .money-plan-allocation-empty p, .money-plan-allocation-empty__action { margin: 0; color: var(--muted); font-size: var(--text-label); line-height: 1.45; }
+  .money-plan-allocation-empty__action { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+  .money-plan-archive-note { padding: var(--space-2) var(--space-3); border-block: 1px solid var(--hairline); }
+  .money-plan-archive-note a, .money-plan-inline-archived a { color: var(--carbon); font-weight: var(--weight-medium); }
+  .money-plan-record-view { display: flex; min-height: var(--control-md); align-items: end; gap: var(--space-1); border-bottom: 1px solid var(--hairline); }
+  .money-plan-record-view a { display: inline-flex; min-height: var(--control-md); align-items: center; gap: var(--space-2); padding-inline: var(--space-3); border-bottom: 2px solid transparent; color: var(--muted); font-size: var(--text-label); font-weight: var(--weight-medium); text-decoration: none; }
+  .money-plan-record-view a[aria-current="page"] { border-bottom-color: var(--life); color: var(--carbon); }
+  .money-plan-record-view a span { min-width: 20px; padding-inline: var(--inset-badge); border-radius: var(--radius-pill); background: var(--layer-sunken); color: var(--graphite); font-size: var(--text-micro); text-align: center; }
+  .money-plan-archive { display: grid; gap: var(--space-5); padding-block: var(--space-3); }
+  .money-plan-archive > header { display: flex; align-items: end; justify-content: space-between; gap: var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--hairline-strong); }
+  .money-plan-archive > header h2, .money-plan-archive > header p { margin: 0; }
+  .money-plan-archive > header h2 { margin-top: var(--space-1); font-size: var(--text-section); }
+  .money-plan-archive > header div > p:last-child { max-width: 64ch; margin-top: var(--space-1); color: var(--muted); font-size: var(--text-label); }
+  .money-plan-archive > header > span { color: var(--muted); font-size: var(--text-label); white-space: nowrap; }
+  .money-plan-archive__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); }
+  .money-plan-archive__groups > section { min-width: 0; }
+  .money-plan-archive__groups h3 { margin: 0 0 var(--space-2); font-size: var(--text-body); }
+  .money-plan-archive__groups ul { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--hairline); list-style: none; }
+  .money-plan-archive__groups li { display: grid; min-height: 68px; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .money-plan-archive__groups li > span { display: grid; min-width: 0; gap: 2px; }
+  .money-plan-archive__groups li > span:last-child { justify-items: end; }
+  .money-plan-archive__groups small, .money-plan-archive__groups section > p { color: var(--muted); font-size: var(--text-micro); }
+  .money-plan-archive__groups .button { margin-top: var(--space-1); }
+  .money-plan-archive__error { margin: 0; color: var(--danger); font-size: var(--text-label); }
+  .money-plan-inline-unavailable { display: grid; min-height: 88px; grid-template-columns: auto minmax(0, 1fr); align-content: center; gap: var(--space-3); padding: var(--space-3); border-block: 1px solid var(--hairline); color: var(--warning); }
+  .money-plan-inline-unavailable p { margin: var(--space-1) 0 0; color: var(--muted); font-size: var(--text-label); }
+  .money-plan-inline-pending { min-height: 88px; align-content: center; padding: var(--space-3); border-block: 1px solid var(--hairline); color: var(--muted); font-size: var(--text-label); }
+  .money-plan-empty { display: grid; gap: var(--space-3); padding-block: var(--space-4); }
+  .money-plan-empty > header { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: start; }
+  .money-plan-starts { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-plan-empty__unavailable { color: var(--muted); font-size: var(--text-label); }
+  .money-plan-form { display: grid; gap: var(--space-4); }
+  .kora-sheet[data-purpose="properties"]:has(.money-plan-form) { width: min(560px, calc(100vw - var(--space-7))); }
+  .money-plan-form fieldset { display: grid; gap: var(--space-2); margin: 0; padding: 0; border: 0; }
+  .money-plan-form legend { color: var(--carbon); font-size: var(--text-label); font-weight: var(--weight-medium); }
+  .money-plan-form fieldset > p, .money-plan-form__note { margin: 0; color: var(--muted); font-size: var(--text-micro); }
+  .money-plan-form__actions { display: flex; justify-content: flex-end; gap: var(--space-2); padding-block: var(--space-3); border-top: 1px solid var(--hairline); }
+  .money-plan-form__actions-spacer { flex: 1 1 auto; }
+  .money-plan-form__error { margin: 0; color: var(--danger); font-size: var(--text-label); }
+  .money-plan-draft { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); padding: var(--space-3); border-block: 1px solid var(--hairline); color: var(--graphite); font-size: var(--text-label); }
+  .money-plan-draft strong { color: var(--carbon); }
+  .money-plan-dismiss, .money-plan-conflict { display: grid; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--warning); border-radius: var(--radius-control); background: var(--warning-soft); }
+  .money-plan-dismiss p, .money-plan-conflict p { margin: 0; color: var(--graphite); font-size: var(--text-label); }
+  .money-plan-dismiss > div, .money-plan-conflict > div { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-plan-conflict dl { display: grid; margin: 0; border-top: 1px solid var(--hairline); }
+  .money-plan-conflict dl > div { display: flex; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .money-plan-conflict dt { color: var(--graphite); font-size: var(--text-label); }
+  .money-plan-conflict dd { display: grid; min-width: 0; justify-items: end; margin: 0; overflow-wrap: anywhere; font-size: var(--text-label); }
+  .money-plan-conflict dd small { color: var(--muted); }
+  .money-plan-record-meta { display: grid; margin: 0; border-block: 1px solid var(--hairline); }
+  .money-plan-record-meta > div { display: grid; grid-template-columns: minmax(96px, .42fr) minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .money-plan-record-meta > div:last-child { border-bottom: 0; }
+  .money-plan-record-meta dt { color: var(--muted); font-size: var(--text-label); }
+  .money-plan-record-meta dd { margin: 0; color: var(--graphite); font-size: var(--text-label); text-align: end; overflow-wrap: anywhere; }
+  .money-plan-loading { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .72fr); gap: var(--space-6); }
+  .money-plan-loading span { height: 190px; border-block: 1px solid var(--hairline); background: var(--layer-sunken); }
+  .money-plan-loading span:last-child { grid-column: 1 / -1; height: 120px; }
+  @media (max-width: 1099px) { .money-plan-layout { grid-template-columns: 1fr; } .money-plan-context { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); } .money-plan-authority { grid-column: 1 / -1; } .money-plan-loading { grid-template-columns: 1fr; } .money-plan-loading span { height: 138px; } .money-plan-loading span:last-child { grid-column: auto; height: 86px; } .money-plan-archive__groups { grid-template-columns: 1fr; gap: var(--space-5); } }
+  @media (max-width: 759px) { .money-plan-context { grid-template-columns: 1fr; } .money-plan-authority { grid-column: auto; } .money-plan-grid__head { display: none; } .money-plan-grid__row { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2) var(--space-3); padding-block: var(--space-2); } .money-plan-grid__row > :first-child { grid-column: 1 / -1; } .money-plan-grid__row > :nth-child(2) { text-align: start; } .money-plan-grid__row > :last-child { justify-self: end; } .money-plan-section > header, .money-plan-protection > header { grid-template-columns: minmax(0, 1fr) auto; } .money-plan-notice { grid-template-columns: auto minmax(0, 1fr); padding-block: var(--space-2); } .money-plan-notice a { grid-column: 2; } .money-plan-form__actions { position: sticky; z-index: var(--z-local-content); bottom: 0; padding-block: var(--space-3) max(var(--space-3), env(safe-area-inset-bottom)); background: var(--layer-raised); } .money-plan-form__actions--resolution { position: static; padding-bottom: var(--space-3); background: transparent; } .money-plan-archive > header { align-items: start; } .money-plan-archive__groups li { grid-template-columns: 1fr; } .money-plan-archive__groups li > span:last-child { grid-template-columns: minmax(0, 1fr) auto; align-items: center; justify-items: start; } .money-plan-archive__groups .button { margin-top: 0; } }
+  @media (max-width: 479px) { .money-plan-view-action__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .money-plan-section > header, .money-plan-protection > header { grid-template-columns: 1fr; } .money-plan-section > header .button, .money-plan-protection > header .button { justify-self: start; } .money-plan-form__actions { position: static; flex-direction: column-reverse; } .money-plan-form__actions .button { width: 100%; } .money-plan-conflict dl > div { display: grid; } .money-plan-conflict dd { justify-items: start; text-align: start; } }
+  @media (any-pointer: coarse) { .money-plan-authority summary, .money-plan-starts .button { min-height: var(--coarse-target); } }
+
+  /* Goals are the first decision surface; supporting boundaries stay adjacent. */
+  .money-plan-main { gap: var(--space-5); }
+  .money-plan-main > .money-plan-section,
+  .money-plan-archive,
+  .money-plan-protection,
+  .money-plan-guide { padding: var(--space-5); border: 1px solid var(--hairline-strong); border-radius: var(--radius-card); background: var(--layer-raised); }
+  .money-plan-goals-section .money-plan-goals,
+  .money-plan-allocations-section .money-plan-grid { margin-top: var(--space-1); }
+  .money-plan-goals-section .money-plan-goals article { padding-inline: var(--space-2); }
+  .money-plan-context { gap: var(--space-5); }
+  .money-plan-protection,
+  .money-plan-guide { border-block-start: 1px solid var(--hairline-strong); }
+  .money-plan-guide { position: static; }
+  .money-plan-authority { padding-inline: var(--space-2); }
+  @media (max-width: 759px) {
+    .money-plan-main > .money-plan-section,
+    .money-plan-archive,
+    .money-plan-protection,
+    .money-plan-guide { padding: var(--space-4); }
+    .money-plan-goals-section .money-plan-goals article { padding-inline: 0; }
+  }
+}

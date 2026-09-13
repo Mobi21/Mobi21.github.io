@@ -1,0 +1,14 @@
+@layer specimens {
+  .today-specimen { min-height: 100dvh; background: var(--canvas); color: var(--carbon); }
+  .today-specimen__controls { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-5); border-bottom: 1px solid var(--hairline-strong); background: var(--layer-raised); }
+  .today-specimen__controls > div { display: grid; gap: 1px; }
+  .today-specimen__controls .today-specimen__control-actions { display: flex; align-items: center; gap: var(--space-2); }
+  .today-specimen__controls strong { font-size: var(--text-label); }
+  .today-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+  .today-specimen .view-bar { position: static; }
+  .today-specimen .k-page-frame { min-height: calc(100dvh - 104px); }
+  @media (max-width: 759px) {
+    .today-specimen__controls { align-items: flex-start; padding-inline: var(--space-4); }
+    .today-specimen__controls > div span { max-width: 260px; }
+  }
+}

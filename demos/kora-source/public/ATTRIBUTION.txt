@@ -1,0 +1,1 @@
+Kora UI source, MIT, copyright 2026 Mobolaji Ogunbiyi. Source commit 2276bbdf996ad081ea2622801121a97ee8a65499 at https://github.com/korastudios/Kora . The portfolio shell and sample panes are adaptations. Prepared conversations are fictional examples, not live or recorded agent runs. See LICENSE-KORA.txt and THIRD-PARTY-NOTICES.txt.

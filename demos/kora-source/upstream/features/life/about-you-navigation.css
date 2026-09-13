@@ -1,0 +1,21 @@
+@layer features {
+  .about-you-navigation .k-workspace-local-nav__groups { gap: var(--space-6); }
+  .about-you-navigation .k-workspace-local-nav__link.is-active {
+    border-color: color-mix(in srgb, var(--life) 22%, var(--hairline));
+    background: color-mix(in srgb, var(--life) 7%, var(--layer-raised));
+    box-shadow: inset 2px 0 color-mix(in srgb, var(--life) 75%, transparent);
+  }
+  .about-you-navigation__item { display: inline-flex; min-width: 0; align-items: center; gap: var(--space-2); }
+  .about-you-navigation__item > svg { flex: 0 0 auto; color: var(--life); }
+  .about-you-destination-picker { display: none; min-width: 0; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+  .about-you-destination-picker .kora-select__trigger { width: min(100%, 360px); min-height: var(--control-lg); justify-content: space-between; }
+
+  @media (max-width: 1180px) {
+    .about-you-destination-picker { display: block; }
+  }
+
+  @media (max-width: 759px) {
+    .about-you-destination-picker { padding: var(--space-2) var(--space-4); }
+    .about-you-destination-picker .kora-select__trigger { width: 100%; }
+  }
+}

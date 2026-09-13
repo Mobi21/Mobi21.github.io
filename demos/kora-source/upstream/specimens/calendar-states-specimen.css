@@ -1,0 +1,34 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+  .calendar-state-specimen { display: grid; width: 100%; height: 100%; grid-template-rows: auto minmax(0, 1fr); background: var(--canvas); color: var(--carbon); }
+  .calendar-state-specimen > header { display: grid; min-height: var(--control-lg); grid-template-columns: minmax(0, 1fr) minmax(13rem, 18rem); align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-canvas); }
+  .calendar-state-specimen > header > div { display: grid; gap: calc(var(--space-1) / 2); }
+  .calendar-state-specimen > header span { color: var(--graphite); font-size: var(--text-micro); }
+  .calendar-state-specimen > header .kora-select__trigger { width: 100%; text-transform: capitalize; }
+  .calendar-state-specimen > .calendar-workspace { min-height: 0; }
+  .calendar-state-specimen__panel { display: grid; width: min(34rem, calc(100% - var(--space-6))); grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); margin: auto; padding: var(--space-4); border: 1px solid color-mix(in srgb, var(--danger) 38%, var(--hairline)); border-radius: var(--radius-overlay); background: var(--layer-raised); box-shadow: var(--shadow-raised); }
+  .calendar-state-specimen__panel > svg { color: var(--danger); }
+  .calendar-state-specimen__panel p { margin: var(--space-1) 0 0; color: var(--graphite); font-size: var(--text-label); line-height: var(--leading-body); }
+  .calendar-state-specimen__recovery { display: grid; width: min(32rem, calc(100% - var(--space-6))); gap: var(--space-3); align-self: center; justify-self: center; padding: var(--space-5); border: 1px solid var(--hairline-strong); border-radius: var(--radius-overlay); background: var(--layer-raised); box-shadow: var(--shadow-raised); }
+  .calendar-state-specimen__recovery > span { color: var(--signal); font-size: var(--text-micro); font-weight: var(--weight-strong); }
+  .calendar-state-specimen__recovery h2, .calendar-state-specimen__recovery p { margin: 0; }
+  .calendar-state-specimen__recovery h2 { font-size: var(--text-body); letter-spacing: -.015em; }
+  .calendar-state-specimen__recovery p { color: var(--graphite); font-size: var(--text-label); line-height: var(--leading-body); }
+  .calendar-state-specimen__recovery .button { justify-self: start; }
+  .calendar-state-specimen__boundary { display: grid; min-height: 100%; grid-template-rows: auto minmax(0, 1fr); gap: var(--space-2); }
+  .calendar-state-specimen__boundary > p { margin: 0; color: var(--graphite); font-size: var(--text-label); }
+  .calendar-state-specimen__toolbar { display: grid; gap: var(--space-4); }
+  .calendar-state-specimen__toolbar > p { margin: 0 var(--space-2); color: var(--graphite); font-size: var(--text-label); }
+}
+
+@media (max-width: 680px) {
+  @layer features {
+    .calendar-state-specimen > header { grid-template-columns: minmax(0, 1fr); padding-inline: var(--space-2); }
+    .calendar-state-specimen > header span { display: none; }
+    .calendar-state-specimen > header > .kora-select__trigger { display: none; }
+    .calendar-state-specimen__panel { grid-template-columns: auto minmax(0, 1fr); }
+    .calendar-state-specimen__panel .button { grid-column: 1 / -1; }
+    .calendar-state-specimen__recovery { width: calc(100% - var(--space-4)); padding: var(--space-4); }
+    .calendar-state-specimen__toolbar .calendar-toolbar { margin-inline: calc(var(--space-2) * -1); }
+  }
+}

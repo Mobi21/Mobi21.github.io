@@ -1,0 +1,7 @@
+.about-you-specimen { min-height: 100vh; background: var(--layer-canvas); }
+.about-you-specimen__controls { display: grid; grid-template-columns: 260px minmax(0, 1fr); align-items: center; gap: var(--space-5); min-height: 80px; padding: var(--space-3); border-bottom: 1px solid var(--hairline-strong); background: var(--layer-canvas); }
+.about-you-specimen__controls > div { display: grid; gap: var(--space-1); }
+.about-you-specimen__controls strong { color: var(--carbon); font-size: var(--text-body); }
+.about-you-specimen__controls span { color: var(--graphite); font-size: var(--text-label); line-height: 1.4; }
+.about-you-specimen .view-bar { position: sticky; top: 0; z-index: var(--z-sticky); }
+@media (max-width: 760px) { .about-you-specimen__controls { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); } }

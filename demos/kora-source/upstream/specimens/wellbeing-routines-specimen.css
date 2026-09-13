@@ -1,0 +1,7 @@
+.wellbeing-routines-specimen { min-height: 100dvh; display: grid; grid-template-rows: auto auto minmax(0, 1fr); background: var(--canvas); color: var(--carbon); }
+.wellbeing-routines-specimen__controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+.wellbeing-routines-specimen__controls > div { display: grid; gap: var(--space-1); }
+.wellbeing-routines-specimen__controls strong { font-size: var(--text-label); }
+.wellbeing-routines-specimen__controls span { color: var(--muted); font-size: var(--text-meta); }
+.wellbeing-routines-specimen > .view-bar + .wellbeing-routines-workspace, .wellbeing-routines-specimen .wellbeing-routines-workspace { min-height: 0; }
+@media (max-width: 680px) { .wellbeing-routines-specimen__controls { align-items: stretch; flex-direction: column; } }

@@ -1,0 +1,22 @@
+html, body, #root { min-height: 100%; margin: 0; }
+body { background: var(--canvas); color: var(--text); font-family: var(--font-ui); }
+.wellbeing-privacy-specimen { min-height: 100vh; background: var(--canvas); }
+.wellbeing-privacy-specimen__controls {
+  display: flex;
+  min-height: calc(var(--control-lg) + var(--space-2));
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-5);
+  background: var(--layer-window);
+  box-shadow: inset 0 -1px 0 var(--hairline);
+}
+.wellbeing-privacy-specimen__controls > div { display: grid; gap: var(--space-1); }
+.wellbeing-privacy-specimen__controls strong { font-size: var(--text-body); }
+.wellbeing-privacy-specimen__controls span { color: var(--muted); font-size: var(--text-meta); }
+.wellbeing-privacy-specimen__controls .kora-select__trigger { min-width: calc(var(--space-8) * 3); }
+@media (max-width: 680px) {
+  .wellbeing-privacy-specimen__controls { padding-inline: var(--space-4); }
+  .wellbeing-privacy-specimen__controls > div span { display: none; }
+  .wellbeing-privacy-specimen__controls .kora-select__trigger { min-width: calc(var(--space-8) * 2 + var(--space-5)); }
+}

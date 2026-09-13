@@ -1,0 +1,13 @@
+@layer specimens {
+  .money-overview-specimen { min-height: 100dvh; background: var(--canvas); color: var(--carbon); }
+  .money-overview-specimen__controls { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-5); border-bottom: 1px solid var(--hairline-strong); background: var(--layer-raised); }
+  .money-overview-specimen__controls > div { display: grid; gap: 1px; }
+  .money-overview-specimen__controls strong { font-size: var(--text-label); }
+  .money-overview-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+  .money-overview-specimen .view-bar { position: static; }
+  .money-overview-specimen .k-page-frame { min-height: calc(100dvh - 104px); }
+  @media (max-width: 759px) {
+    .money-overview-specimen__controls { align-items: flex-start; padding-inline: var(--space-4); }
+    .money-overview-specimen__controls > div span { max-width: 260px; }
+  }
+}

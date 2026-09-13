@@ -1,0 +1,19 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  .dense-specimen { display: grid; height: 100%; grid-template-rows: 44px minmax(0, 1fr); background: var(--layer-canvas); }
+  .dense-specimen__drag { min-width: 0; }
+  .dense-specimen__main { min-width: 0; min-height: 0; overflow: hidden; }
+  .dense-specimen .k-page-frame__content { display: grid; align-content: start; gap: var(--space-3); }
+  .task-subject { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+  .task-subject strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .task-subject small { overflow: hidden; color: var(--muted); font-size: var(--text-meta); font-weight: var(--weight-normal); text-overflow: ellipsis; white-space: nowrap; }
+  .task-mobile-meta { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
+  .task-mobile-meta > span:not(.k-badge) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .task-mobile-meta > span + span:not(.k-badge)::before { margin-right: var(--space-2); color: var(--hairline-strong); content: "·"; }
+  .dense-specimen__notice { margin: 0; padding: var(--space-2) var(--space-3); border-left: 2px solid var(--warning); background: var(--warning-soft); color: var(--graphite); font-size: var(--text-meta); }
+  @media (max-width: 899px) {
+    .dense-specimen .k-page-header__description { display: none; }
+    .dense-specimen .k-page-header { padding-bottom: var(--space-2); }
+    .task-mobile-meta > span:first-child { flex: 1 1 100%; }
+  }
+}

@@ -1,0 +1,1 @@
+export const hasDesktopHost=false; export const desktopHost=new Proxy({}, {get:()=>async()=>{throw new Error("This desktop operation is unavailable in the portfolio demo.")}});

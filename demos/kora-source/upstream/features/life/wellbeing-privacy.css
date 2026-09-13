@@ -1,0 +1,339 @@
+.wellbeing-privacy-workspace {
+  --selection: var(--life);
+  --selection-soft: var(--life-soft);
+  min-width: 0;
+}
+
+.wellbeing-privacy-workspace .k-page-frame__content {
+  gap: var(--space-6);
+}
+
+.wellbeing-privacy__content {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-5);
+  padding-bottom: var(--space-7);
+}
+
+.wellbeing-privacy__statement {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--life) 26%, var(--hairline));
+  background: color-mix(in oklch, var(--life) 4%, transparent);
+}
+
+.wellbeing-privacy__statement:focus-visible {
+  outline: 2px solid var(--life);
+  outline-offset: 3px;
+}
+
+.wellbeing-privacy__statement > svg { color: var(--life); }
+.wellbeing-privacy__groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+}
+
+.wellbeing-privacy__group {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-overlay);
+  background: var(--surface);
+  box-shadow: var(--shadow-hairline);
+}
+
+.wellbeing-privacy__group > header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-3);
+}
+
+.wellbeing-privacy__group-icon {
+  display: inline-flex;
+  width: var(--control-md);
+  height: var(--control-md);
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-control);
+  background: var(--life-soft);
+  color: var(--life);
+}
+
+.wellbeing-privacy__group-body {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+.wellbeing-privacy__group--use .wellbeing-privacy__classification {
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.wellbeing-privacy__group .wellbeing-privacy__exact-boundary {
+  display: block;
+  margin-top: 0;
+  padding: var(--space-3);
+}
+
+.wellbeing-privacy__group-body > p,
+.wellbeing-privacy__details > p {
+  margin: 0;
+  color: var(--graphite);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.wellbeing-privacy__supporting-copy {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--hairline);
+}
+
+.wellbeing-privacy__group h2 {
+  margin: 0;
+  color: var(--carbon);
+  font-size: var(--text-section);
+  line-height: var(--leading-section);
+  letter-spacing: var(--track-section);
+  text-wrap: balance;
+}
+
+.wellbeing-privacy__group > header p {
+  max-width: 38ch;
+  margin: var(--space-1) 0 0;
+  color: var(--graphite);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.wellbeing-privacy__details {
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--space-3);
+}
+
+.wellbeing-privacy__details > summary {
+  display: inline-flex;
+  min-height: var(--control-md);
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--life);
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+  cursor: pointer;
+}
+
+.wellbeing-privacy__details > summary:focus-visible,
+.wellbeing-privacy__inline-link:focus-visible {
+  outline: 2px solid var(--life);
+  outline-offset: 3px;
+}
+
+.wellbeing-privacy__details[open] > summary { margin-bottom: var(--space-3); }
+
+.wellbeing-privacy__inline-link {
+  display: inline-flex;
+  min-height: var(--control-md);
+  align-items: center;
+  justify-self: start;
+  color: var(--life);
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+}
+
+.wellbeing-privacy__statement h2,
+.wellbeing-privacy__unavailable h2 {
+  margin: 0;
+  color: var(--carbon);
+  font-size: var(--text-section);
+  line-height: var(--leading-section);
+  letter-spacing: var(--track-section);
+  text-wrap: balance;
+}
+
+.wellbeing-privacy__statement p,
+.wellbeing-privacy__unavailable p {
+  max-width: 70ch;
+  margin: var(--space-1) 0 0;
+  color: var(--graphite);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.wellbeing-privacy__classification h3,
+.wellbeing-privacy__exact-boundary h3 {
+  margin: 0;
+  color: var(--carbon);
+  font-size: var(--text-body);
+  font-weight: var(--weight-section);
+  line-height: var(--leading-body);
+}
+
+.wellbeing-privacy__classification p,
+.wellbeing-privacy__exact-boundary p,
+.wellbeing-privacy__exact-boundary span {
+  margin: var(--space-1) 0 0;
+  color: var(--graphite);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.wellbeing-privacy__classification {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.wellbeing-privacy__classification article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.wellbeing-privacy__classification-icon {
+  display: inline-flex;
+  width: var(--control-md);
+  height: var(--control-md);
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-control);
+}
+
+.wellbeing-privacy__classification-icon[data-tone="private"] { background: var(--life-soft); color: var(--life); }
+.wellbeing-privacy__classification-icon[data-tone="restricted"] { background: var(--warning-soft); color: var(--warning); }
+.wellbeing-privacy__classification h3 small {
+  margin-left: var(--space-1);
+  color: var(--muted);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+}
+
+.wellbeing-privacy__exact-boundary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-control);
+  background: color-mix(in oklch, var(--warning-soft) 58%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--warning) 34%, var(--hairline));
+}
+
+.wellbeing-privacy__exact-boundary > svg { color: var(--warning); }
+.wellbeing-privacy__exact-boundary span { display: block; color: var(--muted); }
+
+.wellbeing-privacy__authority-list {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.wellbeing-privacy__authority-list > div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.wellbeing-privacy__authority-list dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--carbon);
+  font-size: var(--text-body);
+  font-weight: var(--weight-section);
+}
+
+.wellbeing-privacy__authority-list dt svg { color: var(--life); }
+.wellbeing-privacy__authority-list dd { margin: 0 0 0 var(--space-5); color: var(--graphite); font-size: var(--text-body); line-height: var(--leading-body); }
+
+.wellbeing-privacy__control-rows {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: 0;
+}
+
+.wellbeing-privacy__control-rows > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-2);
+}
+.wellbeing-privacy__control-rows > div:first-child { padding-left: 0; }
+.wellbeing-privacy__control-rows > div > svg { color: var(--muted); }
+.wellbeing-privacy__control-rows > div:last-child > svg { color: var(--danger); }
+.wellbeing-privacy__control-rows span { display: grid; gap: var(--space-1); }
+.wellbeing-privacy__control-rows strong { color: var(--carbon); font-size: var(--text-body); line-height: var(--leading-body); }
+.wellbeing-privacy__control-rows small { color: var(--graphite); font-size: var(--text-body); line-height: var(--leading-body); }
+
+.wellbeing-privacy__unavailable {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-overlay);
+  background: var(--warning-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--warning) 30%, transparent);
+}
+.wellbeing-privacy__unavailable > svg { color: var(--warning); }
+
+.wellbeing-privacy__loading { display: grid; gap: var(--space-7); padding-bottom: var(--space-7); }
+.wellbeing-privacy__loading-statement,
+.wellbeing-privacy__loading-title,
+.wellbeing-privacy__loading-description,
+.wellbeing-privacy__loading-lines i {
+  display: block;
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  animation: wellbeing-privacy-loading var(--dur-slow) ease-in-out infinite alternate;
+}
+.wellbeing-privacy__loading-statement { height: calc(var(--space-8) + var(--space-6)); }
+.wellbeing-privacy__loading-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
+.wellbeing-privacy__loading-group { display: grid; min-width: 0; gap: var(--space-3); padding: var(--space-5); border: 1px solid var(--hairline-strong); border-radius: var(--radius-overlay); background: var(--surface); }
+.wellbeing-privacy__loading-title { width: 38%; height: var(--leading-section); }
+.wellbeing-privacy__loading-description { width: 62%; height: var(--leading-body); }
+.wellbeing-privacy__loading-lines { display: grid; gap: var(--space-2); }
+.wellbeing-privacy__loading-lines i:first-child { width: 92%; height: calc(var(--leading-body) * 2); }
+.wellbeing-privacy__loading-lines i:last-child { width: 72%; height: var(--leading-body); }
+
+@keyframes wellbeing-privacy-loading { to { background: var(--surface-strong); } }
+
+@media (max-width: 1180px) {
+  .wellbeing-privacy__groups { grid-template-columns: 1fr; }
+  .wellbeing-privacy__loading-groups { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .wellbeing-privacy__content { gap: var(--space-4); }
+  .wellbeing-privacy__group { padding: var(--space-4); }
+  .wellbeing-privacy__statement { grid-template-columns: auto minmax(0, 1fr); padding: var(--space-2) 0; }
+  .wellbeing-privacy__loading-group { padding: var(--space-4); }
+  .wellbeing-privacy__control-rows { grid-template-columns: 1fr; }
+  .wellbeing-privacy__unavailable { grid-template-columns: auto minmax(0, 1fr); padding: var(--space-4); }
+  .wellbeing-privacy__unavailable .button { grid-column: 2; justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wellbeing-privacy__loading-statement,
+  .wellbeing-privacy__loading-title,
+  .wellbeing-privacy__loading-description,
+  .wellbeing-privacy__loading-lines i { animation: none; }
+}
+
+@media (pointer: coarse) {
+  .wellbeing-privacy-workspace .button { min-height: var(--control-lg); }
+}

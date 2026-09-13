@@ -1,0 +1,22 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+  .calendar-specimen { display: grid; grid-template-rows: auto minmax(0, 1fr); width: 100%; height: 100%; background: var(--canvas); color: var(--carbon); }
+  .calendar-specimen__bar { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(180px, 1fr); align-items: center; gap: var(--space-3); min-height: 58px; padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-canvas); }
+  .calendar-specimen__bar > div:first-child { display: grid; gap: 2px; }
+  .calendar-specimen__bar h1 { margin: 0; font: inherit; font-weight: var(--weight-strong); }
+  .calendar-specimen__bar span, .calendar-specimen__bar output { color: var(--graphite); font-size: var(--text-micro); }
+  .calendar-specimen__bar > div[role="group"] { display: flex; gap: var(--space-1); padding: var(--space-1); border-radius: var(--radius-control); background: var(--surface); }
+  .calendar-specimen__bar button { min-height: 32px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-hair); background: transparent; color: var(--graphite); font: inherit; font-size: var(--text-micro); text-transform: capitalize; cursor: pointer; }
+  .calendar-specimen__bar button[aria-pressed="true"] { background: var(--field); color: var(--carbon); box-shadow: var(--shadow-raised); }
+  .calendar-specimen__bar button:focus-visible { outline: 0; box-shadow: var(--focus); }
+  .calendar-specimen__bar output { justify-self: end; text-align: right; }
+  .calendar-specimen > .calendar-workspace { min-height: 0; }
+}
+
+@media (max-width: 760px) {
+  @layer features {
+    .calendar-specimen__bar { grid-template-columns: 1fr auto; min-height: 52px; padding-inline: var(--space-2); }
+    .calendar-specimen__bar span, .calendar-specimen__bar output { display: none; }
+    .calendar-specimen__bar button { min-width: 44px; min-height: 44px; padding-inline: var(--space-1); }
+  }
+}

@@ -1,0 +1,15 @@
+@layer features {
+  html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  .chart-specimen { display: grid; height: 100%; grid-template-rows: 44px minmax(0, 1fr); background: var(--layer-canvas); }
+  .chart-specimen__bar { display: flex; align-items: center; gap: var(--space-3); padding-inline: var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+  .chart-specimen__bar strong { margin-right: auto; font-size: var(--text-body); }
+  .chart-specimen__main { min-width: 0; min-height: 0; overflow: auto; }
+  .chart-specimen__content { width: min(1180px, calc(100% - 2 * var(--page-gutter))); margin-inline: auto; padding-block: var(--space-5) var(--pane-scroll-end); }
+  .chart-specimen__status { min-height: var(--control-md); margin: 0; padding-top: var(--space-2); color: var(--muted); font-size: var(--text-meta); }
+  @media (max-width: 759px) {
+    .chart-specimen__bar { padding-inline: var(--space-2); }
+    .chart-specimen__bar strong { display: none; }
+    .chart-specimen__bar .kora-select__trigger { width: 100%; }
+    .chart-specimen__content { width: calc(100% - 2 * var(--page-gutter-compact)); padding-block: var(--space-3) var(--pane-scroll-end); }
+  }
+}

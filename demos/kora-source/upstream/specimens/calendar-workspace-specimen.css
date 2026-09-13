@@ -1,0 +1,10 @@
+.calendar-workspace-specimen { display: grid; width: 100%; height: 100vh; min-height: 0; grid-template-rows: auto auto minmax(0, 1fr); overflow: hidden; background: var(--canvas); color: var(--carbon); }
+.calendar-workspace-specimen__controls { position: relative; z-index: var(--z-panel); min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+.calendar-workspace-specimen__controls > div { min-width: 0; display: grid; gap: var(--space-1); }
+.calendar-workspace-specimen__controls strong { font-size: var(--text-label); }
+.calendar-workspace-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+.calendar-workspace-specimen__controls .kora-select__trigger { min-width: 15rem; }
+.calendar-workspace-specimen > .view-bar { position: relative; z-index: var(--z-scrim); }
+.calendar-workspace-specimen .calendar-workspace { height: auto; min-height: 0; }
+.calendar-workspace-specimen__route { padding: var(--space-6); }
+@media (max-width: 760px) { .calendar-workspace-specimen__controls { align-items: stretch; flex-direction: column; } .calendar-workspace-specimen__controls .kora-select__trigger { width: 100%; } }

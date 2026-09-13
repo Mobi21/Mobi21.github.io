@@ -1,0 +1,36 @@
+@layer features {
+  /* Keep the contextual return control in its own shell row, as Work does,
+     so it never covers a detail view's first interactive target. */
+  .pane__content:has(> .today-origin-return) { grid-template-rows: auto minmax(0, 1fr); }
+  .pane__content:has(> .today-origin-return) > :not(.today-origin-return) { grid-row: 2; min-height: 0; }
+  .today-origin-return {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    padding: var(--space-2) var(--page-gutter) 0;
+  }
+  .today-origin-return__link {
+    display: inline-flex;
+    min-height: var(--control-sm);
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-control);
+    background: var(--layer-raised);
+    color: var(--graphite);
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+  .today-origin-return__link svg:last-child { color: var(--muted); }
+  .today-origin-return__link:hover { border-color: var(--signal); color: var(--carbon); }
+  .today-origin-return__link:focus-visible {
+    outline: 0;
+    box-shadow: var(--focus-inset);
+  }
+
+  @media (max-width: 900px) {
+    .today-origin-return { padding-inline: var(--page-gutter-compact); }
+  }
+}

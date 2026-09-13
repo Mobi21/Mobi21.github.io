@@ -1,0 +1,193 @@
+@layer features {
+  @media (min-width: 1181px) {
+    .money-activity-workspace .k-page-frame { --workspace-frame-inspector: 400px; }
+  }
+
+  .money-activity-state { display: grid; min-width: max-content; gap: var(--space-1); }
+  .money-activity-state__freshness { display: none; color: var(--muted); font-size: var(--text-micro); white-space: nowrap; }
+
+  @container k-collection (min-width: 76.01rem) {
+    .money-activity-state__freshness { display: block; }
+  }
+
+  .money-activity-workspace { height: 100%; min-height: 0; }
+  .money-activity-workspace .k-page-frame__content { gap: var(--space-3); }
+  .money-activity-workspace .k-page-header { padding-bottom: var(--space-2); }
+  .money-activity-workspace .money-local-navigation { flex: 0 0 auto; }
+  .money-activity-panel { min-width: 0; border: 1px solid var(--hairline); border-radius: var(--radius-card); background: var(--layer-raised); box-shadow: var(--shadow-raised); }
+  .money-activity-panel--controls { display: grid; gap: var(--space-3); padding: var(--space-4) var(--space-5); }
+  .money-activity-panel--collection { display: flex; min-height: 0; flex: 1; flex-direction: column; overflow: hidden; padding: 0 var(--space-5) var(--space-4); }
+  .money-activity-panel--collection.money-activity-panel--empty { flex: 0 0 auto; }
+  .money-activity-panel--collection > .k-content-state { min-height: 240px; align-content: center; padding: var(--space-5) 0; }
+  .money-activity-panel--collection.money-activity-panel--empty > .k-content-state { min-height: 0; }
+  .money-activity-views { display: flex; min-width: 0; min-height: 50px; align-items: stretch; gap: var(--space-1); border-bottom: 1px solid var(--hairline); }
+  .money-activity-views > a { position: relative; display: flex; min-width: 148px; align-items: center; gap: var(--space-2); padding-inline: var(--space-3); color: var(--graphite); text-decoration: none; white-space: nowrap; }
+  .money-activity-views > a span { font-size: var(--text-label); font-weight: var(--weight-medium); }
+  .money-activity-views > a small { color: var(--muted); font-size: var(--text-micro); white-space: nowrap; }
+  .money-activity-views > a[aria-current="page"] { color: var(--carbon); background: color-mix(in srgb, var(--life) 5%, transparent); }
+  .money-activity-views > a[aria-current="page"]::after { position: absolute; right: var(--space-3); bottom: -1px; left: var(--space-3); height: 2px; background: var(--life); content: ""; }
+  .money-activity-views > a:focus-visible { outline: 0; box-shadow: var(--focus-inset); }
+  .money-activity-views > p { max-width: 48ch; margin: auto 0 auto auto; color: var(--muted); font-size: var(--text-micro); line-height: var(--leading-micro); }
+  .money-activity-workspace .k-page-toolbar { flex: 0 0 auto; }
+  .money-activity-workspace .k-dense-data { display: flex; flex-direction: column; min-height: 0; flex: 1; gap: var(--space-2); }
+  .money-activity-workspace .k-dense-data__viewport { min-height: 0; flex: 1; overflow: auto; border-inline: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .money-activity-workspace .k-dense-data__footer { flex: 0 0 auto; }
+  .money-activity-workspace .k-dense-data__table { background: transparent; }
+  .money-activity-workspace .k-dense-data__table thead { position: sticky; z-index: var(--z-local-content); top: 0; }
+  .money-activity-workspace .k-dense-data__table tbody tr { background: transparent; }
+  .money-activity-filters { display: flex; min-width: 0; gap: var(--space-2); }
+  .money-activity-filters .kora-select__trigger { min-width: 142px; }
+  .money-activity-filter { display: grid; min-width: 0; gap: var(--space-1); }
+  .money-activity-filter__label { color: var(--muted); font-size: var(--text-micro); font-weight: var(--weight-medium); line-height: var(--leading-micro); }
+  .money-activity-subject { display: grid; min-width: 0; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: var(--space-2); }
+  .money-activity-subject > span:last-child, .money-activity-account { display: grid; min-width: 0; gap: 2px; }
+  .money-activity-subject strong, .money-activity-account strong { overflow-wrap: anywhere; white-space: normal; }
+  .money-activity-subject small, .money-activity-account small { color: var(--muted); font-size: var(--text-micro); overflow-wrap: anywhere; white-space: normal; }
+  .money-activity-direction { display: grid; width: 24px; height: 24px; place-items: center; border: 1px solid var(--hairline); border-radius: var(--radius-control); color: var(--graphite); }
+  .money-activity-direction[data-direction="in"] { color: var(--success); }
+  .money-activity-date { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+  .money-activity-amount { color: var(--carbon); font-variant-numeric: tabular-nums; font-weight: var(--weight-medium); white-space: nowrap; }
+  .money-activity-amount[data-direction="in"] { color: var(--success); }
+  .money-activity-evidence { color: var(--muted); }
+  .money-activity-category { display: block; overflow-wrap: anywhere; white-space: normal; }
+  .money-activity-category[data-empty] { color: var(--muted); }
+  .money-activity-evidence[data-evidence="needs_review"] { color: var(--warning); font-weight: var(--weight-medium); }
+  .money-activity-evidence[data-evidence="matched"] { color: var(--graphite); }
+  .money-activity-workspace .k-dense-data__table tbody td:has(.money-activity-evidence),
+  .money-activity-workspace .k-dense-data__table tbody td:has(.money-activity-category) { overflow: visible; overflow-wrap: anywhere; text-overflow: clip; white-space: normal; }
+  .money-activity-notice { display: flex; min-height: 48px; min-width: 0; flex: 0 0 auto; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); color: var(--graphite); font-size: var(--text-label); }
+  .money-activity-notice > svg { flex: 0 0 auto; }
+  .money-activity-notice > span { min-width: 12ch; flex: 1 1 24ch; overflow-wrap: anywhere; }
+  .money-activity-notice > a { flex: 0 0 auto; }
+  .money-activity-notice a { color: var(--carbon); font-weight: var(--weight-medium); text-decoration: none; }
+  .money-activity-date-scope { display: inline-flex; min-width: max-content; align-items: center; gap: var(--space-1); color: var(--muted); font-size: var(--text-micro); white-space: nowrap; }
+  .money-activity-date-scope strong { color: var(--graphite); font-weight: var(--weight-medium); }
+  .money-activity-mobile { display: grid; min-width: 0; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); }
+  .money-activity-mobile__context { display: grid; min-width: 0; gap: 1px; color: var(--muted); font-size: var(--text-micro); overflow-wrap: anywhere; white-space: normal; }
+  .money-activity-mobile__context small { color: var(--muted); font-size: var(--text-micro); }
+  .money-activity-mobile__trailing { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--space-3); }
+  .money-activity-intermediate { display: grid; min-width: 0; gap: 2px; }
+  .money-activity-intermediate > span,
+  .money-activity-intermediate > small { overflow-wrap: anywhere; white-space: normal; }
+  .money-activity-intermediate > small { color: var(--muted); font-size: var(--text-micro); }
+  .money-activity-filter-sheet { display: grid; gap: var(--space-4); }
+  .money-activity-filter-sheet .money-activity-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) var(--space-3); }
+  .money-activity-filter-sheet .kora-select__trigger { width: 100%; }
+
+  @container k-collection (max-width: 48rem) {
+    .money-activity-workspace .k-dense-data__table thead th.k-dense-data__compact-head,
+    .money-activity-workspace .k-dense-data__table tbody tr > .k-dense-data__compact-summary { width: 54%; }
+    .money-activity-mobile { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .money-activity-mobile__trailing { justify-content: space-between; }
+  }
+
+  /* The Life rail and a docked inspector can leave a useful, but narrower,
+     ledger than the viewport breakpoint implies. Move secondary columns into
+     the existing intermediate summary before the amount or state can clip. */
+  @container k-collection (min-width: 48.01rem) and (max-width: 76rem) {
+    .money-activity-workspace .k-dense-data__table [data-wide-only] { display: none; }
+    .money-activity-workspace .k-dense-data__table col[data-wide-only] { visibility: collapse; }
+    .money-activity-workspace .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-column { width: 24ch; visibility: visible; }
+    .money-activity-workspace .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-head,
+    .money-activity-workspace .k-dense-data__table[data-has-intermediate-summary="true"] .k-dense-data__compact-summary[data-intermediate="true"] { display: table-cell; }
+    .money-activity-workspace .k-dense-data__intermediate-meta { display: block; color: var(--graphite); font-size: var(--text-meta); line-height: var(--leading-meta); white-space: normal; }
+    .money-activity-workspace .k-dense-data__mobile-meta { display: none; }
+    .money-activity-workspace .k-dense-data__table tbody td[data-align="end"],
+    .money-activity-workspace .k-dense-data__table tbody td:has(.k-badge) { overflow: visible; text-overflow: clip; white-space: nowrap; }
+  }
+
+  .money-transaction-detail { display: grid; align-content: start; gap: var(--space-5); height: 100%; overflow: auto; padding: var(--space-5); }
+  .money-transaction-detail > header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); align-items: start; }
+  .money-transaction-detail > header > div { display: grid; gap: var(--space-1); }
+  .money-transaction-detail > header span { color: var(--muted); font-size: var(--text-label); }
+  .money-transaction-detail h2, .money-transaction-detail h3, .money-transaction-detail p { margin: 0; }
+  .money-transaction-detail h2 { font-size: var(--text-headline); line-height: 1.15; overflow-wrap: anywhere; }
+  .money-transaction-detail h2:focus { outline: 0; }
+  .money-transaction-detail__amount { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-4); border-block: 1px solid var(--hairline-strong); }
+  .money-transaction-detail__amount .money-activity-amount { font-size: var(--text-page); }
+  .money-transaction-detail dl { display: grid; margin: 0; }
+  .money-transaction-detail dl > div { display: grid; min-width: 0; grid-template-columns: minmax(90px, .65fr) minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-transaction-detail dt { color: var(--muted); font-size: var(--text-label); }
+  .money-transaction-detail dd { display: grid; min-width: 0; gap: 2px; margin: 0; color: var(--carbon); }
+  .money-transaction-detail dd small { color: var(--muted); font-size: var(--text-micro); }
+  .money-transaction-detail > section { display: grid; gap: var(--space-3); }
+  .money-transaction-detail > section h3 { font-size: var(--text-body); }
+  .money-transaction-detail > section p { color: var(--muted); font-size: var(--text-label); }
+  .money-transaction-detail ul { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--hairline); list-style: none; }
+  .money-transaction-detail li { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--hairline); }
+  .money-transaction-detail li > div { display: grid; min-width: 0; gap: var(--space-1); }
+  .money-transaction-detail li small { color: var(--muted); font-size: var(--text-micro); }
+  .money-receipt-read li dl { margin-top: var(--space-2); }
+  .money-receipt-read li dl > div { grid-template-columns: 72px minmax(0, 1fr); padding-block: var(--space-2); }
+  .money-receipt-read code { display: block; overflow-wrap: anywhere; color: var(--graphite); font-family: var(--font-mono); font-size: var(--text-micro); white-space: normal; }
+  .money-evidence-limitation { padding-top: var(--space-2); border-top: 1px solid var(--hairline); }
+  .money-transaction-note, .money-receipt-candidates { display: grid; gap: var(--space-2); }
+  .money-transaction-note label { display: grid; gap: var(--space-1); }
+  .money-transaction-note textarea { min-block-size: 6rem; resize: vertical; border: 1px solid var(--hairline-strong); border-radius: var(--radius-control); background: var(--surface); color: var(--carbon); padding: var(--space-2); font: inherit; }
+  .money-transaction-conflict { display: grid; gap: var(--space-3); padding: var(--space-3); border: 1px solid color-mix(in oklch, var(--warning) 28%, var(--hairline)); border-radius: var(--radius-control); background: var(--warning-soft); }
+  .money-transaction-conflict > p { color: var(--graphite); }
+  .money-transaction-conflict dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+  .money-transaction-conflict dl > div { grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--space-1); padding: var(--space-2); border: 0; background: var(--layer-canvas); }
+  .money-transaction-conflict dd span { overflow-wrap: anywhere; color: var(--graphite); white-space: pre-wrap; }
+  .money-transaction-conflict__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .money-receipt-candidates > ol, .money-receipt-candidates li ul { display: grid; gap: var(--space-2); margin: 0; padding-inline-start: var(--space-5); }
+  .money-receipt-candidates > ol > li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); padding-block: var(--space-2); }
+  .money-receipt-candidates > ol > li > div > span, .money-receipt-candidates__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .money-transaction-detail .money-receipt-candidates > ol { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .money-transaction-detail .money-receipt-candidates > ol > li { display: grid; min-width: 0; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--hairline); border-radius: var(--radius-control); background: var(--layer-canvas); }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div { display: grid; min-width: 0; gap: var(--space-1); }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > span { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > span > strong { min-width: 0; overflow-wrap: anywhere; }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > small { display: block; min-width: 0; color: var(--muted); font-size: var(--text-label); line-height: var(--leading-label); overflow-wrap: anywhere; }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > ul { display: grid; gap: var(--space-1); margin: var(--space-1) 0 0; padding: 0 0 0 var(--space-4); border: 0; list-style: disc; }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > ul > li { display: list-item; margin: 0; padding: 0; border: 0; color: var(--graphite); font-size: var(--text-label); line-height: var(--leading-label); }
+  .money-transaction-detail .money-receipt-candidates > ol > li > div > ul > li::marker { color: var(--muted); }
+  .money-transaction-detail .money-receipt-candidates > ol > li > .button { width: 100%; justify-content: center; }
+  .money-transaction-detail details { color: var(--graphite); }
+  .money-transaction-detail summary { min-height: var(--control-md); cursor: pointer; font-size: var(--text-label); }
+  .money-transaction-detail__id { overflow-wrap: anywhere; font-family: var(--font-mono); font-size: var(--text-micro); }
+
+  @media (max-width: 899px) {
+    /* Compact Activity has one scroll owner: the page viewport. Letting the
+       collection create a second fixed-height scroller pushed its pagination
+       footer below the supported 680x620 window. */
+    .money-activity-workspace .k-page-frame__viewport { overflow-y: auto; }
+    .money-activity-workspace .k-page-frame__content {
+      height: auto;
+      min-height: 100%;
+      padding-bottom: var(--pane-scroll-end);
+    }
+    .money-activity-workspace .k-dense-data { flex: 0 0 auto; }
+    .money-activity-workspace .k-dense-data__viewport {
+      min-height: 0;
+      max-height: none;
+      overflow: visible;
+    }
+    .money-activity-views { min-height: 48px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+    .money-activity-panel--controls { padding: var(--space-3) var(--space-4); }
+    .money-activity-panel--collection { padding-inline: var(--space-4); padding-bottom: var(--space-3); }
+    .money-activity-views::-webkit-scrollbar { display: none; }
+    .money-activity-views > a { min-width: 128px; }
+    .money-activity-views > p { display: none; }
+    .money-activity-subject small { display: none; }
+    .money-activity-workspace .k-dense-data__viewport { border-top: 1px solid var(--hairline); }
+    .money-activity-workspace .k-dense-data__table thead { position: static; }
+    .money-activity-notice { align-items: flex-start; padding-block: var(--space-2); }
+    .money-transaction-conflict dl { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 680px) {
+    .money-activity-workspace .k-page-frame__content { gap: var(--space-2); }
+    .money-activity-workspace .k-page-header { gap: var(--space-2); padding-bottom: 0; }
+    .money-activity-workspace .k-page-header__identity { gap: var(--space-1); }
+    .money-activity-workspace .k-page-header__description { display: none; }
+    .money-activity-workspace .money-local-navigation { margin-block: calc(var(--space-1) * -1); }
+    .money-activity-workspace .k-page-toolbar { padding-block: var(--space-1); }
+    .money-activity-workspace .k-page-toolbar__query,
+    .money-activity-workspace .k-page-toolbar__controls { gap: var(--space-1); }
+    .money-activity-workspace .money-activity-panel--controls { gap: var(--space-2); padding-block: var(--space-2); }
+    .money-activity-views > a { min-width: 128px; }
+    .money-activity-filter-sheet .money-activity-filters { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (any-pointer: coarse) { .money-activity-views > a, .money-activity-notice a, .money-transaction-detail summary { min-height: var(--coarse-target); } }
+  @media (prefers-reduced-motion: reduce) { .money-activity-views > a { transition: none; } }
+}

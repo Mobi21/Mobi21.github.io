@@ -1,0 +1,36 @@
+@layer features {
+  .wellbeing-today-specimen {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--canvas);
+  }
+
+  .wellbeing-today-specimen__controls {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-inline: var(--space-4);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--layer-chrome);
+  }
+
+  .wellbeing-today-specimen__controls > div { display: grid; gap: 1px; }
+  .wellbeing-today-specimen__controls span { color: var(--muted); font-size: var(--text-micro); }
+  .wellbeing-today-specimen > .view-bar { position: static; }
+  .wellbeing-today-specimen .wellbeing-today-workspace { min-height: 0; overflow: auto; }
+
+  @media (max-width: 759px) {
+    .wellbeing-today-specimen__controls { align-items: flex-start; padding-block: var(--space-2); }
+    .wellbeing-today-specimen__controls > div span { display: none; }
+  }
+
+  @media (max-width: 479px) {
+    .wellbeing-today-specimen__controls { display: grid; grid-template-columns: 1fr; }
+    .wellbeing-today-specimen__controls .k-select { width: 100%; }
+  }
+}

@@ -8,12 +8,16 @@
   <link rel="canonical" href="https://mobolaji.builtbykora.com/work-writing/websites-as-systems/">
   <title>How I Build Websites as Complete Systems — Mobolaji Ogunbiyi</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=399ff7a">
-  <link rel="stylesheet" href="/work-writing/websites-as-systems/article.css?v=1">
+  <link rel="stylesheet" href="/styles.css?v=20260913">
+  <link rel="stylesheet" href="/work-writing/websites-as-systems/article.css?v=20260913">
   <script src="/script.js" defer></script>
+
+  <meta property="og:title" content="How I Build Websites as Complete Systems — Mobolaji Ogunbiyi">
+  <meta property="og:description" content="How Mobolaji Ogunbiyi designs websites as complete business systems: from customer action and ownership boundaries through operations, recovery, testing, and deployment.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mobolaji.builtbykora.com/work-writing/websites-as-systems/">
+  <meta property="og:image" content="https://mobolaji.builtbykora.com/assets/projects/kora-conversation-workspace.webp">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="systems-writing">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -22,10 +26,7 @@
       <a class="wordmark" href="/">Mobolaji Ogunbiyi</a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>Menu</button>
       <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-nav>
-        <a href="/">Home</a>
-        <a href="/projects/">Projects</a>
-        <a href="/work-writing/" aria-current="page">Work &amp; Writing</a>
-        <a href="/about/">About</a>
+        <a href="/projects/">Work</a><a href="/about/">About</a><a href="/assets/resume.pdf">Resume</a><a href="mailto:bjfifi1@gmail.com">Contact ↗</a>
       </nav>
     </div>
   </header>
@@ -39,10 +40,10 @@
         <div class="systems-hero-grid">
           <div>
             <p class="piece-type">System Design</p>
-            <h1>How I build websites as complete systems</h1>
+            <h1>The system behind the website</h1>
           </div>
           <div class="systems-hero-copy">
-            <p class="systems-deck">I start with the customer’s action and the business’s next action—not a page list or a preferred stack. The architecture should carry that workflow reliably, without owning more than it needs to.</p>
+            <p class="systems-deck">What happens after someone clicks Send, Book, or Order? I design the customer experience and the operations that make its promise real.</p>
             <p class="systems-byline">By Mobolaji Ogunbiyi · A synthesis of five implemented website systems</p>
           </div>
         </div>
@@ -73,7 +74,7 @@
             <h2 id="opening-title">The word “website” hides the engineering problem</h2>
             <p>A public interface is only the visible edge of a business workflow. A visitor clicks <em>Send</em>, <em>Book</em>, or <em>Order</em>; after that, the system still has to validate intent, place the resulting work somewhere authoritative, notify the right person, expose a useful operational state, and recover if one of those steps fails.</p>
             <p>I learned to treat those downstream responsibilities as part of the website decision. That does not mean giving every client a database, admin dashboard, or custom backend. Kora Studio’s own inquiry flow intentionally sends one validated owner notification and stores nothing. Zube’s Grub needs a very different boundary because payments, kitchen work, fulfillment, and provider reconciliation continue long after checkout.</p>
-            <p>This article explains the method that recurs across the systems I have built. It is not a fixed process or a universal stack. Each example is here because its checked-in implementation makes a different tradeoff visible.</p>
+            <p>These examples show how the method changes with the client: a focused inquiry form, a booking operation, and a payment-backed ordering system need different boundaries.</p>
           </section>
 
           <section id="workflow" aria-labelledby="workflow-title">
@@ -107,7 +108,7 @@
                 </svg>
               </div>
               <figcaption id="flow-caption">The interface is one link in a customer-to-operator chain. A complete design includes the return path when the chain breaks.</figcaption>
-              <details class="diagram-transcript" open>
+              <details class="diagram-transcript">
                 <summary>Text equivalent</summary>
                 <ol>
                   <li>A customer arrives with an intent: ask, book, or buy.</li>
@@ -176,7 +177,7 @@
                 </svg>
               </div>
               <figcaption id="ownership-caption">Ownership is a contract, not a technology choice. Some systems legitimately omit the provider or operational store entirely.</figcaption>
-              <details class="diagram-transcript" open>
+              <details class="diagram-transcript">
                 <summary>Text equivalent</summary>
                 <ul>
                   <li><strong>Browser:</strong> temporary input and presentation state; never privileged commercial or operational authority.</li>
@@ -224,7 +225,7 @@
                 </svg>
               </div>
               <figcaption id="decision-caption">Architecture grows when the workflow acquires durable state, operational ownership, external authority, or recovery obligations.</figcaption>
-              <details class="diagram-transcript" open>
+              <details class="diagram-transcript">
                 <summary>Text equivalent</summary>
                 <ol>
                   <li>If the click needs no server work, use static delivery or an external handoff.</li>
@@ -252,7 +253,7 @@
                 </svg>
               </div>
               <figcaption id="spectrum-caption">This is a responsibility spectrum, not a maturity ranking. Kora Studio is deliberately smaller because its public workflow ends earlier. Aboh’s position describes the implemented repository architecture, not a claim about client adoption or business outcomes.</figcaption>
-              <details class="diagram-transcript" open>
+              <details class="diagram-transcript">
                 <summary>Text equivalent</summary>
                 <ol>
                   <li><strong>Kora Studio:</strong> schema validation, honeypot, rate limit, one server-side email notification, and no lead persistence.</li>
@@ -352,7 +353,7 @@
                 </svg>
               </div>
               <figcaption id="verification-caption">The release loop follows the same system boundary as the implementation. A browser test cannot replace provider verification; a provider test cannot prove the customer can complete the flow.</figcaption>
-              <details class="diagram-transcript" open>
+              <details class="diagram-transcript">
                 <summary>Text equivalent</summary>
                 <ol>
                   <li>Verify domain contracts and schemas locally.</li>
@@ -393,6 +394,6 @@
     </article>
   </main>
 
-  <footer class="site-footer shell"><p>© <span data-year>2026</span> Mobolaji Ogunbiyi</p><a href="mailto:bjfifi1@gmail.com">Contact ↗</a></footer>
+  <footer class="site-footer shell"><div><a class="footer-invite" href="mailto:bjfifi1@gmail.com">Let’s build something useful. <span aria-hidden="true">↗</span></a><p>Software engineering & applied AI · Graduating May 2027</p></div><div class="footer-links"><a href="/assets/resume.pdf">Resume</a><a href="https://github.com/Mobi21">GitHub</a><a href="https://www.linkedin.com/in/mobolaji-ogunbiyi-355a53287/">LinkedIn</a><a href="/work-writing/">Writing</a></div><p class="copyright">© 2026 Mobolaji Ogunbiyi · Built with care in Maryland.</p></footer>
 </body>
 </html>

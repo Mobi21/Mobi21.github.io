@@ -1,0 +1,595 @@
+@layer reset, tokens, base, components, features, utilities;
+
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+    --font-ui: "Mona Sans Variable", "Segoe UI Variable", "Segoe UI", sans-serif;
+    --font-mono: "Cascadia Code", Consolas, monospace;
+
+    /* ── Neutral planes ─────────────────────────────────────────────── */
+    --color-window: oklch(0.905 0.022 285);
+    --color-chrome: oklch(0.935 0.018 285);
+    --color-canvas: oklch(0.975 0.012 285);
+    --color-surface: oklch(0.958 0.012 285);
+    --color-surface-raised: oklch(0.995 0.002 285);
+    --color-surface-sunken: oklch(0.925 0.022 285);
+    --color-surface-active: oklch(0.925 0.026 285);
+    --color-surface-overlay: oklch(1 0 285);
+    --canvas: var(--color-canvas);
+    --field: var(--color-surface-raised);
+    --surface: var(--color-surface);
+    --surface-strong: var(--color-surface-active);
+
+    /* ── Ink ────────────────────────────────────────────────────────── */
+    --color-ink: oklch(0.22 0.035 292);
+    --color-ink-secondary: oklch(0.42 0.035 292);
+    --color-ink-subtle: oklch(0.46 0.03 292);
+    --carbon: var(--color-ink);
+    --graphite: var(--color-ink-secondary);
+    /* Secondary text uses the semantic ink palette; contrast is verified
+       against every authored plane in tokens.test.ts. */
+    --muted: var(--color-ink-subtle);
+    --text: var(--color-ink);
+
+    /* ── Lines ──────────────────────────────────────────────────────── */
+    --color-border-subtle: oklch(0.875 0.022 285);
+    --color-border-strong: oklch(0.76 0.03 285);
+    --hairline: var(--color-border-subtle);
+    --hairline-strong: var(--color-border-strong);
+    /* Editable control edges need more contrast than decorative separators. */
+    --control-border: color-mix(in oklch, var(--graphite) 65%, var(--field));
+
+    /* ── Signal ─────────────────────────────────────────────────────── */
+    --color-focus: oklch(0.56 0.21 25);
+    --color-action: oklch(0.68 0.16 42);
+    --color-action-hover: oklch(0.63 0.17 38);
+    --color-on-action: oklch(0.20 0.035 292);
+    --color-action-soft: oklch(0.94 0.045 35);
+    --color-action-ink: oklch(0.43 0.16 30);
+    --signal: var(--color-action);
+    --signal-hover: var(--color-action-hover);
+    /* Foreground for filled primary actions. Destructive actions have their
+       own pair because their background has a different luminance. */
+    --on-signal: var(--color-on-action);
+    --signal-soft: var(--color-action-soft);
+    --signal-ink: var(--color-action-ink);
+
+    /* ── Semantic state. Only for state with no other honest signal. ─── */
+    --color-assistant: oklch(0.51 0.13 345);
+    --color-work: oklch(0.50 0.10 190);
+    --color-brain: oklch(0.52 0.12 300);
+    --color-life: oklch(0.49 0.11 145);
+    --color-calendar: oklch(0.50 0.12 235);
+    --color-positive: oklch(0.48 0.13 145);
+    --color-warning: oklch(0.48 0.12 75);
+    --color-warning-ink: oklch(0.35 0.10 75);
+    --color-warning-soft: oklch(0.94 0.03 75);
+    --color-danger: oklch(0.52 0.20 25);
+    --color-on-danger: oklch(1 0 0);
+    --color-danger-ink: oklch(0.42 0.16 22);
+    --color-info: oklch(0.49 0.13 240);
+    --assistant: var(--color-assistant);
+    --work: var(--color-work);
+    --brain: var(--color-brain);
+    --life: var(--color-life);
+    --calendar: var(--color-calendar);
+    --positive: var(--color-positive);
+    --success: var(--color-positive);
+    --warning: var(--color-warning);
+    --warning-ink: var(--color-warning-ink);
+    --danger: var(--color-danger);
+    --on-danger: var(--color-on-danger);
+    --danger-ink: var(--color-danger-ink);
+    --info: var(--color-info);
+    --assistant-soft: color-mix(in oklch, var(--assistant) 11%, var(--field));
+    --work-soft: color-mix(in oklch, var(--work) 10%, var(--field));
+    --brain-soft: color-mix(in oklch, var(--brain) 10%, var(--field));
+    --life-soft: color-mix(in oklch, var(--life) 10%, var(--field));
+    --calendar-soft: color-mix(in oklch, var(--calendar) 10%, var(--field));
+    --positive-soft: color-mix(in oklch, var(--positive) 12%, var(--field));
+    --warning-soft: var(--color-warning-soft);
+    --danger-soft: color-mix(in oklch, var(--danger) 11%, var(--field));
+    --info-soft: color-mix(in oklch, var(--info) 11%, var(--field));
+
+    /* Fixed categories classify records; they never communicate status. */
+    --category-1: oklch(0.46 0.13 255);
+    --category-1-soft: color-mix(in oklch, var(--category-1) 12%, var(--field));
+    --category-2: oklch(0.44 0.12 155);
+    --category-2-soft: color-mix(in oklch, var(--category-2) 12%, var(--field));
+    --category-3: oklch(0.46 0.14 300);
+    --category-3-soft: color-mix(in oklch, var(--category-3) 12%, var(--field));
+    --category-4: oklch(0.46 0.11 75);
+    --category-4-soft: color-mix(in oklch, var(--category-4) 12%, var(--field));
+    --category-5: oklch(0.44 0.10 200);
+    --category-5-soft: color-mix(in oklch, var(--category-5) 12%, var(--field));
+    --category-6: oklch(0.46 0.13 340);
+    --category-6-soft: color-mix(in oklch, var(--category-6) 12%, var(--field));
+    /* Page slices can rebind these two roles to their workspace atmosphere. */
+    --selection: var(--assistant);
+    --selection-soft: var(--assistant-soft);
+
+    /* ── Surface hierarchy ──────────────────────────────────────────────
+       Chrome is DIMMER than the canvas, not brighter. Orientation and
+       navigation should recede once the user has arrived; the pane where the
+       work happens takes precedence. Every chrome surface previously measured
+       the identical rgb(29,29,32) — nav rail, header, status bar and the
+       conversation rail all one value — so a claimed three-plane system was
+       delivering two and separating everything else with hairlines. */
+    --layer-window: var(--color-window);
+    --layer-chrome: var(--color-chrome);
+    --layer-canvas: var(--color-canvas);
+    --layer-raised: var(--color-surface-raised);
+    --layer-sunken: var(--color-surface-sunken);
+    --layer-overlay: var(--color-surface-overlay);
+    --layer-well: var(--color-surface);
+
+    /* ── Elevation ──────────────────────────────────────────────────── */
+    --shadow-hairline: 0 1px 2px -1px oklch(0.22 0.035 292 / 0.10), 0 1px 1px -1px oklch(0.22 0.035 292 / 0.06);
+    --shadow-raised: 0 3px 8px -4px oklch(0.22 0.035 292 / 0.14), 0 1px 3px -2px oklch(0.22 0.035 292 / 0.08);
+    --shadow-panel: 0 14px 36px -12px oklch(0.22 0.035 292 / 0.22), 0 4px 10px -6px oklch(0.22 0.035 292 / 0.12);
+    --shadow-modal: 0 28px 68px -22px oklch(0.22 0.035 292 / 0.32), 0 8px 18px -10px oklch(0.22 0.035 292 / 0.16);
+    --shadow-floating: var(--shadow-panel);
+    --shadow-overlay: var(--shadow-panel);
+    --scrim: oklch(0.16 0.025 292 / 0.46);
+
+    /* Focus is a ring on the interactive boundary, not a glow. The previous
+       28%-of-signal wash measured 1.56:1 against the light canvas, against a
+       3:1 WCAG floor, and its alpha ignored the theme entirely. Full-strength
+       signal measures 4.83:1 light / 5.27:1 dark. The inner 1px in the field
+       colour is what keeps a solid ring from reading as a thickened border.
+       --focus-inset exists because six surfaces sit flush against a container
+       edge and have no room to paint outward; `inset var(--focus)` cannot work,
+       since only the first shadow in a list would take the keyword. */
+    --focus-ring: 2px;
+    --focus: 0 0 0 1px var(--field), 0 0 0 3px var(--color-focus);
+    --focus-inset: inset 0 0 0 1px var(--field), inset 0 0 0 3px var(--color-focus);
+
+    /* Panel bevel: what makes a surface read as built rather than printed. */
+    --edge-top: color-mix(in oklch, var(--color-ink) 7%, transparent);
+    --edge-bottom: color-mix(in oklch, var(--color-ink) 12%, transparent);
+
+    /* ── Space — 4pt grid, for LAYOUT ───────────────────────────────── */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* ── Control insets — NOT the layout grid ───────────────────────────
+       Optically derived from control height and cap height, which is why they
+       are off the 4pt grid and correct anyway: a 36px button with 12px side
+       padding reads cramped and with 16px reads loose. DESIGN.md previously
+       declared one spacing rule and then specified these three values in its
+       own component table, which is why ~700 off-grid literals accumulated
+       with no rule able to catch them.
+
+       The rule is now: layout spacing comes from --space-*, control insets come
+       from --inset-*, and nothing is a bare literal. 1px hairlines and
+       --focus-ring are exempt as structural rather than spatial. */
+    --inset-badge: 7px;    /* 20px badge */
+    --inset-chip: 10px;    /* 26px chip */
+    --inset-control: 14px; /* 36px button, input, select */
+    --inset-row: var(--space-3);
+
+    /* ── Type — fixed product ladder; reading is prose-only ──────────── */
+    --text-micro: 0.6875rem;
+    --text-label: 0.75rem;
+    --text-meta: 0.75rem;
+    --text-body: 0.875rem;
+    --text-reading: 1rem;
+    --text-reading-heading: 1.25rem;
+    --text-section: 1.125rem;
+    --text-page: 1.75rem;
+    --text-page-title: var(--text-page);
+    --text-moment: 1.875rem;
+    /* Compatibility name for page titles while the shell slice migrates. */
+    --text-headline: var(--text-page);
+
+    /* Prose only — headings inside a message Kora wrote.
+       Deliberately not part of the chrome scale and named so it cannot be
+       borrowed for one: a heading in an answer must outrank the paragraph under
+       it while staying subordinate to the view title above it, which is the
+       single case the four chrome steps cannot express. Reaching for this in a
+       toolbar or a card is the 17px title that was removed from the scale. */
+    --text-prose-title: var(--text-section);
+
+    --leading-micro: 1rem;
+    --leading-label: 1.125rem;
+    --leading-meta: 1.125rem;
+    --leading-body: 1.25rem;
+    --leading-reading: 1.6875rem;
+    --leading-section: 1.5rem;
+    --leading-page: 2rem;
+    --leading-moment: 2.125rem;
+    --leading-title: var(--leading-section);
+    --leading-headline: var(--leading-page);
+
+    /* Tracking is size-specific. One value is wrong somewhere on any scale. */
+    --track-micro: 0.005em;
+    --track-label: 0;
+    --track-body: 0;
+    --track-section: -0.01em;
+    --track-page: -0.015em;
+    --track-moment: -0.02em;
+    --track-title: var(--track-section);
+    --track-headline: var(--track-page);
+
+    /* ── Weight — body, controls, sections, emphasis ────────────────── */
+    --weight-normal: 440;
+    --weight-medium: 560;
+    --weight-section: 620;
+    --weight-strong: 650;
+
+    /* ── Radius ─────────────────────────────────────────────────────── */
+    --radius-mark: 1px;
+    --radius-hair: 6px;
+    --radius-control: 8px;
+    --radius-overlay: 12px;
+    --radius-card: 14px;
+    --radius-object: var(--radius-card);
+    --radius-panel: var(--radius-overlay);
+    --radius-window: var(--radius-overlay);
+    --radius-pill: 999px;
+
+    /* ── Motion ─────────────────────────────────────────────────────── */
+    --dur-press: 90ms;
+    --dur-state: 140ms;
+    --dur-enter: 220ms;
+    --dur-exit: 165ms;
+    --dur-move: 320ms;
+    --dur-instant: var(--dur-state);
+    --dur-quick: var(--dur-enter);
+    --dur-base: 250ms;
+    --dur-slow: var(--dur-move);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+
+    /* ── Z-index — local ordering stays inside its component context;
+       overlays use the global scale and a scrim outranks what it dims. ── */
+    --z-local-underlay: 0;
+    --z-local-content: 1;
+    --z-local-control: 2;
+    --z-local-floating: 3;
+    --z-local-sticky: 5;
+    --z-local-top: 8;
+    --z-base: 0;
+    --z-sticky: 10;
+    --z-rail: 20;
+    --z-scrim: 30;
+    --z-panel: 40;
+    --z-overlay: 50;
+    --z-modal: 60;
+    --z-popover: 70;
+    --z-toast: 80;
+    --z-tooltip: 90;
+    --z-critical: 100;
+
+    /* ── Control and icon metrics ───────────────────────────────────── */
+    --control-sm: 32px;
+    --control-md: 40px;
+    --control-lg: 48px;
+    --coarse-target: 44px;
+    --icon-sm: 16px;
+    --icon-md: 20px;
+    --icon-lg: 24px;
+    --icon-stroke: 1.5;
+    --content-narrow: 720px;
+    --content-wide: 960px;
+    --page-gutter: var(--space-5);
+    --page-gutter-compact: var(--space-4);
+    --window-min-width: 680px;
+    --window-min-height: 620px;
+    --table-row: 32px;
+
+    /* ── Shell — global navigation menu and workspace-local sidebars ─── */
+    --navigator-width: 320px;
+    --navigator-menu-width: 256px;
+    --conversation-rail-width: 224px;
+    --window-bar-height: 44px;
+    --view-bar-height: 48px;
+    --inspector-width: 320px;
+    /* The Work detail inspector reserves its own column width. */
+    --work-inspector-width: 420px;
+
+    /* Retained: the old rail/header tokens are still referenced by surfaces the
+       shell rebuild has not reached yet. They go with slice 10. */
+    --header-height: 36px;
+    --rail-width: 236px;
+
+    /* ── Pane geometry ──────────────────────────────────────────────────
+       Named because the shared ledger/detail grammar in Brain, Work, and
+       Settings needs one value to reference rather than each page picking a
+       number. --ledger-width was implemented as four different values
+       (250px, 280px, 294px, 320px) across three Brain stylesheets. */
+    --ledger-width: 340px;
+    /* Narrow-viewport ledger. Was 286/290/294/310px across four stylesheets. */
+    --ledger-width-compact: 300px;
+    --pane-toolbar-height: 40px;
+    --detail-measure: 720px;
+
+    /* Clearance below the last row of a scrolling pane, so content does not end
+       flush against the frame. Was 72px or 80px depending on the file. */
+    --pane-scroll-end: var(--space-8);
+
+    /* ── Density — compact metrics; appearance defaults to comfortable ─ */
+    --row-single: 40px;
+    --row-double: 52px;
+    --row-pad-x: var(--space-3);
+  }
+
+  :root[data-density="comfortable"] {
+    --row-single: 48px;
+    --row-double: 60px;
+    --row-pad-x: var(--space-4);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      /* Cool ink, not a violet field: hue is only perceptible in aggregate at
+         this chroma, while 0.03 lightness steps keep each working plane clear. */
+      --color-window: oklch(0.12 0.008 265);
+      --color-chrome: oklch(0.15 0.008 265);
+      --color-canvas: oklch(0.21 0.009 265);
+      --color-surface: oklch(0.24 0.010 265);
+      --color-surface-raised: oklch(0.27 0.011 265);
+      --color-surface-sunken: oklch(0.18 0.009 265);
+      --color-surface-active: oklch(0.30 0.012 265);
+      --color-surface-overlay: oklch(0.30 0.012 265);
+      --color-ink: oklch(0.94 0.010 85);
+      --color-ink-secondary: oklch(0.77 0.010 265);
+      --color-ink-subtle: oklch(0.69 0.010 265);
+      --color-border-subtle: oklch(0.38 0.012 265);
+      --color-border-strong: oklch(0.50 0.015 265);
+      --color-focus: oklch(0.74 0.18 28);
+      --color-action: oklch(0.73 0.15 42);
+      --color-action-hover: oklch(0.78 0.14 42);
+      --color-on-action: oklch(0.19 0.035 292);
+      --color-action-soft: oklch(0.29 0.065 25);
+      --color-action-ink: oklch(0.84 0.09 35);
+      --color-assistant: oklch(0.76 0.13 345);
+      --color-work: oklch(0.76 0.10 190);
+      --color-brain: oklch(0.76 0.12 300);
+      --color-life: oklch(0.76 0.11 145);
+      --color-calendar: oklch(0.77 0.11 235);
+      --color-positive: oklch(0.76 0.13 145);
+      --color-warning: oklch(0.79 0.13 75);
+      --color-warning-ink: oklch(0.86 0.10 75);
+      --color-warning-soft: oklch(0.31 0.045 75);
+      --color-danger: oklch(0.72 0.18 25);
+      --color-on-danger: oklch(0.19 0.035 292);
+      --color-danger-ink: oklch(0.83 0.10 22);
+      --color-info: oklch(0.77 0.12 235);
+      --category-1: oklch(0.76 0.13 255);
+      --category-2: oklch(0.76 0.12 155);
+      --category-3: oklch(0.77 0.14 300);
+      --category-4: oklch(0.79 0.11 75);
+      --category-5: oklch(0.76 0.10 200);
+      --category-6: oklch(0.77 0.13 340);
+      --shadow-hairline: 0 1px 2px -1px oklch(0.04 0.006 265 / 0.38), 0 1px 1px -1px oklch(0.04 0.006 265 / 0.24);
+      --shadow-raised: 0 3px 8px -4px oklch(0.04 0.006 265 / 0.48), 0 1px 3px -2px oklch(0.04 0.006 265 / 0.34);
+      --shadow-panel: 0 14px 36px -12px oklch(0.04 0.006 265 / 0.62), 0 4px 10px -6px oklch(0.04 0.006 265 / 0.44);
+      --shadow-modal: 0 28px 68px -22px oklch(0.04 0.006 265 / 0.72), 0 8px 18px -10px oklch(0.04 0.006 265 / 0.52);
+      --shadow-floating: var(--shadow-panel);
+      --shadow-overlay: var(--shadow-panel);
+      --scrim: oklch(0.06 0.006 265 / 0.58);
+      --edge-top: color-mix(in oklch, var(--color-ink) 9%, transparent);
+      --edge-bottom: color-mix(in oklch, oklch(0.04 0.006 265) 45%, transparent);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-window: oklch(0.12 0.008 265);
+    --color-chrome: oklch(0.15 0.008 265);
+    --color-canvas: oklch(0.21 0.009 265);
+    --color-surface: oklch(0.24 0.010 265);
+    --color-surface-raised: oklch(0.27 0.011 265);
+    --color-surface-sunken: oklch(0.18 0.009 265);
+    --color-surface-active: oklch(0.30 0.012 265);
+    --color-surface-overlay: oklch(0.30 0.012 265);
+    --color-ink: oklch(0.94 0.010 85);
+    --color-ink-secondary: oklch(0.77 0.010 265);
+    --color-ink-subtle: oklch(0.69 0.010 265);
+    --color-border-subtle: oklch(0.38 0.012 265);
+    --color-border-strong: oklch(0.50 0.015 265);
+    --color-focus: oklch(0.74 0.18 28);
+    --color-action: oklch(0.73 0.15 42);
+    --color-action-hover: oklch(0.78 0.14 42);
+    --color-on-action: oklch(0.19 0.035 292);
+    --color-action-soft: oklch(0.29 0.065 25);
+    --color-action-ink: oklch(0.84 0.09 35);
+    --color-assistant: oklch(0.76 0.13 345);
+    --color-work: oklch(0.76 0.10 190);
+    --color-brain: oklch(0.76 0.12 300);
+    --color-life: oklch(0.76 0.11 145);
+    --color-calendar: oklch(0.77 0.11 235);
+    --color-positive: oklch(0.76 0.13 145);
+    --color-warning: oklch(0.79 0.13 75);
+    --color-warning-ink: oklch(0.86 0.10 75);
+    --color-warning-soft: oklch(0.31 0.045 75);
+    --color-danger: oklch(0.72 0.18 25);
+    --color-on-danger: oklch(0.19 0.035 292);
+    --color-danger-ink: oklch(0.83 0.10 22);
+    --color-info: oklch(0.77 0.12 235);
+    --category-1: oklch(0.76 0.13 255);
+    --category-2: oklch(0.76 0.12 155);
+    --category-3: oklch(0.77 0.14 300);
+    --category-4: oklch(0.79 0.11 75);
+    --category-5: oklch(0.76 0.10 200);
+    --category-6: oklch(0.77 0.13 340);
+    --shadow-hairline: 0 1px 2px -1px oklch(0.04 0.006 265 / 0.38), 0 1px 1px -1px oklch(0.04 0.006 265 / 0.24);
+    --shadow-raised: 0 3px 8px -4px oklch(0.04 0.006 265 / 0.48), 0 1px 3px -2px oklch(0.04 0.006 265 / 0.34);
+    --shadow-panel: 0 14px 36px -12px oklch(0.04 0.006 265 / 0.62), 0 4px 10px -6px oklch(0.04 0.006 265 / 0.44);
+    --shadow-modal: 0 28px 68px -22px oklch(0.04 0.006 265 / 0.72), 0 8px 18px -10px oklch(0.04 0.006 265 / 0.52);
+    --shadow-floating: var(--shadow-panel);
+    --shadow-overlay: var(--shadow-panel);
+    --scrim: oklch(0.06 0.006 265 / 0.58);
+    --edge-top: color-mix(in oklch, var(--color-ink) 9%, transparent);
+    --edge-bottom: color-mix(in oklch, oklch(0.04 0.006 265) 45%, transparent);
+  }
+
+  :root[data-theme="light"] { color-scheme: light; }
+}
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body, #root { width: 100%; min-width: 0; height: 100%; margin: 0; }
+  button, input, textarea, select { font: inherit; }
+  button:not(.button) { color: inherit; }
+
+  /* ── The elements that were rendering at browser defaults ────────────────
+     Measured in the running app: <strong>, <b> and <h1>–<h6> all painted at
+     font-weight 700, and unstyled headings at UA sizes (30 / 22.5 / 17.55px)
+     with UA margins (20.1 / 18.675 / 17.55px).
+
+     This is why the interface read as flat despite a documented 400/500/600
+     scale: every row title and every heading was already at 700, so the
+     deliberate 500-vs-600 distinction had nothing left to distinguish. Fixing
+     one rule here changes hierarchy on every screen in the product. */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: var(--weight-strong);
+    line-height: var(--leading-title);
+    text-wrap: balance;
+  }
+
+  strong, b, th, optgroup { font-weight: var(--weight-strong); }
+
+  /* UA margins on flow content are off-grid (15px) and leak wherever a feature
+     has not overridden them. Spacing is owned by layout, not by the UA.
+
+     Deliberately NOT resetting `list-style` or list padding here: markdown from
+     Streamdown renders real <ul>/<ol> in the transcript, Pages, People, Sources
+     and Outputs, and a global `list-style: none` would silently strip the bullets
+     from every one of them. The twelve list containers that genuinely want no
+     markers already opt out in their own stylesheets. */
+  p, dl, dd, blockquote, figure, pre { margin: 0; }
+  p, li, dd, blockquote { text-wrap: pretty; }
+
+  hr { margin: 0; border: 0; border-top: 1px solid var(--hairline); }
+}
+
+@layer base {
+  body {
+    overflow: hidden;
+    background: var(--canvas);
+    color: var(--carbon);
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    font-weight: var(--weight-normal);
+    line-height: var(--leading-body);
+
+    /* Windows/Chromium notes:
+       - optimizeLegibility forces kerning and ligature lookups on every layout
+         pass, with measurable jank on long lists. Feature settings below get
+         the typographic wins deliberately instead.
+       - -webkit-font-smoothing is macOS-only; where it applies on Windows it
+         thins strokes below the legibility threshold at 12-13px.
+       - Weight comes from font-weight, never font-variation-settings, so the
+         browser keeps its variable-font optimisations and font-synthesis works. */
+    font-optical-sizing: auto;
+    font-synthesis: none;
+    font-feature-settings: "cv05" 1, "ss03" 1, "zero" 1, "calt" 1;
+    text-rendering: auto;
+
+    transition: background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  }
+
+  button, a, input, textarea, select, summary { -webkit-tap-highlight-color: transparent; }
+  .spin { animation: spin 850ms linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  :where(
+    button,
+    a[href],
+    input,
+    textarea,
+    select,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline: 0;
+    box-shadow: var(--focus);
+  }
+
+  @media (forced-colors: active) {
+    :where(
+      button,
+      a[href],
+      input,
+      textarea,
+      select,
+      summary,
+      [tabindex]:not([tabindex="-1"])
+    ):focus-visible {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+      box-shadow: none;
+    }
+  }
+  ::selection { background: var(--signal-soft); color: var(--signal-ink); }
+
+  time,
+  .k-numeric,
+  [data-numeric] { font-variant-numeric: tabular-nums; }
+
+  /* Reduced motion is handled once, here. Per-file blocks cannot be complete:
+     this sits in `base`, so by cascade-layer order it outranks every rule in
+     `components` and `features` without needing to enumerate them.
+     Reduced motion means gentler, not absent. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    /* Ambient state indicators stop entirely and keep their resting shape,
+       so the mark still reads as present. */
+    .presence__core,
+    .presence__orbit,
+    .conversation-rail-row__open i,
+    .live-bar-cascade i,
+    .work-group__live-label::after,
+    .activity-row__live,
+    .today-activity__state--running,
+    .browser-connection__pulse[data-state="live"]::after { animation: none !important; }
+
+    .live-bar-cascade i { opacity: .55; transform: scaleY(.55); }
+    .live-bar-cascade i:nth-child(2) { opacity: .8; transform: scaleY(1); }
+    .live-bar-cascade i:nth-child(3) { opacity: .65; transform: scaleY(.72); }
+    .work-group__live-label::after { opacity: 0; transform: none; }
+
+    /* Loading sweeps hold a legible resting shape rather than vanishing. This
+       originated in the retired Applications surface; reduced
+       motion is handled once, here, so it can never be partial. */
+    .applications__loading-line::after {
+      animation: none !important;
+      opacity: .65;
+      transform: none;
+    }
+
+    /* Drawers keep a brief opacity cue but drop positional travel. */
+    .kora-sheet {
+      transition-property: opacity !important;
+      transition-duration: var(--dur-quick) !important;
+    }
+    .kora-sheet[data-side][data-starting-style],
+    .kora-sheet[data-side][data-ending-style] { transform: none !important; }
+
+    .navigation-popover {
+      transition-property: opacity !important;
+      transition-duration: var(--dur-quick) !important;
+    }
+    .navigation-popover[data-starting-style],
+    .navigation-popover[data-ending-style] { transform: none !important; }
+
+    /* Busy state remains visible without continuous rotation. */
+    .spin { animation: none !important; }
+  }
+}

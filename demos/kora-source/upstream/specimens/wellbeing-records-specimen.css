@@ -1,0 +1,7 @@
+.wellbeing-records-specimen { min-height: 100dvh; display: grid; grid-template-rows: auto auto minmax(0, 1fr); background: var(--canvas); color: var(--carbon); }
+.wellbeing-records-specimen__controls { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--hairline); background: var(--layer-chrome); }
+.wellbeing-records-specimen__controls > div { display: grid; gap: 2px; }
+.wellbeing-records-specimen__controls strong { font-size: var(--text-label); }
+.wellbeing-records-specimen__controls span { color: var(--muted); font-size: var(--text-meta); }
+.wellbeing-records-specimen > .wellbeing-records-workspace { min-height: 0; }
+@media (max-width: 680px) { .wellbeing-records-specimen__controls { align-items: stretch; flex-direction: column; } }

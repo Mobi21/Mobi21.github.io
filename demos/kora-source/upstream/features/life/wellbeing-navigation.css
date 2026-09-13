@@ -1,0 +1,154 @@
+.wellbeing-navigation__title {
+  display: grid;
+  gap: var(--space-1);
+  color: var(--carbon);
+  font-size: var(--text-body);
+  font-weight: var(--weight-section);
+  letter-spacing: normal;
+}
+
+.wellbeing-navigation .k-workspace-local-nav__groups {
+  gap: var(--space-6);
+}
+
+.wellbeing-navigation .k-workspace-local-nav__group {
+  gap: var(--space-2);
+}
+
+.wellbeing-navigation .k-workspace-local-nav__link {
+  position: relative;
+}
+
+.wellbeing-navigation .k-workspace-local-nav__link.is-active {
+  border-color: color-mix(in srgb, var(--life) 22%, var(--hairline));
+  background: color-mix(in srgb, var(--life) 7%, var(--layer-raised));
+  box-shadow: inset 2px 0 color-mix(in srgb, var(--life) 75%, transparent);
+}
+
+.wellbeing-navigation__title small {
+  color: var(--muted);
+  font-size: var(--text-meta);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-meta);
+}
+
+.wellbeing-navigation__item {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wellbeing-navigation__item > svg {
+  flex: 0 0 auto;
+  color: var(--life);
+}
+
+.wellbeing-destination-picker {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-panel);
+  background: var(--layer-chrome);
+}
+
+.wellbeing-destination-picker__context {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--life);
+}
+
+.wellbeing-destination-picker__context > span {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.wellbeing-destination-picker__context strong {
+  color: var(--carbon);
+  font-size: var(--text-label);
+  font-weight: var(--weight-section);
+}
+
+.wellbeing-destination-picker__context small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--text-meta);
+  line-height: var(--leading-meta);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wellbeing-destination-picker__control {
+  min-width: 0;
+}
+
+.wellbeing-destination-picker .kora-select__trigger {
+  width: 100%;
+  min-height: var(--control-lg);
+}
+
+.wellbeing-frame .wellbeing-destination-picker {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .wellbeing-frame .k-page-frame__content > .k-page-header {
+    grid-row: 1;
+    grid-column: 1;
+    padding-right: var(--inspector-width);
+  }
+
+  .wellbeing-frame .wellbeing-destination-picker {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    grid-template-columns: minmax(220px, 280px);
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+    justify-self: end;
+    justify-content: end;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    z-index: var(--z-local-control);
+  }
+
+  .wellbeing-destination-picker__context { display: none; }
+
+  /* LifeLayout owns responsive domain navigation in the integrated app.
+     Keep the picker only for standalone qualification harnesses. */
+  .life-workspace[data-life-scope="wellbeing"] .wellbeing-frame .wellbeing-destination-picker {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .wellbeing-frame .k-page-frame__content > .k-page-header {
+    grid-row: auto;
+    padding-right: 0;
+  }
+
+  .wellbeing-frame .wellbeing-destination-picker {
+    grid-row: auto;
+    grid-column: auto;
+    justify-self: stretch;
+  }
+
+  .wellbeing-destination-picker {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+}

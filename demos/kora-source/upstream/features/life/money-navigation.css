@@ -1,0 +1,23 @@
+@layer features {
+  .money-local-nav { min-width: 0; overflow-x: auto; border-bottom: 1px solid var(--hairline); scrollbar-width: none; }
+  .money-local-picker { display: none; }
+  .money-local-nav::-webkit-scrollbar { display: none; }
+  .money-local-nav ul { display: flex; min-width: max-content; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+  .money-local-nav a { position: relative; display: inline-flex; min-height: var(--control-md); align-items: center; padding-inline: var(--space-3); color: var(--muted); font-size: var(--text-label); font-weight: var(--weight-medium); text-decoration: none; transition: color var(--dur-instant) var(--ease-out), background-color var(--dur-instant) var(--ease-out); }
+  .money-local-nav a:hover { color: var(--carbon); background: var(--surface); }
+  .money-local-nav a:active { background: var(--layer-raised); }
+  .money-local-nav a.active { color: var(--carbon); }
+  .money-local-nav a.active::after { position: absolute; right: var(--space-3); bottom: -1px; left: var(--space-3); height: 2px; border-radius: var(--radius-pill); background: var(--life); content: ""; }
+  .money-local-nav a:focus-visible { z-index: var(--z-local-content); outline: 0; box-shadow: var(--focus-inset); }
+  @media (max-width: 759px) {
+    .money-local-nav { display: none; }
+    .money-local-picker { display: block; width: min(100%, 320px); }
+    .money-local-picker .kora-select__trigger { width: 100%; justify-content: space-between; }
+  }
+  /* At true 200% reflow the view bar has room for the two familiar icons, not
+     two duplicated text labels. aria-label remains the control name. */
+  @media (max-width: 479px) {
+    .money-viewbar-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  }
+  @media (any-pointer: coarse) { .money-local-nav a { min-height: var(--coarse-target); } }
+}

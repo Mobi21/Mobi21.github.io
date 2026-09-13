@@ -1,0 +1,29 @@
+.runtime-stop-specimen {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: var(--layer-canvas);
+  color: var(--carbon);
+}
+.runtime-stop-specimen > header {
+  position: relative;
+  z-index: var(--z-critical);
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--layer-raised);
+}
+.runtime-stop-specimen > header > div { display: grid; gap: 2px; }
+.runtime-stop-specimen > header strong { font-size: var(--text-label); }
+.runtime-stop-specimen > header span { color: var(--graphite); font-size: var(--text-meta); }
+.runtime-stop-specimen > header .kora-select__trigger { min-width: 190px; }
+.runtime-stop-specimen > main { display: grid; place-content: center; justify-items: center; gap: var(--space-3); padding: var(--space-6); text-align: center; }
+.runtime-stop-specimen > main p { max-width: 56ch; margin: 0; color: var(--graphite); }
+@media (max-width: 720px) {
+  .runtime-stop-specimen > header { align-items: stretch; flex-direction: column; }
+  .runtime-stop-specimen > header .kora-select__trigger { width: 100%; }
+}

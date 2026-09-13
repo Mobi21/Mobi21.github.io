@@ -1,0 +1,67 @@
+@layer components {
+  .sheet-specimen { min-height: 100vh; background: var(--canvas); color: var(--carbon); }
+  .sheet-specimen__drag { min-width: 0; }
+  .sheet-specimen__main { min-height: calc(100vh - var(--window-bar-height) - var(--view-bar-height)); overflow: auto; padding-block: var(--space-7); }
+  .sheet-specimen__fixtures { display: grid; overflow: hidden; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--hairline); }
+  .sheet-specimen__fixtures button { display: grid; min-width: 0; gap: var(--space-1); padding: var(--space-3); border: 0; border-right: 1px solid var(--hairline); outline: 0; background: transparent; color: var(--carbon); text-align: left; cursor: pointer; }
+  .sheet-specimen__fixtures button:nth-child(4n) { border-right: 0; }
+  .sheet-specimen__fixtures button:nth-child(n + 5) { border-top: 1px solid var(--hairline); }
+  .sheet-specimen__fixtures button:hover { background: var(--surface); }
+  .sheet-specimen__fixtures button:focus-visible { box-shadow: inset var(--focus); }
+  .sheet-specimen__fixtures button[data-selected] { background: color-mix(in oklch, var(--selection) 10%, transparent); color: var(--selection); }
+  .sheet-specimen__fixtures span { overflow: hidden; font-size: var(--text-label); font-weight: var(--weight-strong); text-overflow: ellipsis; white-space: nowrap; }
+  .sheet-specimen__fixtures small { color: var(--muted); font-size: var(--text-micro); }
+  .sheet-specimen__open { margin-top: var(--space-4); }
+
+  .sheet-specimen__record,
+  .sheet-specimen__properties,
+  .sheet-specimen__long { display: grid; gap: var(--space-5); }
+  .sheet-specimen__record-state { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); color: var(--muted); font-size: var(--text-micro); }
+  .sheet-specimen__summary { margin: 0; color: var(--carbon); font-size: var(--text-body); line-height: var(--leading-body); }
+  .sheet-specimen__facts { display: grid; margin: 0; border-block: 1px solid var(--hairline); }
+  .sheet-specimen__facts div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--hairline); }
+  .sheet-specimen__facts div:last-child { border-bottom: 0; }
+  .sheet-specimen__facts dt { color: var(--muted); font-size: var(--text-label); }
+  .sheet-specimen__facts dd { min-width: 0; margin: 0; color: var(--carbon); font-size: var(--text-label); }
+  .sheet-specimen__record section { display: grid; gap: var(--space-2); }
+  .sheet-specimen__record h3,
+  .sheet-specimen__long h3 { margin: 0; font-size: var(--text-body); font-weight: var(--weight-strong); }
+  .sheet-specimen__record section > p,
+  .sheet-specimen__long p { margin: 0; color: var(--graphite); font-size: var(--text-label); line-height: var(--leading-meta); }
+  .sheet-specimen__linked { display: grid; width: 100%; min-height: 52px; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; border: 0; border-block: 1px solid var(--hairline); outline: 0; background: transparent; color: var(--carbon); text-align: left; cursor: pointer; }
+  .sheet-specimen__linked:focus-visible { box-shadow: var(--focus); }
+  .sheet-specimen__linked span { display: grid; min-width: 0; gap: 2px; }
+  .sheet-specimen__linked small { color: var(--muted); font-size: var(--text-micro); }
+
+  .sheet-specimen__navigation { display: grid; margin-inline: calc(var(--space-4) * -1); }
+  .sheet-specimen__navigation button { display: grid; min-height: 60px; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4); border: 0; border-bottom: 1px solid var(--hairline); outline: 0; background: transparent; color: var(--carbon); text-align: left; cursor: pointer; }
+  .sheet-specimen__navigation button:hover { background: var(--surface); }
+  .sheet-specimen__navigation button:focus-visible { box-shadow: inset var(--focus); }
+  .sheet-specimen__navigation button > span { display: grid; gap: 2px; }
+  .sheet-specimen__navigation strong { font-size: var(--text-label); }
+  .sheet-specimen__navigation small { color: var(--muted); font-size: var(--text-micro); }
+
+  .sheet-specimen__guard,
+  .sheet-specimen__provenance { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-object); background: var(--surface); }
+  .sheet-specimen__guard { background: color-mix(in oklch, var(--danger) 10%, var(--surface)); color: var(--danger); }
+  .sheet-specimen__guard p,
+  .sheet-specimen__provenance p { margin: var(--space-1) 0 0; color: var(--graphite); font-size: var(--text-micro); line-height: var(--leading-meta); }
+  .sheet-specimen__guard strong,
+  .sheet-specimen__provenance strong { color: var(--carbon); font-size: var(--text-label); }
+
+  .sheet-specimen__loading { display: grid; width: 100%; justify-self: stretch; gap: var(--space-4); }
+  .sheet-specimen__loading span { height: 58px; border-radius: var(--radius-object); background: linear-gradient(90deg, var(--layer-chrome), color-mix(in srgb, var(--carbon) 7%, var(--layer-chrome)), var(--layer-chrome)); background-size: 180% 100%; box-shadow: inset 0 0 0 1px var(--hairline); animation: k-shimmer 1.2s linear infinite; }
+  .sheet-specimen__loading span:first-child { height: 30px; width: 42%; }
+  .sheet-specimen__loading span:last-child { width: 72%; }
+
+  .sheet-specimen__long section { display: grid; gap: var(--space-1); padding-bottom: var(--space-4); border-bottom: 1px solid var(--hairline); }
+  .sheet-specimen__long section > span { color: var(--muted); font-size: var(--text-micro); }
+
+  @media (max-width: 760px) {
+    .sheet-specimen__main { padding-block: var(--space-5); }
+    .sheet-specimen__fixtures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sheet-specimen__fixtures button:nth-child(2n) { border-right: 0; }
+    .sheet-specimen__fixtures button:nth-child(4n - 1) { border-right: 1px solid var(--hairline); }
+    .sheet-specimen__fixtures button:nth-child(n + 3) { border-top: 1px solid var(--hairline); }
+  }
+}
